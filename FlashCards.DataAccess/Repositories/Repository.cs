@@ -9,27 +9,43 @@ public class Repository<TId, TEntity>(DbContext context)
 {
     protected readonly DbContext _dbContext = context;
 
-    public async Task Add(TEntity entity) =>
+    public async Task Add(TEntity entity)
+    {
         await _dbContext.Set<TEntity>().AddAsync(entity);
+    }
 
-    public async Task AddRange(ICollection<TEntity> entities) =>
+    public async Task AddRange(ICollection<TEntity> entities)
+    {
         await _dbContext.Set<TEntity>().AddRangeAsync(entities);
+    }
 
-    public async Task<TEntity> Get(TId id) =>
-        await _dbContext.Set<TEntity>().FindAsync(id);
+    public async Task<TEntity> Get(TId id)
+    {
+        return await _dbContext.Set<TEntity>().FindAsync(id);
+    }
 
-    public async Task<ICollection<TEntity>> GetAll() =>
-        await _dbContext.Set<TEntity>().ToListAsync();
+    public async Task<ICollection<TEntity>> GetAll()
+    {
+        return await _dbContext.Set<TEntity>().ToListAsync();
+    }
 
-    public async Task<ICollection<TEntity>> Find(Expression<Func<TEntity, bool>> predicate) =>
-        await _dbContext.Set<TEntity>().Where(predicate).ToListAsync();
+    public async Task<ICollection<TEntity>> Find(Expression<Func<TEntity, bool>> predicate)
+    {
+        return await _dbContext.Set<TEntity>().Where(predicate).ToListAsync();
+    }
 
-    public async Task<TEntity> SingleOrDefault(Expression<Func<TEntity, bool>> predicate) =>
-        await _dbContext.Set<TEntity>().SingleOrDefaultAsync(predicate);
+    public async Task<TEntity> SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
+    {
+        return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(predicate);
+    }
 
-    public void Remove(TEntity entity) =>
+    public void Remove(TEntity entity)
+    {
         _dbContext.Set<TEntity>().Remove(entity);
+    }
 
-    public void RemoveRange(ICollection<TEntity> entities) =>
+    public void RemoveRange(ICollection<TEntity> entities)
+    {
         _dbContext.Set<TEntity>().RemoveRange(entities);
+    }
 }

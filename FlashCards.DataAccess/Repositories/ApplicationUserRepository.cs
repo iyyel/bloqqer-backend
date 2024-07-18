@@ -4,11 +4,16 @@ using FlashCards.DataAccess.Repositories.Interfaces;
 
 namespace FlashCards.DataAccess.Repositories;
 
-public sealed class ApplicationUserRepository(ApplicationDbContext context) : Repository<Guid, ApplicationUser>(context), IApplicationUserRepository
+public sealed class ApplicationUserRepository(ApplicationDbContext context)
+    : Repository<Guid, ApplicationUser>(context), IApplicationUserRepository
 {
-    public async Task<ApplicationUser> FindUserByUsername(string username)
+    public ApplicationUser FindUserByUsername(string username)
     {
-        // return await _dbContext.Users.SingleOrDefault(i => i.UserName == username);
-        throw new NotImplementedException();
+        return _dbContext.Users.SingleOrDefault(user => user.UserName == username);
+    }
+
+    private ApplicationDbContext _dbContext
+    {
+        get { return _dbContext as ApplicationDbContext; }
     }
 }
