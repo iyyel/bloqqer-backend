@@ -4,8 +4,8 @@ using System.Linq.Expressions;
 
 namespace FlashCards.DataAccess.Repositories;
 
-public class Repository<TEntity, TId>(DbContext context)
-    : IRepository<TEntity, TId> where TEntity : class
+public class Repository<TId, TEntity>(DbContext context)
+    : IRepository<TId, TEntity> where TEntity : class
 {
     protected readonly DbContext _dbContext = context;
 

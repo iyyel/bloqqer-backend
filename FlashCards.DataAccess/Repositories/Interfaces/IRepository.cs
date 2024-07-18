@@ -2,7 +2,7 @@
 
 namespace FlashCards.DataAccess.Repositories.Interfaces;
 
-public interface IRepository<TEntity, TId> where TEntity : class
+public interface IRepository<TId, TEntity> where TEntity : class
 {
     Task Add(TEntity entity);
     Task AddRange(ICollection<TEntity> entities);
