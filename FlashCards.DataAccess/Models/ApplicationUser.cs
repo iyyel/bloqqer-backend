@@ -4,4 +4,5 @@ namespace FlashCards.DataAccess.Models;
 
 public sealed class ApplicationUser : IdentityUser
 {
+
 }

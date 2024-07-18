@@ -4,7 +4,7 @@ using FlashCards.DataAccess.Repositories.Interfaces;
 
 namespace FlashCards.DataAccess.Repositories;
 
-public sealed class FlashCardSetRepository(AppDbContext context) : Repository<Guid, FlashCardSet>(context), IFlashCardSetRepository
+public sealed class FlashCardSetRepository(ApplicationDbContext context) : Repository<Guid, FlashCardSet>(context), IFlashCardSetRepository
 {
 
 }

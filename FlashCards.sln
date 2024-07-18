@@ -5,11 +5,11 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlashCards.WebAPI", "FlashCards.WebAPI\FlashCards.WebAPI.csproj", "{E3EB8BD9-B84E-4E8A-BAC6-FD7AF26C29CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashCards.DataAccess", "FlashCards.DataAccess\FlashCards.DataAccess.csproj", "{574F6ABB-89D0-4C99-8C30-F4DA9450386C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlashCards.DataAccess", "FlashCards.DataAccess\FlashCards.DataAccess.csproj", "{574F6ABB-89D0-4C99-8C30-F4DA9450386C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashCards.Infrastructure", "FlashCards.Infrastructure\FlashCards.Infrastructure.csproj", "{8C22213D-7459-4D44-8063-2320ADEF2C19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlashCards.Infrastructure", "FlashCards.Infrastructure\FlashCards.Infrastructure.csproj", "{8C22213D-7459-4D44-8063-2320ADEF2C19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashCards.Frontend", "FlashCards.Frontend\FlashCards.Frontend.csproj", "{90CFC2E7-4019-4038-B090-41DC3D7E49F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlashCards.Frontend", "FlashCards.Frontend\FlashCards.Frontend.csproj", "{90CFC2E7-4019-4038-B090-41DC3D7E49F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

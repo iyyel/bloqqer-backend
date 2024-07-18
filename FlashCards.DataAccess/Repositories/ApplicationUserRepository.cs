@@ -4,7 +4,7 @@ using FlashCards.DataAccess.Repositories.Interfaces;
 
 namespace FlashCards.DataAccess.Repositories;
 
-public sealed class ApplicationUserRepository(AppDbContext context) : Repository<Guid, ApplicationUser>(context), IApplicationUserRepository
+public sealed class ApplicationUserRepository(ApplicationDbContext context) : Repository<Guid, ApplicationUser>(context), IApplicationUserRepository
 {
     public async Task<ApplicationUser> FindUserByUsername(string username)
     {

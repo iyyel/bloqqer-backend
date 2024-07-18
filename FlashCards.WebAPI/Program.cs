@@ -1,5 +1,7 @@
 using FlashCards.DataAccess.Contexts;
 using FlashCards.DataAccess.Models;
+using FlashCards.DataAccess.Repositories;
+using FlashCards.DataAccess.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,12 +20,18 @@ builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
 builder.Services.AddAuthorizationBuilder();
 
 // Database (currently temporary inMemory db)
-builder.Services.AddDbContext<AppDbContext>(
-    options => options.UseInMemoryDatabase("AppDb"));
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration
+    .GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("FlashCards.WebAPI"))
+    );
+
+builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+builder.Services.AddScoped<IFlashCardRepository, FlashCardRepository>();
+builder.Services.AddScoped<IFlashCardSetRepository, FlashCardSetRepository>();
 
 // Identity stuff
 builder.Services.AddIdentityCore<ApplicationUser>()
-    .AddEntityFrameworkStores<AppDbContext>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddApiEndpoints();
 
 var app = builder.Build();

@@ -4,13 +4,13 @@ using FlashCards.DataAccess.Repositories.Interfaces;
 namespace FlashCards.DataAccess.Repositories.UnitOfWork;
 
 public sealed class UnitOfWork(
-    AppDbContext dbContext,
+    ApplicationDbContext dbContext,
     IFlashCardRepository flashCards,
     IFlashCardSetRepository flashCardSets,
     IApplicationUserRepository applicationUsers
 ) : IUnitOfWork
 {
-    private readonly AppDbContext _dbContext = dbContext;
+    private readonly ApplicationDbContext _dbContext = dbContext;
 
     public IFlashCardRepository FlashCards { get; } = flashCards;
 
