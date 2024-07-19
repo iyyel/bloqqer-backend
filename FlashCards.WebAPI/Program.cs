@@ -1,5 +1,5 @@
 using FlashCards.DataAccess.Contexts;
-using FlashCards.DataAccess.Models;
+using FlashCards.DataAccess.Entities;
 using FlashCards.DataAccess.Repositories;
 using FlashCards.DataAccess.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;

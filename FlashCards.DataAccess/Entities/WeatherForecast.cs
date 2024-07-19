@@ -1,4 +1,4 @@
-﻿namespace FlashCards.DataAccess.Models;
+﻿namespace FlashCards.DataAccess.Entities;
 
 public class WeatherForecast
 {

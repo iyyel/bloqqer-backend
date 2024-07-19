@@ -1,4 +1,4 @@
-﻿using FlashCards.DataAccess.Models;
+﻿using FlashCards.DataAccess.Entities;
 
 namespace FlashCards.DataAccess.Repositories.Interfaces;
 

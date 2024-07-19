@@ -1,5 +1,5 @@
 ﻿using FlashCards.DataAccess.Contexts;
-using FlashCards.DataAccess.Models;
+using FlashCards.DataAccess.Entities;
 using FlashCards.DataAccess.Repositories.Interfaces;
 
 namespace FlashCards.DataAccess.Repositories;
@@ -9,11 +9,11 @@ public sealed class ApplicationUserRepository(ApplicationDbContext context)
 {
     public ApplicationUser FindUserByUsername(string username)
     {
-        return _dbContext.Users.SingleOrDefault(user => user.UserName == username);
+        return _dbContext.Users.SingleOrDefault(i => i.UserName == username);
     }
 
-    private ApplicationDbContext _dbContext
+    private new ApplicationDbContext _dbContext
     {
-        get { return _dbContext as ApplicationDbContext; }
+        get { return _dbContext; }
     }
 }

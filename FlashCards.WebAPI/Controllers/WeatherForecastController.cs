@@ -1,4 +1,4 @@
-using FlashCards.DataAccess.Models;
+using FlashCards.DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

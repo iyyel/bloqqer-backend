@@ -22,7 +22,7 @@ namespace FlashCards.WebAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FlashCards.DataAccess.Models.ApplicationUser", b =>
+            modelBuilder.Entity("FlashCards.DataAccess.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -85,9 +85,24 @@ namespace FlashCards.WebAPI.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "11cd7a5b-574a-4c6d-b6a5-62440206703b",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1a263251-d864-433b-a660-3e1784551cee",
+                            Email = "system@iyyel.io",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "fb762a6a-a5e3-444b-8c45-d7392957d852",
+                            TwoFactorEnabled = false,
+                            UserName = "System"
+                        });
                 });
 
-            modelBuilder.Entity("FlashCards.DataAccess.Models.FlashCard", b =>
+            modelBuilder.Entity("FlashCards.DataAccess.Entities.FlashCard", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,12 +112,31 @@ namespace FlashCards.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid?>("FlashCardSetId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Front")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -111,17 +145,41 @@ namespace FlashCards.WebAPI.Migrations
                     b.ToTable("FlashCards");
                 });
 
-            modelBuilder.Entity("FlashCards.DataAccess.Models.FlashCardSet", b =>
+            modelBuilder.Entity("FlashCards.DataAccess.Entities.FlashCardSet", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("SetName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("FlashCardSets");
                 });
@@ -259,11 +317,20 @@ namespace FlashCards.WebAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("FlashCards.DataAccess.Models.FlashCard", b =>
+            modelBuilder.Entity("FlashCards.DataAccess.Entities.FlashCard", b =>
                 {
-                    b.HasOne("FlashCards.DataAccess.Models.FlashCardSet", null)
+                    b.HasOne("FlashCards.DataAccess.Entities.FlashCardSet", null)
                         .WithMany("FlashCards")
                         .HasForeignKey("FlashCardSetId");
+                });
+
+            modelBuilder.Entity("FlashCards.DataAccess.Entities.FlashCardSet", b =>
+                {
+                    b.HasOne("FlashCards.DataAccess.Entities.ApplicationUser", "User")
+                        .WithMany("FlashCardSets")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -277,7 +344,7 @@ namespace FlashCards.WebAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("FlashCards.DataAccess.Models.ApplicationUser", null)
+                    b.HasOne("FlashCards.DataAccess.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -286,7 +353,7 @@ namespace FlashCards.WebAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("FlashCards.DataAccess.Models.ApplicationUser", null)
+                    b.HasOne("FlashCards.DataAccess.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -301,7 +368,7 @@ namespace FlashCards.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FlashCards.DataAccess.Models.ApplicationUser", null)
+                    b.HasOne("FlashCards.DataAccess.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -310,14 +377,19 @@ namespace FlashCards.WebAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("FlashCards.DataAccess.Models.ApplicationUser", null)
+                    b.HasOne("FlashCards.DataAccess.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FlashCards.DataAccess.Models.FlashCardSet", b =>
+            modelBuilder.Entity("FlashCards.DataAccess.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("FlashCardSets");
+                });
+
+            modelBuilder.Entity("FlashCards.DataAccess.Entities.FlashCardSet", b =>
                 {
                     b.Navigation("FlashCards");
                 });
