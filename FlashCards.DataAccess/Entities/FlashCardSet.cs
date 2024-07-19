@@ -1,10 +1,14 @@
 ﻿namespace FlashCards.DataAccess.Entities;
 
-public class FlashCardSet : BaseEntity<Guid>
+public sealed class FlashCardSet : BaseEntity<Guid>
 {
-    public required virtual ApplicationUser User { get; set; }
+    public const int MaxTitleLength = 256;
 
-    public required string SetName { get; set; }
+    public required Guid ApplicationUserId { get; set; }
 
-    public required virtual ICollection<FlashCard> FlashCards { get; set; }
+    public required ApplicationUser ApplicationUser { get; set; }
+
+    public required string Title { get; set; }
+
+    public required ICollection<FlashCard> FlashCards { get; set; }
 }

@@ -4,8 +4,8 @@ using System.Linq.Expressions;
 
 namespace FlashCards.DataAccess.Repositories;
 
-public class Repository<TId, TEntity>(DbContext context)
-    : IRepository<TId, TEntity> where TEntity : class
+public class Repository<TKey, TEntity>(DbContext context)
+    : IRepository<TKey, TEntity> where TEntity : class
 {
     protected readonly DbContext _dbContext = context;
 
@@ -19,7 +19,7 @@ public class Repository<TId, TEntity>(DbContext context)
         await _dbContext.Set<TEntity>().AddRangeAsync(entities);
     }
 
-    public async Task<TEntity> Get(TId id)
+    public async Task<TEntity> Get(TKey id)
     {
         return await _dbContext.Set<TEntity>().FindAsync(id);
     }

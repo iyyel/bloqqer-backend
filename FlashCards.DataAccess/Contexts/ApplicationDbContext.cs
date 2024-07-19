@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace FlashCards.DataAccess.Contexts;
 
 public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-    : IdentityDbContext<ApplicationUser>(options)
+    : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>(options)
 {
     public DbSet<FlashCard> FlashCards { get; set; }
     public DbSet<FlashCardSet> FlashCardSets { get; set; }
@@ -13,6 +13,7 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         new DbInitializer(modelBuilder).Seed();
     }
 }
