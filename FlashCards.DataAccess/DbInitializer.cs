@@ -10,11 +10,12 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
 
     public void Seed()
     {
-        var users = SeedUsers();
-        SeedFlashCardSets(users);
+        SeedUsers();
+        SeedRoles();
+        SeedFlashCardSets();
     }
 
-    private (ApplicationUser, ApplicationUser) SeedUsers()
+    private void SeedUsers()
     {
         var passwordHasher = new PasswordHasher<ApplicationUser>();
 
@@ -55,35 +56,66 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
         danielUser.PasswordHash = passwordHasher.HashPassword(danielUser, "1234");
 
         modelBuilder.Entity<ApplicationUser>().HasData(adminUser, danielUser);
-
-        return (adminUser, danielUser);
     }
 
-    private void SeedFlashCardSets((ApplicationUser adminUser, ApplicationUser danielUser) users)
+    private void SeedRoles()
     {
-        var flashCardSet = new FlashCardSet()
+        modelBuilder.Entity<ApplicationRole>().HasData(new ApplicationRole()
         {
             Id = Guid.NewGuid(),
-            ApplicationUserId = users.adminUser.Id,
-            ApplicationUser = users.adminUser,
-            Title = "Admin Set",
+            Name = ApplicationRole.SuperUser
+        });
+        modelBuilder.Entity<ApplicationRole>().HasData(new ApplicationRole()
+        {
+            Id = Guid.NewGuid(),
+            Name = ApplicationRole.Admin
+        });
+        modelBuilder.Entity<ApplicationRole>().HasData(new ApplicationRole()
+        {
+            Id = Guid.NewGuid(),
+            Name = ApplicationRole.User
+        });
+    }
+
+    private void SeedFlashCardSets()
+    {
+        var flashCardSet1 = new FlashCardSet()
+        {
+            Id = Guid.NewGuid(),
+            Title = "Set 1",
             FlashCards = [],
-        };
-        /*
-        var flashCard = new FlashCard()
-        {
-            Id = Guid.NewGuid(),
-            FlashCardSetId = flashCardSetId,
-            FlashCardSet = flashCardSet,
-            FrontText = "front text",
-            BackText = "back text",
             CreatedBy = "Seed",
             CreatedOn = DateTime.Now,
         };
-        flashCards.Add(flashCard);
-       */
 
-        modelBuilder.Entity<FlashCardSet>().HasData(flashCardSet);
-        // modelBuilder.Entity<FlashCard>().HasData(flashCard);
+        var flashCardSet2 = new FlashCardSet()
+        {
+            Id = Guid.NewGuid(),
+            Title = "Set 1",
+            FlashCards = [],
+            CreatedBy = "Seed",
+            CreatedOn = DateTime.Now,
+        };
+
+        var flashCard1 = new FlashCard()
+        {
+            Id = Guid.NewGuid(),
+            FrontText = "Front Text 1",
+            BackText = "Back Text 1",
+            CreatedBy = "Seed",
+            CreatedOn = DateTime.Now,
+        };
+
+        var flashCard2 = new FlashCard()
+        {
+            Id = Guid.NewGuid(),
+            FrontText = "Front Text 2",
+            BackText = "Back Text 2",
+            CreatedBy = "Seed",
+            CreatedOn = DateTime.Now,
+        };
+
+        modelBuilder.Entity<FlashCardSet>().HasData(flashCardSet1, flashCardSet2);
+        modelBuilder.Entity<FlashCard>().HasData(flashCard1, flashCard2);
     }
 }

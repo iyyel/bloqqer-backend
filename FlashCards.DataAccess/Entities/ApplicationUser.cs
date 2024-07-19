@@ -18,6 +18,7 @@ public sealed class ApplicationUser : IdentityUser<Guid>
 
     public ICollection<FlashCardSet>? FlashCardSets { get; set; }
 
+    /* TODO: How do I get this class to inherit from BaseEntity as well? */
     public string? CreatedBy { get; set; }
 
     public DateTime CreatedOn { get; set; }

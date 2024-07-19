@@ -6,9 +6,11 @@ public sealed class FlashCard : BaseEntity<Guid>
 
     public const int MaxBackTextLength = 256;
 
-    public required Guid? FlashCardSetId { get; set; }
+    // TODO: Required?
+    public Guid? FlashCardSetId { get; set; }
 
-    public required FlashCardSet FlashCardSet { get; set; }
+    // TODO: Required?
+    public FlashCardSet? FlashCardSet { get; set; }
 
     public required string FrontText { get; set; }
 

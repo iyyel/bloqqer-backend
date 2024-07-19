@@ -9,6 +9,7 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
 {
     public DbSet<FlashCard> FlashCards { get; set; }
     public DbSet<FlashCardSet> FlashCardSets { get; set; }
+    new public DbSet<ApplicationRole> Roles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
