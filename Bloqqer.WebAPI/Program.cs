@@ -29,6 +29,8 @@ builder.Services
     .AddAuthentication(IdentityConstants.ApplicationScheme)
     .AddIdentityCookies();
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddAuthorizationBuilder();
 
 // Database
@@ -41,6 +43,10 @@ builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository
 builder.Services.AddScoped<IBloqRepository, BloqRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IBloqService, BloqService>();
 
 // Identity stuff
 builder.Services
@@ -49,8 +55,6 @@ builder.Services
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddApiEndpoints();
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

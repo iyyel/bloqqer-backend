@@ -15,11 +15,20 @@ public class UserController(IUserService userService, ILogger<UserController> lo
 
     private readonly ILogger<UserController> _logger = logger;
 
-    [Route("users")]
+    [Authorize]
+    [HttpGet]
+    [ProducesResponseType(typeof(string), 200)]
+    [ProducesResponseType(typeof(APIError), 404)]
+    public ActionResult<(APIError? Error, ICollection<UserDTO>? Users)> GetLoggedInUser()
+    {
+        return Ok(_userService.GetLoggedInUserId());
+    }
+
+    [Route("all")]
     [Authorize]
     [HttpGet]
     [ProducesResponseType(typeof(ICollection<UserDTO>), 200)]
-    [ProducesResponseType(typeof(string), 404)]
+    [ProducesResponseType(typeof(APIError), 404)]
     public async Task<ActionResult<(APIError? Error, ICollection<UserDTO>? Users)>> GetUsers()
     {
         return Ok(await _userService.GetAllUsers());

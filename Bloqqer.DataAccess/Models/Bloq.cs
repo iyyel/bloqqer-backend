@@ -1,4 +1,6 @@
-﻿namespace Bloqqer.DataAccess.Models;
+﻿using Microsoft.VisualBasic;
+
+namespace Bloqqer.DataAccess.Models;
 
 public sealed class Bloq : BaseEntity<Guid>
 {
@@ -18,9 +20,36 @@ public sealed class Bloq : BaseEntity<Guid>
 
     public required bool IsPublished { get; set; }
 
-    public required DateTime? Published { get; set; }
+    public DateTime? Published { get; set; }
 
     public required bool IsPrivate { get; set; }
 
     public required ICollection<Post> Posts { get; set; }
+
+    public static Bloq Create(
+        Guid? applicationUserId,
+        ApplicationUser? applicationUser,
+        string title,
+        string description,
+        bool isPrivate,
+        string createdBy,
+        ICollection<Post>? posts = null,
+        DateTime? published = null,
+        bool isPublished = false)
+    {
+        return new Bloq()
+        {
+            Id = Guid.NewGuid(),
+            ApplicationUserId = applicationUserId,
+            ApplicationUser = applicationUser,
+            Title = title,
+            Description = description,
+            IsPrivate = isPrivate,
+            Posts = posts ?? [],
+            Published = published ?? null,
+            IsPublished = isPublished,
+            CreatedBy = createdBy,
+            CreatedOn = DateTime.UtcNow
+        };
+    }
 }

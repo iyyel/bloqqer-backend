@@ -24,7 +24,7 @@ public sealed class Post : BaseEntity<Guid>
 
     public required bool IsPublished { get; set; }
 
-    public required DateTime? Published { get; set; }
+    public DateTime? Published { get; set; }
 
     public required ICollection<Comment> Comments { get; set; }
 }

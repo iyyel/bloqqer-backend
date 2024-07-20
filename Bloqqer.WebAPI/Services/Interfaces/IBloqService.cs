@@ -2,7 +2,7 @@
 
 namespace Bloqqer.DataAccess.Services.Interfaces;
 
-public interface IUserService
+public interface IBloqService
 {
-    Task<ICollection<UserDTO>> GetAllUsers();
+    Task<Guid> CreateBloq(CreateBloqDTO bloq);
 }
