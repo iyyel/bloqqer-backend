@@ -12,9 +12,9 @@ public sealed class Post : BaseEntity<Guid>
 
     public required Bloq Bloq { get; set; }
 
-    public required Guid AuthorId { get; set; }
+    public required Guid ApplicationUserId { get; set; }
 
-    public required ApplicationUser Author { get; set; }
+    public required ApplicationUser ApplicationUser { get; set; }
 
     public required string Title { get; set; }
 

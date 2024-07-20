@@ -82,14 +82,12 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
         var bloq = new Bloq()
         {
             Id = Guid.NewGuid(),
-            AuthorId = Guid.NewGuid(),
-            Author = new ApplicationUser(),
             Title = "Bloq title",
             Description = "Bloq description",
             IsPublished = true,
             Published = DateTime.UtcNow,
             IsPrivate = false,
-            // Posts = [],
+            Posts = [],
         };
 
         modelBuilder.Entity<Bloq>().HasData(bloq);

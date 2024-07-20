@@ -4,13 +4,13 @@ public sealed class Comment : BaseEntity<Guid>
 {
     public const int MaxContentLength = 256;
 
-    public required Guid PostId { get; set; }
+    public Guid? PostId { get; set; }
 
     public required Post Post { get; set; }
 
-    public required Guid AuthorId { get; set; }
+    public required Guid ApplicationUserId { get; set; }
 
-    public required ApplicationUser Author { get; set; }
+    public required ApplicationUser ApplicationUser { get; set; }
 
     public required string Content { get; set; }
 

@@ -18,20 +18,18 @@ public sealed class ApplicationUserConfiguration : IEntityTypeConfiguration<Appl
             .HasMaxLength(ApplicationUser.MaxLastNameLength);
 
         builder.HasMany(a => a.Bloqs)
-            .WithOne(b => b.Author)
-            .HasForeignKey(b => b.AuthorId)
+            .WithOne(b => b.ApplicationUser)
+            .HasForeignKey(b => b.ApplicationUserId)
             .HasPrincipalKey(a => a.Id);
-        /*
+
         builder.HasMany(a => a.Posts)
-            .WithOne(p => p.Author)
-            .HasForeignKey(p => p.AuthorId)
+            .WithOne(p => p.ApplicationUser)
+            .HasForeignKey(p => p.ApplicationUserId)
             .HasPrincipalKey(a => a.Id);
-        */
-        /*
+
         builder.HasMany(a => a.Comments)
-            .WithOne(c => c.Author)
-            .HasForeignKey(c => c.AuthorId)
+            .WithOne(c => c.ApplicationUser)
+            .HasForeignKey(c => c.ApplicationUserId)
             .HasPrincipalKey(a => a.Id);
-        */
     }
 }

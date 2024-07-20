@@ -7,7 +7,7 @@ namespace Bloqqer.DataAccess.Configurations;
 public sealed class CommentConfiguration : IEntityTypeConfiguration<Comment>
 {
     public void Configure(EntityTypeBuilder<Comment> builder)
-    {/*
+    {
         builder.Property(p => p.Content)
             .HasMaxLength(Post.MaxContentLength);
 
@@ -16,9 +16,9 @@ public sealed class CommentConfiguration : IEntityTypeConfiguration<Comment>
             .HasForeignKey(p => p.PostId)
             .HasPrincipalKey(p => p.Id);
 
-        builder.HasOne(c => c.Author)
+        builder.HasOne(c => c.ApplicationUser)
             .WithMany(a => a.Comments)
-            .HasForeignKey(c => c.AuthorId)
-            .HasPrincipalKey(a => a.Id);*/
+            .HasForeignKey(c => c.ApplicationUserId)
+            .HasPrincipalKey(a => a.Id);
     }
 }

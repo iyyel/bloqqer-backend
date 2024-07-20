@@ -13,15 +13,15 @@ public sealed class BloqConfiguration : IEntityTypeConfiguration<Bloq>
 
         builder.Property(b => b.Description)
             .HasMaxLength(Bloq.MaxDescriptionLength);
-        /*
+
         builder.HasMany(b => b.Posts)
             .WithOne(p => p.Bloq)
             .HasForeignKey(p => p.BloqId)
             .HasPrincipalKey(b => b.Id);
-        */
-        builder.HasOne(b => b.Author)
+
+        builder.HasOne(b => b.ApplicationUser)
             .WithMany(a => a.Bloqs)
-            .HasForeignKey(b => b.AuthorId)
+            .HasForeignKey(b => b.ApplicationUserId)
             .HasPrincipalKey(a => a.Id);
     }
 }

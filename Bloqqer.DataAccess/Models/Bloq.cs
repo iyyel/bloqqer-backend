@@ -6,9 +6,11 @@ public sealed class Bloq : BaseEntity<Guid>
 
     public const int MaxDescriptionLength = 256;
 
-    public required Guid AuthorId { get; set; }
+    // TODO: Make required?
+    public Guid? ApplicationUserId { get; set; }
 
-    public required ApplicationUser Author { get; set; }
+    // TODO: Make required?
+    public ApplicationUser? ApplicationUser { get; set; }
 
     public required string Title { get; set; }
 
@@ -20,5 +22,5 @@ public sealed class Bloq : BaseEntity<Guid>
 
     public required bool IsPrivate { get; set; }
 
-    // public required ICollection<Post> Posts { get; set; }
+    public required ICollection<Post> Posts { get; set; }
 }
