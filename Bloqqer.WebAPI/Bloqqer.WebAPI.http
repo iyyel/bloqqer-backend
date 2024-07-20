@@ -1,0 +1,6 @@
+@Bloqqer_HostAddress = http://localhost:5133
+
+GET {{Bloqqer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
