@@ -7,7 +7,7 @@ namespace Bloqqer.DataAccess.Configurations;
 public sealed class PostConfiguration : IEntityTypeConfiguration<Post>
 {
     public void Configure(EntityTypeBuilder<Post> builder)
-    {
+    {/*
         builder.Property(p => p.Title)
             .HasMaxLength(Post.MaxTitleLength);
 
@@ -26,5 +26,6 @@ public sealed class PostConfiguration : IEntityTypeConfiguration<Post>
             .WithMany(a => a.Posts)
             .HasForeignKey(p => p.AuthorId)
             .HasPrincipalKey(a => a.Id);
+        */
     }
 }

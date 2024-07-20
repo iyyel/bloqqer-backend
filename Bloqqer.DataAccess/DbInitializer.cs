@@ -89,7 +89,7 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             IsPublished = true,
             Published = DateTime.UtcNow,
             IsPrivate = false,
-            Posts = [],
+            // Posts = [],
         };
 
         modelBuilder.Entity<Bloq>().HasData(bloq);

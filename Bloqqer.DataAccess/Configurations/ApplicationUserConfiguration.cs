@@ -21,15 +21,17 @@ public sealed class ApplicationUserConfiguration : IEntityTypeConfiguration<Appl
             .WithOne(b => b.Author)
             .HasForeignKey(b => b.AuthorId)
             .HasPrincipalKey(a => a.Id);
-
+        /*
         builder.HasMany(a => a.Posts)
             .WithOne(p => p.Author)
             .HasForeignKey(p => p.AuthorId)
             .HasPrincipalKey(a => a.Id);
-
+        */
+        /*
         builder.HasMany(a => a.Comments)
             .WithOne(c => c.Author)
             .HasForeignKey(c => c.AuthorId)
             .HasPrincipalKey(a => a.Id);
+        */
     }
 }

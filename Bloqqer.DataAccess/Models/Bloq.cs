@@ -20,5 +20,5 @@ public sealed class Bloq : BaseEntity<Guid>
 
     public required bool IsPrivate { get; set; }
 
-    public required ICollection<Post> Posts { get; set; }
+    // public required ICollection<Post> Posts { get; set; }
 }

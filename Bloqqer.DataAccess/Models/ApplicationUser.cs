@@ -18,9 +18,9 @@ public sealed class ApplicationUser : IdentityUser<Guid>
 
     public ICollection<Bloq>? Bloqs { get; set; }
 
-    public ICollection<Post>? Posts { get; set; }
+    // public ICollection<Post>? Posts { get; set; }
 
-    public ICollection<Comment>? Comments { get; set; }
+    // public ICollection<Comment>? Comments { get; set; }
 
     /* TODO: How do I get this class to inherit from BaseEntity as well? */
     public string? CreatedBy { get; set; }
