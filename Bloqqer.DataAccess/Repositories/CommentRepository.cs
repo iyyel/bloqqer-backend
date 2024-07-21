@@ -4,8 +4,8 @@ using Bloqqer.DataAccess.Repositories.Interfaces;
 
 namespace Bloqqer.DataAccess.Repositories;
 
-public sealed class CommentRepository(ApplicationDbContext context)
-    : Repository<Guid, Comment>(context), ICommentRepository
+public sealed class CommentRepository(ApplicationDbContext dbContext)
+    : Repository<Guid, Comment>(dbContext), ICommentRepository
 {
 
 }

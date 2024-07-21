@@ -2,7 +2,7 @@
 
 namespace Bloqqer.DataAccess.Repositories.Interfaces;
 
-public interface ICommentRepository : IRepository<Guid, Comment>
+public interface ICommentRepository : IGuidRepository<Comment>
 {
 
 }

@@ -4,8 +4,8 @@ using Bloqqer.DataAccess.Repositories.Interfaces;
 
 namespace Bloqqer.DataAccess.Repositories;
 
-public sealed class PostRepository(ApplicationDbContext context)
-    : Repository<Guid, Post>(context), IPostRepository
+public sealed class PostRepository(ApplicationDbContext dbContext)
+    : Repository<Guid, Post>(dbContext), IPostRepository
 {
 
 }

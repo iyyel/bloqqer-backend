@@ -4,48 +4,48 @@ using System.Linq.Expressions;
 
 namespace Bloqqer.DataAccess.Repositories;
 
-public class Repository<TKey, TEntity>(DbContext context)
+public class Repository<TKey, TEntity>(DbContext dbContext)
     : IRepository<TKey, TEntity> where TEntity : class
 {
-    protected readonly DbContext _dbContext = context;
+    protected readonly DbSet<TEntity> _dbSet = dbContext.Set<TEntity>();
 
-    public async Task Add(TEntity entity)
+    public async Task AddAsync(TEntity entity)
     {
-        await _dbContext.Set<TEntity>().AddAsync(entity);
+        await _dbSet.AddAsync(entity);
     }
 
-    public async Task AddRange(ICollection<TEntity> entities)
+    public async Task AddRangeAsync(ICollection<TEntity> entities)
     {
-        await _dbContext.Set<TEntity>().AddRangeAsync(entities);
+        await _dbSet.AddRangeAsync(entities);
     }
 
-    public async Task<TEntity> Get(TKey id)
+    public async Task<TEntity?> GetByIdAsync(TKey id)
     {
-        return await _dbContext.Set<TEntity>().FindAsync(id);
+        return await _dbSet.FindAsync(id);
     }
 
-    public async Task<ICollection<TEntity>> GetAll()
+    public async Task<ICollection<TEntity>> GetAllAsync()
     {
-        return await _dbContext.Set<TEntity>().ToListAsync();
+        return await _dbSet.ToListAsync();
     }
 
-    public async Task<ICollection<TEntity>> Find(Expression<Func<TEntity, bool>> predicate)
+    public async Task<ICollection<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
     {
-        return await _dbContext.Set<TEntity>().Where(predicate).ToListAsync();
+        return await _dbSet.Where(predicate).ToListAsync();
     }
 
-    public async Task<TEntity> SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
+    public async Task<TEntity?> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
     {
-        return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(predicate);
+        return await _dbSet.SingleOrDefaultAsync(predicate);
     }
 
-    public void Remove(TEntity entity)
+    public void Delete(TEntity entity)
     {
-        _dbContext.Set<TEntity>().Remove(entity);
+        _dbSet.Remove(entity);
     }
 
-    public void RemoveRange(ICollection<TEntity> entities)
+    public void DeleteRange(ICollection<TEntity> entities)
     {
-        _dbContext.Set<TEntity>().RemoveRange(entities);
+        _dbSet.RemoveRange(entities);
     }
 }

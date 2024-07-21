@@ -2,7 +2,7 @@
 
 namespace Bloqqer.DataAccess.Repositories.Interfaces;
 
-public interface IPostRepository : IRepository<Guid, Post>
+public interface IPostRepository : IGuidRepository<Post>
 {
 
 }

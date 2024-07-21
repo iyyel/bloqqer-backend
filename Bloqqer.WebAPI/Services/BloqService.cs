@@ -18,7 +18,7 @@ public sealed class BloqService(
     public async Task<Guid> CreateBloq(CreateBloqDTO createBloq)
     {
         var userGuid = _userService.GetLoggedInUserId() ?? throw new ArgumentException("Not logged in?");
-        var user = await _unitOfWork.ApplicationUsers.Get(userGuid) ?? throw new ArgumentException("User not found?");
+        var user = await _unitOfWork.ApplicationUsers.GetByIdAsync(userGuid) ?? throw new ArgumentException("User not found?");
 
         var newBloq = Bloq.Create(
             userGuid,
@@ -29,7 +29,7 @@ public sealed class BloqService(
             user.UserName ?? "System"
         );
 
-        await _unitOfWork.Bloqs.Add(newBloq);
+        await _unitOfWork.Bloqs.AddAsync(newBloq);
 
         return newBloq.Id;
     }

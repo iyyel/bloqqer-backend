@@ -2,7 +2,7 @@
 
 namespace Bloqqer.DataAccess.Repositories.Interfaces;
 
-public interface IApplicationUserRepository : IRepository<Guid, ApplicationUser>
+public interface IApplicationUserRepository : IGuidRepository<ApplicationUser>
 {
-    ApplicationUser FindUserByUsername(string username);
+    ApplicationUser? FindUserByUserName(string userName);
 }
