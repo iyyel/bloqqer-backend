@@ -1,9 +1,9 @@
-﻿using Bloqqer.DataAccess.Repositories.UnitOfWork;
-using Bloqqer.DataAccess.Services.Interfaces;
+﻿using Bloqqer.Infrastructure.UnitOfWork.Interfaces;
 using Bloqqer.Infrastructure.ViewModels;
+using Bloqqer.WebAPI.Services.Interfaces;
 using System.Security.Claims;
 
-namespace Bloqqer.DataAccess.Services;
+namespace Bloqqer.WebAPI.Services;
 
 public sealed class UserService(
     IUnitOfWork _unitOfWork,

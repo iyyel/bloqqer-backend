@@ -1,10 +1,11 @@
-using Bloqqer.DataAccess.Contexts;
-using Bloqqer.DataAccess.Models;
-using Bloqqer.DataAccess.Repositories;
-using Bloqqer.DataAccess.Repositories.Interfaces;
-using Bloqqer.DataAccess.Repositories.UnitOfWork;
-using Bloqqer.DataAccess.Services;
-using Bloqqer.DataAccess.Services.Interfaces;
+using Bloqqer.Infrastructure.Database;
+using Bloqqer.Infrastructure.Models;
+using Bloqqer.Infrastructure.Repositories;
+using Bloqqer.Infrastructure.Repositories.Interfaces;
+using Bloqqer.Infrastructure.UnitOfWork;
+using Bloqqer.Infrastructure.UnitOfWork.Interfaces;
+using Bloqqer.WebAPI.Services;
+using Bloqqer.WebAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

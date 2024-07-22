@@ -1,9 +1,9 @@
-﻿using Bloqqer.DataAccess.Models;
-using Bloqqer.DataAccess.Repositories.UnitOfWork;
-using Bloqqer.DataAccess.Services.Interfaces;
+﻿using Bloqqer.Infrastructure.Models;
+using Bloqqer.Infrastructure.UnitOfWork.Interfaces;
 using Bloqqer.Infrastructure.ViewModels;
+using Bloqqer.WebAPI.Services.Interfaces;
 
-namespace Bloqqer.DataAccess.Services;
+namespace Bloqqer.WebAPI.Services;
 
 public sealed class BloqService(
     IUnitOfWork unitOfWork,
@@ -22,7 +22,6 @@ public sealed class BloqService(
 
         var newBloq = Bloq.Create(
             userGuid,
-            user,
             createBloq.Title,
             createBloq.Description,
             createBloq.IsPrivate,

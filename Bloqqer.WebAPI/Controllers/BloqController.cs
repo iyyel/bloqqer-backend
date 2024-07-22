@@ -1,6 +1,6 @@
-using Bloqqer.DataAccess.Services.Interfaces;
 using Bloqqer.Infrastructure.ViewModels;
 using Bloqqer.WebAPI.Errors;
+using Bloqqer.WebAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,5 +23,4 @@ public class BloqController(IBloqService bloqService, ILogger<BloqController> lo
     {
         return Ok(_bloqService.CreateBloq(createBloq));
     }
-
 }

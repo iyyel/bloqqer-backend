@@ -1,6 +1,6 @@
 ﻿using Bloqqer.Infrastructure.ViewModels;
 
-namespace Bloqqer.DataAccess.Services.Interfaces;
+namespace Bloqqer.WebAPI.Services.Interfaces;
 
 public interface IUserService
 {

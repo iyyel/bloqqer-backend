@@ -5,8 +5,6 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloqqer.WebAPI", "Bloqqer.WebAPI\Bloqqer.WebAPI.csproj", "{E3EB8BD9-B84E-4E8A-BAC6-FD7AF26C29CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloqqer.DataAccess", "Bloqqer.DataAccess\Bloqqer.DataAccess.csproj", "{574F6ABB-89D0-4C99-8C30-F4DA9450386C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloqqer.Infrastructure", "Bloqqer.Infrastructure\Bloqqer.Infrastructure.csproj", "{8C22213D-7459-4D44-8063-2320ADEF2C19}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{E3EB8BD9-B84E-4E8A-BAC6-FD7AF26C29CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3EB8BD9-B84E-4E8A-BAC6-FD7AF26C29CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3EB8BD9-B84E-4E8A-BAC6-FD7AF26C29CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{574F6ABB-89D0-4C99-8C30-F4DA9450386C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{574F6ABB-89D0-4C99-8C30-F4DA9450386C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{574F6ABB-89D0-4C99-8C30-F4DA9450386C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{574F6ABB-89D0-4C99-8C30-F4DA9450386C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8C22213D-7459-4D44-8063-2320ADEF2C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8C22213D-7459-4D44-8063-2320ADEF2C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C22213D-7459-4D44-8063-2320ADEF2C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
