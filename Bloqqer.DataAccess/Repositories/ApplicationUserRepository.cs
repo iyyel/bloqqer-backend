@@ -5,7 +5,7 @@ using Bloqqer.DataAccess.Repositories.Interfaces;
 namespace Bloqqer.DataAccess.Repositories;
 
 public sealed class ApplicationUserRepository(ApplicationDbContext dbContext)
-    : Repository<Guid, ApplicationUser>(dbContext), IApplicationUserRepository
+    : Repository<ApplicationUser>(dbContext), IApplicationUserRepository
 {
     public ApplicationUser? FindUserByUserName(string username)
     {

@@ -4,8 +4,8 @@ using System.Linq.Expressions;
 
 namespace Bloqqer.DataAccess.Repositories;
 
-public class Repository<TKey, TEntity>(DbContext dbContext)
-    : IRepository<TKey, TEntity> where TEntity : class
+public class Repository<TEntity>(DbContext dbContext)
+    : IGuidRepository<TEntity> where TEntity : class
 {
     protected readonly DbSet<TEntity> _dbSet = dbContext.Set<TEntity>();
 
@@ -19,7 +19,7 @@ public class Repository<TKey, TEntity>(DbContext dbContext)
         await _dbSet.AddRangeAsync(entities);
     }
 
-    public async Task<TEntity?> GetByIdAsync(TKey id)
+    public async Task<TEntity?> GetByIdAsync(Guid id)
     {
         return await _dbSet.FindAsync(id);
     }
