@@ -8,6 +8,8 @@ public sealed class BloqConfiguration : IEntityTypeConfiguration<Bloq>
 {
     public void Configure(EntityTypeBuilder<Bloq> builder)
     {
+        builder.ToTable("Bloqqer.Bloqs");
+
         builder.Property(b => b.Title)
             .HasMaxLength(Bloq.MaxTitleLength);
 
@@ -19,9 +21,9 @@ public sealed class BloqConfiguration : IEntityTypeConfiguration<Bloq>
             .HasForeignKey(p => p.BloqId)
             .HasPrincipalKey(b => b.Id);
 
-        builder.HasOne(b => b.ApplicationUser)
+        builder.HasOne(b => b.Author)
             .WithMany(a => a.Bloqs)
-            .HasForeignKey(b => b.ApplicationUserId)
+            .HasForeignKey(b => b.AuthorId)
             .HasPrincipalKey(a => a.Id);
     }
 }

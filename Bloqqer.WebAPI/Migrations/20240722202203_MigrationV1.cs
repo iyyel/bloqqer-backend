@@ -28,7 +28,7 @@ namespace Bloqqer.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
+                name: "Bloqqer.ApplicationUsers",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -58,7 +58,7 @@ namespace Bloqqer.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.PrimaryKey("PK_Bloqqer.ApplicationUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,9 +96,9 @@ namespace Bloqqer.WebAPI.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        name: "FK_AspNetUserClaims_Bloqqer.ApplicationUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Bloqqer.ApplicationUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -116,9 +116,9 @@ namespace Bloqqer.WebAPI.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        name: "FK_AspNetUserLogins_Bloqqer.ApplicationUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Bloqqer.ApplicationUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -140,9 +140,9 @@ namespace Bloqqer.WebAPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        name: "FK_AspNetUserRoles_Bloqqer.ApplicationUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Bloqqer.ApplicationUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -160,24 +160,24 @@ namespace Bloqqer.WebAPI.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        name: "FK_AspNetUserTokens_Bloqqer.ApplicationUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Bloqqer.ApplicationUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bloqs",
+                name: "Bloqqer.Bloqs",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AuthorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    IsPrivate = table.Column<bool>(type: "bit", nullable: false),
                     IsPublished = table.Column<bool>(type: "bit", nullable: false),
                     Published = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsPrivate = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -187,22 +187,22 @@ namespace Bloqqer.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bloqs", x => x.Id);
+                    table.PrimaryKey("PK_Bloqqer.Bloqs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bloqs_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_Bloqqer.Bloqs_Bloqqer.ApplicationUsers_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Bloqqer.ApplicationUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Posts",
+                name: "Bloqqer.Posts",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BloqId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AuthorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Content = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
@@ -217,27 +217,27 @@ namespace Bloqqer.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Posts", x => x.Id);
+                    table.PrimaryKey("PK_Bloqqer.Posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Posts_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_Bloqqer.Posts_Bloqqer.ApplicationUsers_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Bloqqer.ApplicationUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Posts_Bloqs_BloqId",
+                        name: "FK_Bloqqer.Posts_Bloqqer.Bloqs_BloqId",
                         column: x => x.BloqId,
-                        principalTable: "Bloqs",
+                        principalTable: "Bloqqer.Bloqs",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
+                name: "Bloqqer.Comments",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AuthorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     IsPublished = table.Column<bool>(type: "bit", nullable: false),
                     Published = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -250,59 +250,63 @@ namespace Bloqqer.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.PrimaryKey("PK_Bloqqer.Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_Bloqqer.Comments_Bloqqer.ApplicationUsers_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Bloqqer.ApplicationUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Comments_Posts_PostId",
+                        name: "FK_Bloqqer.Comments_Bloqqer.Posts_PostId",
                         column: x => x.PostId,
-                        principalTable: "Posts",
+                        principalTable: "Bloqqer.Posts",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
+                table: "Bloqqer.ApplicationUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "MiddleName", "ModifiedBy", "ModifiedOn", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("9ec5bf5a-8215-453b-ae4c-55ea4b337823"), 0, "294eee7c-5098-42e3-895d-9e006237ed31", "Seed", new DateTime(2024, 7, 22, 15, 38, 11, 578, DateTimeKind.Local).AddTicks(241), null, null, "mail@iyyel.io", true, "Daniel", "Larsen", false, null, "", null, null, "MAIL@IYYEL.IO", "MAIL@IYYEL.IO", "AQAAAAIAAYagAAAAEAcGagwcG9QQTXna8CF+ZzcYG1SkHpoGdH/6ZE1vbX9GRK7QebTii2X536VcfjTcEg==", "20202020", false, "user", false, "mail@iyyel.io" },
-                    { new Guid("cbeca2b2-01d7-4014-aea3-f7c8a809a905"), 0, "62793c88-5f85-4785-8f4a-33ac29b8742d", "Seed", new DateTime(2024, 7, 22, 15, 38, 11, 540, DateTimeKind.Local).AddTicks(8391), null, null, "admin@iyyel.io", true, "Admin", "", false, null, "", null, null, "ADMIN@IYYEL.IO", "ADMIN@IYYEL.IO", "AQAAAAIAAYagAAAAEIUl3P0FncNsdrY9J9YE+pzXHoET6n/QQuUwZ5Ih42ij4FNt44FdqyAcDxDhUz7jqQ==", "21212121", false, "admin", false, "admin@iyyel.io" }
+                    { new Guid("5734941b-03c9-4416-9451-b32d2a0e4cc0"), 0, "14c160cc-d6a5-4b32-8f71-414cbb151dae", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8681), null, null, "james@butler.xyz", true, "James", "Butler", false, null, "Henrich", null, null, "JAMES@BUTLER.XYZ", "JAMES@BUTLER.XYZ", "AQAAAAIAAYagAAAAEIVFkCAoob+7qjmbyRSOQ3hHPVQkxZm6A26wdUdSlNjsLf04mDD3LotqB6IX3RHa0Q==", "23232323", true, "james", false, "james@butler.xyz" },
+                    { new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), 0, "7696412e-0a44-4030-8457-57dd583f6764", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 861, DateTimeKind.Utc).AddTicks(9745), null, null, "admin@iyyel.io", true, "Admin", "", false, null, "", null, null, "ADMIN@IYYEL.IO", "ADMIN@IYYEL.IO", "AQAAAAIAAYagAAAAEI25KOjmf+rbFav5CE7Zy/XBUfY/eOyIdVuYl6X6CzodvaUnhCPQ84B3sOLlNpgQqQ==", "21212121", true, "admin", false, "admin@iyyel.io" },
+                    { new Guid("de05b775-a344-497f-a091-643d267ff25d"), 0, "1ae96e3c-5473-49fe-9b88-236ac6c3e8da", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5677), null, null, "mail@iyyel.io", true, "Daniel", "", false, null, "", null, null, "MAIL@IYYEL.IO", "MAIL@IYYEL.IO", "AQAAAAIAAYagAAAAEPKAQanzU+lpbrCbXk6QyKZCVyudWQ/EZNtNuEJLxpaa/Ykje8HgG1ya937vnJBICQ==", "20202020", true, "user", false, "mail@iyyel.io" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Bloqs",
-                columns: new[] { "Id", "ApplicationUserId", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Description", "IsPrivate", "IsPublished", "ModifiedBy", "ModifiedOn", "Published", "Title" },
+                table: "Bloqqer.Bloqs",
+                columns: new[] { "Id", "AuthorId", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Description", "IsPrivate", "IsPublished", "ModifiedBy", "ModifiedOn", "Published", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("954c3a03-9992-452a-8c22-f306d7ecbfcd"), new Guid("cbeca2b2-01d7-4014-aea3-f7c8a809a905"), "Seed", new DateTime(2024, 7, 22, 13, 38, 11, 577, DateTimeKind.Utc).AddTicks(9686), null, null, "Admin Seed Bloq Description", false, false, null, null, null, "Admin Seed Bloq Title" },
-                    { new Guid("db2f6fa6-664e-4381-880b-88a7b0563440"), new Guid("9ec5bf5a-8215-453b-ae4c-55ea4b337823"), "Seed", new DateTime(2024, 7, 22, 13, 38, 11, 615, DateTimeKind.Utc).AddTicks(3936), null, null, "Daniel Seed Bloq Description", false, false, null, null, null, "Daniel Seed Bloq Title" }
+                    { new Guid("295efc76-56d6-4839-ada4-25924f912aa0"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5118), null, null, "Admin Seed Bloq Description 1/2", false, true, null, null, new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5112), "Admin Seed Bloq Title 1/2" },
+                    { new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8175), null, null, "Daniel Seed Bloq Description", false, true, null, null, new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8169), "Daniel Seed Bloq Title" },
+                    { new Guid("f8d31b28-1c9a-43c0-aebd-19236af4422f"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5131), null, null, "Admin Seed Bloq Description 2/2", true, false, null, null, null, "Admin Seed Bloq Title 2/2" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Posts",
-                columns: new[] { "Id", "ApplicationUserId", "BloqId", "Content", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Description", "IsPublished", "ModifiedBy", "ModifiedOn", "Published", "Title" },
+                table: "Bloqqer.Posts",
+                columns: new[] { "Id", "AuthorId", "BloqId", "Content", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Description", "IsPublished", "ModifiedBy", "ModifiedOn", "Published", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("1ef5202a-3982-4bd3-9e02-8e544717aa58"), new Guid("cbeca2b2-01d7-4014-aea3-f7c8a809a905"), new Guid("954c3a03-9992-452a-8c22-f306d7ecbfcd"), "Admin Seed Bloq Post 2/2 Content", "Seed", new DateTime(2024, 7, 22, 13, 38, 11, 577, DateTimeKind.Utc).AddTicks(9700), null, null, "Admin Seed Bloq Post 2/2 Description", true, null, null, null, "Admin Seed Bloq Post 2/2" },
-                    { new Guid("22ec441d-2c36-4979-a85e-9d686e9606ec"), new Guid("cbeca2b2-01d7-4014-aea3-f7c8a809a905"), new Guid("954c3a03-9992-452a-8c22-f306d7ecbfcd"), "Admin Seed Bloq Post 1/2 Content", "Seed", new DateTime(2024, 7, 22, 13, 38, 11, 577, DateTimeKind.Utc).AddTicks(9698), null, null, "Admin Seed Bloq Post 1/2 Description", true, null, null, null, "Admin Seed Bloq Post 1/2" },
-                    { new Guid("fe39ae01-336c-4938-a9ef-d3ddfdfd0361"), new Guid("9ec5bf5a-8215-453b-ae4c-55ea4b337823"), new Guid("db2f6fa6-664e-4381-880b-88a7b0563440"), "Daniel Seed Bloq Post 1/1 Content", "Seed", new DateTime(2024, 7, 22, 13, 38, 11, 615, DateTimeKind.Utc).AddTicks(3951), null, null, "Daniel Seed Bloq Post 1/1 Description", true, null, null, null, "Daniel Seed Bloq Post 1/1" }
+                    { new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"), "Daniel Seed Bloq Post 1/2 Content", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8195), null, null, "Daniel Seed Bloq Post 1/2 Description", true, null, null, new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8194), "Daniel Seed Bloq Post 1/2" },
+                    { new Guid("0cb3379f-6bea-424d-ba0f-a44f4fa6a11a"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), new Guid("295efc76-56d6-4839-ada4-25924f912aa0"), "Admin Seed Bloq Post 1/2 Content", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5138), null, null, "Admin Seed Bloq Post 1/2 Description", true, null, null, new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5138), "Admin Seed Bloq Post 1/2" },
+                    { new Guid("efab75ca-f1ac-4211-8076-e344b9c98025"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), new Guid("295efc76-56d6-4839-ada4-25924f912aa0"), "Admin Seed Bloq Post 2/2 Content", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5141), null, null, "Admin Seed Bloq Post 2/2 Description", false, null, null, null, "Admin Seed Bloq Post 2/2" },
+                    { new Guid("f298d1f6-9ae6-477c-af37-173f959cdd1c"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"), "Daniel Seed Bloq Post 2/2 Content", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8199), null, null, "Daniel Seed Bloq Post 2/2 Description", true, null, null, new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8198), "Daniel Seed Bloq Post 2/2" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Comments",
-                columns: new[] { "Id", "ApplicationUserId", "Content", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "IsPublished", "ModifiedBy", "ModifiedOn", "PostId", "Published" },
+                table: "Bloqqer.Comments",
+                columns: new[] { "Id", "AuthorId", "Content", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "IsPublished", "ModifiedBy", "ModifiedOn", "PostId", "Published" },
                 values: new object[,]
                 {
-                    { new Guid("15b8e778-83a3-435f-a177-752d507c30c9"), new Guid("cbeca2b2-01d7-4014-aea3-f7c8a809a905"), "Admin Seed Bloq Post 1 Comment 2/2", "Seed", new DateTime(2024, 7, 22, 13, 38, 11, 577, DateTimeKind.Utc).AddTicks(9706), null, null, true, null, null, new Guid("22ec441d-2c36-4979-a85e-9d686e9606ec"), null },
-                    { new Guid("4ed8541c-311d-402a-9286-9e30a12693f8"), new Guid("9ec5bf5a-8215-453b-ae4c-55ea4b337823"), "Daniel Seed Bloq Post Comment 3/3", "Seed", new DateTime(2024, 7, 22, 13, 38, 11, 615, DateTimeKind.Utc).AddTicks(3959), null, null, true, null, null, new Guid("fe39ae01-336c-4938-a9ef-d3ddfdfd0361"), null },
-                    { new Guid("5458a84b-0762-4550-a6af-0e2e518c1d53"), new Guid("cbeca2b2-01d7-4014-aea3-f7c8a809a905"), "Admin Seed Bloq Post 1 Comment 1/2", "Seed", new DateTime(2024, 7, 22, 13, 38, 11, 577, DateTimeKind.Utc).AddTicks(9704), null, null, true, null, null, new Guid("22ec441d-2c36-4979-a85e-9d686e9606ec"), null },
-                    { new Guid("9834727c-9134-4148-b7b1-8e2a6d3a0bde"), new Guid("9ec5bf5a-8215-453b-ae4c-55ea4b337823"), "Daniel Seed Bloq Post Comment 2/3", "Seed", new DateTime(2024, 7, 22, 13, 38, 11, 615, DateTimeKind.Utc).AddTicks(3958), null, null, true, null, null, new Guid("fe39ae01-336c-4938-a9ef-d3ddfdfd0361"), null },
-                    { new Guid("a1a0fc2a-8c93-4615-9773-a54435932eab"), new Guid("9ec5bf5a-8215-453b-ae4c-55ea4b337823"), "Daniel Seed Bloq Post Comment 1/3", "Seed", new DateTime(2024, 7, 22, 13, 38, 11, 615, DateTimeKind.Utc).AddTicks(3956), null, null, true, null, null, new Guid("fe39ae01-336c-4938-a9ef-d3ddfdfd0361"), null },
-                    { new Guid("d36369b7-8bf8-4e2e-b7ca-9ff650cc852f"), new Guid("cbeca2b2-01d7-4014-aea3-f7c8a809a905"), "Admin Seed Bloq Post 2 Comment 1/1", "Seed", new DateTime(2024, 7, 22, 13, 38, 11, 577, DateTimeKind.Utc).AddTicks(9707), null, null, true, null, null, new Guid("1ef5202a-3982-4bd3-9e02-8e544717aa58"), null }
+                    { new Guid("180daba0-d465-40d0-bb01-68e0ac40b86c"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Admin Seed Bloq Post 1 Comment 2/2", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5148), null, null, false, null, null, new Guid("0cb3379f-6bea-424d-ba0f-a44f4fa6a11a"), null },
+                    { new Guid("1af0038f-73a2-4fbb-867f-75a90cf33536"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Admin Seed Bloq Post 1 Comment 1/2", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5146), null, null, true, null, null, new Guid("0cb3379f-6bea-424d-ba0f-a44f4fa6a11a"), new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5146) },
+                    { new Guid("3e8f006d-04c7-4d2b-97a2-108de9b39b3a"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Admin Seed Bloq Post 2 Comment 1/2", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5149), null, null, true, null, null, new Guid("efab75ca-f1ac-4211-8076-e344b9c98025"), new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5149) },
+                    { new Guid("49304138-ec9e-495e-8774-d4b2b64781ce"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), "Daniel Seed Bloq Post 1 Comment 2/3", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8210), null, null, true, null, null, new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"), new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8210) },
+                    { new Guid("679dee46-f2f2-4859-bedc-7d542eae5089"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), "Daniel Seed Bloq Post 1 Comment 3/3", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8212), null, null, true, null, null, new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"), new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8212) },
+                    { new Guid("d1cd67d2-67e5-4c6f-aabb-cb4056dd5064"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), "Daniel Seed Bloq Post 1 Comment 1/3", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8208), null, null, true, null, null, new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"), new DateTime(2024, 7, 22, 20, 22, 2, 944, DateTimeKind.Utc).AddTicks(8207) },
+                    { new Guid("fcc41c42-f406-4b28-9b4f-c7e02ccb6380"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Admin Seed Bloq Post 2 Comment 2/2", "Seed", new DateTime(2024, 7, 22, 20, 22, 2, 904, DateTimeKind.Utc).AddTicks(5150), null, null, false, null, null, new Guid("efab75ca-f1ac-4211-8076-e344b9c98025"), null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -334,39 +338,39 @@ namespace Bloqqer.WebAPI.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                table: "AspNetUsers",
+                table: "Bloqqer.ApplicationUsers",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                table: "AspNetUsers",
+                table: "Bloqqer.ApplicationUsers",
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bloqs_ApplicationUserId",
-                table: "Bloqs",
-                column: "ApplicationUserId");
+                name: "IX_Bloqqer.Bloqs_AuthorId",
+                table: "Bloqqer.Bloqs",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_ApplicationUserId",
-                table: "Comments",
-                column: "ApplicationUserId");
+                name: "IX_Bloqqer.Comments_AuthorId",
+                table: "Bloqqer.Comments",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_PostId",
-                table: "Comments",
+                name: "IX_Bloqqer.Comments_PostId",
+                table: "Bloqqer.Comments",
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_ApplicationUserId",
-                table: "Posts",
-                column: "ApplicationUserId");
+                name: "IX_Bloqqer.Posts_AuthorId",
+                table: "Bloqqer.Posts",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_BloqId",
-                table: "Posts",
+                name: "IX_Bloqqer.Posts_BloqId",
+                table: "Bloqqer.Posts",
                 column: "BloqId");
         }
 
@@ -389,19 +393,19 @@ namespace Bloqqer.WebAPI.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "Bloqqer.Comments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "Bloqqer.Posts");
 
             migrationBuilder.DropTable(
-                name: "Bloqs");
+                name: "Bloqqer.Bloqs");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Bloqqer.ApplicationUsers");
         }
     }
 }

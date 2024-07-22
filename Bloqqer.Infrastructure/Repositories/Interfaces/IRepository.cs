@@ -16,6 +16,10 @@ public interface IRepository<TKey, TEntity> where TEntity : class
 
     Task<TEntity?> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
 
+    void Update(TEntity entity);
+
+    void UpdateRange(ICollection<TEntity> entities);
+
     void Delete(TEntity entity);
 
     void DeleteRange(ICollection<TEntity> entities);

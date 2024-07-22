@@ -8,6 +8,8 @@ public sealed class ApplicationUserConfiguration : IEntityTypeConfiguration<Appl
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
+        builder.ToTable("Bloqqer.ApplicationUsers");
+
         builder.Property(a => a.FirstName)
             .HasMaxLength(ApplicationUser.MaxFirstNameLength);
 
@@ -18,18 +20,18 @@ public sealed class ApplicationUserConfiguration : IEntityTypeConfiguration<Appl
             .HasMaxLength(ApplicationUser.MaxLastNameLength);
 
         builder.HasMany(a => a.Bloqs)
-            .WithOne(b => b.ApplicationUser)
-            .HasForeignKey(b => b.ApplicationUserId)
+            .WithOne(b => b.Author)
+            .HasForeignKey(b => b.AuthorId)
             .HasPrincipalKey(a => a.Id);
 
         builder.HasMany(a => a.Posts)
-            .WithOne(p => p.ApplicationUser)
-            .HasForeignKey(p => p.ApplicationUserId)
+            .WithOne(p => p.Author)
+            .HasForeignKey(p => p.AuthorId)
             .HasPrincipalKey(a => a.Id);
 
         builder.HasMany(a => a.Comments)
-            .WithOne(c => c.ApplicationUser)
-            .HasForeignKey(c => c.ApplicationUserId)
+            .WithOne(c => c.Author)
+            .HasForeignKey(c => c.AuthorId)
             .HasPrincipalKey(a => a.Id);
     }
 }

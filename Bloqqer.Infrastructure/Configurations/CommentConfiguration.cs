@@ -8,6 +8,8 @@ public sealed class CommentConfiguration : IEntityTypeConfiguration<Comment>
 {
     public void Configure(EntityTypeBuilder<Comment> builder)
     {
+        builder.ToTable("Bloqqer.Comments");
+
         builder.Property(p => p.Content)
             .HasMaxLength(Post.MaxContentLength);
 
@@ -16,9 +18,9 @@ public sealed class CommentConfiguration : IEntityTypeConfiguration<Comment>
             .HasForeignKey(p => p.PostId)
             .HasPrincipalKey(p => p.Id);
 
-        builder.HasOne(c => c.ApplicationUser)
+        builder.HasOne(c => c.Author)
             .WithMany(a => a.Comments)
-            .HasForeignKey(c => c.ApplicationUserId)
+            .HasForeignKey(c => c.AuthorId)
             .HasPrincipalKey(a => a.Id);
     }
 }

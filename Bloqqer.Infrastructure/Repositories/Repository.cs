@@ -39,6 +39,16 @@ public class Repository<TEntity>(DbContext dbContext)
         return await _dbSet.SingleOrDefaultAsync(predicate);
     }
 
+    public void Update(TEntity entity)
+    {
+        _dbSet.Update(entity);
+    }
+
+    public void UpdateRange(ICollection<TEntity> entities)
+    {
+        _dbSet.UpdateRange(entities);
+    }
+
     public void Delete(TEntity entity)
     {
         _dbSet.Remove(entity);

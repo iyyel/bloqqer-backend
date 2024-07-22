@@ -8,6 +8,8 @@ public sealed class PostConfiguration : IEntityTypeConfiguration<Post>
 {
     public void Configure(EntityTypeBuilder<Post> builder)
     {
+        builder.ToTable("Bloqqer.Posts");
+
         builder.Property(p => p.Title)
             .HasMaxLength(Post.MaxTitleLength);
 
@@ -22,9 +24,9 @@ public sealed class PostConfiguration : IEntityTypeConfiguration<Post>
             .HasForeignKey(c => c.PostId)
             .HasPrincipalKey(p => p.Id);
 
-        builder.HasOne(p => p.ApplicationUser)
+        builder.HasOne(p => p.Author)
             .WithMany(a => a.Posts)
-            .HasForeignKey(p => p.ApplicationUserId)
+            .HasForeignKey(p => p.AuthorId)
             .HasPrincipalKey(a => a.Id);
     }
 }

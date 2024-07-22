@@ -6,44 +6,44 @@ public class Bloq : BaseEntity<Guid>
 
     public const int MaxDescriptionLength = 256;
 
-    public required Guid ApplicationUserId { get; set; }
+    public required Guid AuthorId { get; set; }
 
-    public virtual ApplicationUser? ApplicationUser { get; set; }
+    public virtual ApplicationUser? Author { get; set; }
 
     public required string Title { get; set; }
 
     public required string Description { get; set; }
 
+    public required bool IsPrivate { get; set; }
+
     public required bool IsPublished { get; set; }
 
     public DateTime? Published { get; set; }
 
-    public required bool IsPrivate { get; set; }
-
     public required virtual ICollection<Post> Posts { get; set; }
 
     public static Bloq Create(
-        Guid applicationUserId,
+        Guid authorId,
         string title,
         string description,
-        bool isPrivate,
         string createdBy,
-        ICollection<Post>? posts = null,
-        DateTime? published = null,
-        bool isPublished = false)
+        bool isPrivate = false,
+        Guid? id = null,
+        bool isPublished = false,
+        DateTime? published = null)
     {
         return new Bloq()
         {
-            Id = Guid.NewGuid(),
-            ApplicationUserId = applicationUserId,
+            Id = id ?? Guid.NewGuid(),
+            AuthorId = authorId,
             Title = title,
             Description = description,
-            IsPrivate = isPrivate,
-            Posts = posts ?? [],
-            Published = published ?? null,
-            IsPublished = isPublished,
             CreatedBy = createdBy,
-            CreatedOn = DateTime.UtcNow
+            IsPrivate = isPrivate,
+            IsPublished = isPublished,
+            Published = published ?? (isPublished ? DateTime.UtcNow : null),
+            CreatedOn = DateTime.UtcNow,
+            Posts = [],
         };
     }
 }

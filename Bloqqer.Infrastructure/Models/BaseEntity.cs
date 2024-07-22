@@ -2,7 +2,8 @@
 
 namespace Bloqqer.Infrastructure.Models;
 
-public abstract class BaseEntity<TKey> : IBaseEntity where TKey : IEquatable<TKey>
+public abstract class BaseEntity<TKey>
+    : IBaseEntity where TKey : IEquatable<TKey>
 {
     public required TKey Id { get; set; }
 

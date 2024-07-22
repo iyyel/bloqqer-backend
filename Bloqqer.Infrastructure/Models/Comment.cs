@@ -8,13 +8,35 @@ public class Comment : BaseEntity<Guid>
 
     public virtual Post? Post { get; set; }
 
-    public required Guid ApplicationUserId { get; set; }
+    public required Guid AuthorId { get; set; }
 
-    public virtual ApplicationUser? ApplicationUser { get; set; }
+    public virtual ApplicationUser? Author { get; set; }
 
     public required string Content { get; set; }
 
     public required bool IsPublished { get; set; }
 
     public DateTime? Published { get; set; }
+
+    public static Comment Create(
+       Guid postId,
+       Guid authorId,
+       string content,
+       string createdBy,
+       Guid? id = null,
+       bool isPublished = false,
+       DateTime? published = null)
+    {
+        return new Comment()
+        {
+            Id = id ?? Guid.NewGuid(),
+            PostId = postId,
+            AuthorId = authorId,
+            Content = content,
+            CreatedBy = createdBy,
+            IsPublished = isPublished,
+            Published = published ?? (isPublished ? DateTime.UtcNow : null),
+            CreatedOn = DateTime.UtcNow,
+        };
+    }
 }

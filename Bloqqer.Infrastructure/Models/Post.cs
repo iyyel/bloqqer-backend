@@ -12,9 +12,9 @@ public class Post : BaseEntity<Guid>
 
     public Bloq? Bloq { get; set; }
 
-    public required Guid ApplicationUserId { get; set; }
+    public required Guid AuthorId { get; set; }
 
-    public virtual ApplicationUser? ApplicationUser { get; set; }
+    public virtual ApplicationUser? Author { get; set; }
 
     public required string Title { get; set; }
 
@@ -27,4 +27,31 @@ public class Post : BaseEntity<Guid>
     public DateTime? Published { get; set; }
 
     public required virtual ICollection<Comment> Comments { get; set; }
+
+    public static Post Create(
+        Guid bloqId,
+        Guid authorId,
+        string title,
+        string description,
+        string content,
+        string createdBy,
+        Guid? id = null,
+        bool isPublished = false,
+        DateTime? published = null)
+    {
+        return new Post()
+        {
+            Id = id ?? Guid.NewGuid(),
+            BloqId = bloqId,
+            AuthorId = authorId,
+            Title = title,
+            Description = description,
+            Content = content,
+            CreatedBy = createdBy,
+            IsPublished = isPublished,
+            Published = published ?? (isPublished ? DateTime.UtcNow : null),
+            CreatedOn = DateTime.UtcNow,
+            Comments = [],
+        };
+    }
 }

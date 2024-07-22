@@ -34,4 +34,42 @@ public class ApplicationUser : IdentityUser<Guid>, IBaseEntity
     public string? DeletedBy { get; set; }
 
     public DateTime? DeletedOn { get; set; }
+
+    public static ApplicationUser Create(
+        string email,
+        string firstName,
+        string phoneNumber,
+        string securityStamp,
+        string createdBy,
+        Guid? id = null,
+        string? middleName = "",
+        string? lastName = "",
+        bool? lockoutEnabled = false,
+        bool? emailConfirmed = true,
+        bool? phoneNumberConfirmed = true,
+        bool? twoFactorEnabled = false)
+    {
+        return new ApplicationUser()
+        {
+            Id = id ?? Guid.NewGuid(),
+            UserName = email,
+            NormalizedUserName = email.ToUpper(),
+            Email = email,
+            NormalizedEmail = email.ToUpper(),
+            FirstName = firstName,
+            MiddleName = middleName,
+            LastName = lastName,
+            PhoneNumber = phoneNumber,
+            SecurityStamp = securityStamp,
+            CreatedBy = createdBy,
+            LockoutEnabled = lockoutEnabled ?? false,
+            EmailConfirmed = emailConfirmed ?? true,
+            PhoneNumberConfirmed = phoneNumberConfirmed ?? true,
+            TwoFactorEnabled = twoFactorEnabled ?? false,
+            CreatedOn = DateTime.UtcNow,
+            Bloqs = [],
+            Posts = [],
+            Comments = [],
+        };
+    }
 }
