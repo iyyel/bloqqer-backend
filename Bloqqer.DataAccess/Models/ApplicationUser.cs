@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Bloqqer.DataAccess.Models.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bloqqer.DataAccess.Models;
 
-public sealed class ApplicationUser : IdentityUser<Guid>
+public sealed class ApplicationUser : IdentityUser<Guid>, IBaseEntity
 {
     public const int MaxFirstNameLength = 256;
 
@@ -22,16 +23,15 @@ public sealed class ApplicationUser : IdentityUser<Guid>
 
     public ICollection<Comment>? Comments { get; set; }
 
-    /* TODO: How do I get this class to inherit from BaseEntity as well? */
     public string? CreatedBy { get; set; }
 
-    public DateTime CreatedOn { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime? UpdatedOn { get; set; }
+    public DateTime? CreatedOn { get; set; }
 
     public string? ModifiedBy { get; set; }
 
     public DateTime? ModifiedOn { get; set; }
+
+    public string? DeletedBy { get; set; }
+
+    public DateTime? DeletedOn { get; set; }
 }

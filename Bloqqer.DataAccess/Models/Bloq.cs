@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-
-namespace Bloqqer.DataAccess.Models;
+﻿namespace Bloqqer.DataAccess.Models;
 
 public sealed class Bloq : BaseEntity<Guid>
 {
