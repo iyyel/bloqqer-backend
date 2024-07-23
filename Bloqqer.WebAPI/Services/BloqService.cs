@@ -18,13 +18,12 @@ public sealed class BloqService(
     public async Task<Guid> CreateBloq(CreateBloqDTO createBloq)
     {
         var userGuid = _userService.GetLoggedInUserId() ?? throw new ArgumentException("Not logged in?");
-        var user = await _unitOfWork.ApplicationUsers.GetByIdAsync(userGuid) ?? throw new ArgumentException("User not found?");
 
         var newBloq = Bloq.Create(
             userGuid,
             createBloq.Title,
             createBloq.Description,
-            user.UserName ?? "System",
+            userGuid,
             createBloq.IsPrivate
         );
 
@@ -71,7 +70,6 @@ public sealed class BloqService(
         ).ToList();
     }
 
-    // TODO: Debug this method.
     public async Task<Guid> UpdateBloq(UpdateBloqDTO updateBloq)
     {
         // TODO: Make exception handling better.
@@ -84,27 +82,16 @@ public sealed class BloqService(
         }
 
         var user = await _unitOfWork.ApplicationUsers.GetByIdAsync(userGuid) ?? throw new ArgumentException("User not found?");
-        // TODO: Use AutoMapper for this stuff.
-        _unitOfWork.Bloqs.Update(
-            new Bloq()
-            {
-                Id = oldBloq.Id,
-                AuthorId = oldBloq.AuthorId,
-                Title = updateBloq.Title,
-                Description = updateBloq.Description,
-                IsPrivate = updateBloq.IsPrivate,
-                IsPublished = updateBloq.IsPublished,
-                Published = !oldBloq.IsPublished && updateBloq.IsPublished ? DateTime.UtcNow : oldBloq.Published,
-                Posts = oldBloq.Posts,
-                CreatedBy = oldBloq.CreatedBy,
-                CreatedOn = oldBloq.CreatedOn,
-                ModifiedBy = user.UserName,
-                ModifiedOn = DateTime.UtcNow,
-                DeletedBy = oldBloq.DeletedBy,
-                DeletedOn = oldBloq.DeletedOn,
-            }
-        );
 
+        oldBloq.Title = updateBloq.Title;
+        oldBloq.Description = updateBloq.Description;
+        oldBloq.IsPrivate = updateBloq.IsPrivate;
+        oldBloq.IsPublished = updateBloq.IsPublished;
+        oldBloq.Published = !oldBloq.IsPublished && updateBloq.IsPublished ? DateTime.UtcNow : oldBloq.Published;
+        oldBloq.ModifiedBy = user.Id;
+        oldBloq.ModifiedOn = DateTime.UtcNow;
+
+        _unitOfWork.Bloqs.Update(oldBloq);
         await _unitOfWork.SaveChangesAsync();
 
         return oldBloq.Id;

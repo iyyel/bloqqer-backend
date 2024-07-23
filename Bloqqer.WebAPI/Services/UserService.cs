@@ -24,12 +24,6 @@ public sealed class UserService(
             }).ToList();
     }
 
-    public string? GetLoggedInUser()
-    {
-        var userId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        return userId;
-    }
-
     public Guid? GetLoggedInUserId()
     {
         var userId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

@@ -1,16 +1,16 @@
 ﻿namespace Bloqqer.Infrastructure.Models.Interfaces;
 
-public interface IBaseEntity
+public interface IBaseEntity<TKey> where TKey : IEquatable<TKey>
 {
-    string? CreatedBy { get; set; }
+    TKey? CreatedBy { get; set; }
 
     DateTime? CreatedOn { get; set; }
 
-    string? ModifiedBy { get; set; }
+    TKey? ModifiedBy { get; set; }
 
     DateTime? ModifiedOn { get; set; }
 
-    string? DeletedBy { get; set; }
+    TKey? DeletedBy { get; set; }
 
     DateTime? DeletedOn { get; set; }
 }

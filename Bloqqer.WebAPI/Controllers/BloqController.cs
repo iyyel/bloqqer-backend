@@ -9,7 +9,10 @@ namespace Bloqqer.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
-public class BloqController(IBloqService bloqService, ILogger<BloqController> logger) : ControllerBase
+public class BloqController(
+    IBloqService bloqService,
+    ILogger<BloqController> logger
+) : ControllerBase
 {
     private readonly IBloqService _bloqService = bloqService;
 
@@ -19,7 +22,7 @@ public class BloqController(IBloqService bloqService, ILogger<BloqController> lo
     [HttpPost]
     [ProducesResponseType(typeof(Guid), 200)]
     [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, Guid? BloqId)>> Create(CreateBloqDTO createBloq)
+    public async Task<ActionResult<(APIError? Error, Guid? BloqId)>> CreateBloq(CreateBloqDTO createBloq)
     {
         return Ok(await _bloqService.CreateBloq(createBloq));
     }
@@ -29,7 +32,7 @@ public class BloqController(IBloqService bloqService, ILogger<BloqController> lo
     [Route("user/{id}")]
     [ProducesResponseType(typeof(ICollection<ViewBloqDTO>), 200)]
     [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, ICollection<ViewBloqDTO>? ViewBloqDTOs)>> GetByUserId(Guid id)
+    public async Task<ActionResult<(APIError? Error, ICollection<ViewBloqDTO>? ViewBloqDTOs)>> GetBloqsByUserId(Guid id)
     {
         return Ok(await _bloqService.GetBloqsByUserId(id));
     }
@@ -38,7 +41,7 @@ public class BloqController(IBloqService bloqService, ILogger<BloqController> lo
     [HttpGet]
     [ProducesResponseType(typeof(ICollection<ViewBloqDTO>), 200)]
     [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, ICollection<ViewBloqDTO>? ViewBloqDTOs)>> GetAll()
+    public async Task<ActionResult<(APIError? Error, ICollection<ViewBloqDTO>? ViewBloqDTOs)>> GetAllBloqs()
     {
         return Ok(await _bloqService.GetAllBloqs());
     }
@@ -47,7 +50,7 @@ public class BloqController(IBloqService bloqService, ILogger<BloqController> lo
     [HttpPut]
     [ProducesResponseType(typeof(Guid), 200)]
     [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, Guid? BloqId)>> Update(UpdateBloqDTO updateBloq)
+    public async Task<ActionResult<(APIError? Error, Guid? BloqId)>> UpdateBloq(UpdateBloqDTO updateBloq)
     {
         return Ok(await _bloqService.UpdateBloq(updateBloq));
     }

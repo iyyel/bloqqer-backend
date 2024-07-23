@@ -51,6 +51,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IBloqService, BloqService>();
+builder.Services.AddScoped<IPostService, PostService>();
 
 // Identity stuff
 builder.Services
@@ -58,7 +59,6 @@ builder.Services
     .AddRoles<ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddApiEndpoints();
-
 
 var app = builder.Build();
 

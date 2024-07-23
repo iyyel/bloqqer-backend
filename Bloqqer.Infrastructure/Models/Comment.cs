@@ -22,7 +22,7 @@ public class Comment : BaseEntity<Guid>
        Guid postId,
        Guid authorId,
        string content,
-       string createdBy,
+       Guid createdBy,
        Guid? id = null,
        bool isPublished = false,
        DateTime? published = null)

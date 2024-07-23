@@ -7,6 +7,7 @@ namespace Bloqqer.Infrastructure.Database;
 public sealed class DbInitializer(ModelBuilder modelBuilder)
 {
     private readonly ModelBuilder modelBuilder = modelBuilder;
+    private readonly Guid systemGuid = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff");
 
     public void Seed()
     {
@@ -34,7 +35,7 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             "Admin",
             "21212121",
             "admin",
-            "Seed",
+            systemGuid,
             userGuid
             );
         adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, "admin");
@@ -43,7 +44,7 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             adminUser.Id,
             "Admin Seed Bloq Title 1/2",
             "Admin Seed Bloq Description 1/2",
-            "Seed",
+            systemGuid,
             false,
             bloqGuid1,
             true
@@ -53,7 +54,7 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             adminUser.Id,
             "Admin Seed Bloq Title 2/2",
             "Admin Seed Bloq Description 2/2",
-            "Seed",
+            systemGuid,
             true,
             bloqGuid2,
             false
@@ -65,9 +66,9 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             "Admin Seed Bloq Post 1/2",
             "Admin Seed Bloq Post 1/2 Description",
             "Admin Seed Bloq Post 1/2 Content",
-            "Seed",
-            postGuid1,
-            true
+            systemGuid,
+            true,
+            postGuid1
             );
 
         var adminPost2 = Post.Create(
@@ -76,16 +77,16 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             "Admin Seed Bloq Post 2/2",
             "Admin Seed Bloq Post 2/2 Description",
             "Admin Seed Bloq Post 2/2 Content",
-            "Seed",
-            postGuid2,
-            false
+            systemGuid,
+            false,
+            postGuid2
             );
 
         var adminPost1Comment1 = Comment.Create(
             postGuid1,
             userGuid,
             "Admin Seed Bloq Post 1 Comment 1/2",
-            "Seed",
+            systemGuid,
             post1CommentGuid1,
             true
             );
@@ -94,7 +95,7 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             postGuid1,
             userGuid,
             "Admin Seed Bloq Post 1 Comment 2/2",
-            "Seed",
+            systemGuid,
             post1CommentGuid2,
             false
             );
@@ -103,7 +104,7 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             postGuid2,
             userGuid,
             "Admin Seed Bloq Post 2 Comment 1/2",
-            "Seed",
+            systemGuid,
             post2CommentGuid1,
             true
             );
@@ -112,7 +113,7 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             postGuid2,
             userGuid,
             "Admin Seed Bloq Post 2 Comment 2/2",
-            "Seed",
+            systemGuid,
             post2CommentGuid2,
             false
             );
@@ -145,7 +146,7 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             "Daniel",
             "20202020",
             "user",
-            "Seed",
+            systemGuid,
             userGuid
             );
         user.PasswordHash = passwordHasher.HashPassword(user, "user");
@@ -154,7 +155,7 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             userGuid,
             "Daniel Seed Bloq Title",
             "Daniel Seed Bloq Description",
-            "Seed",
+            systemGuid,
             false,
             bloqGuid,
             true
@@ -166,9 +167,9 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             "Daniel Seed Bloq Post 1/2",
             "Daniel Seed Bloq Post 1/2 Description",
             "Daniel Seed Bloq Post 1/2 Content",
-            "Seed",
-            postGuid1,
-            true
+            systemGuid,
+            true,
+            postGuid1
             );
 
         var post2 = Post.Create(
@@ -177,16 +178,16 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             "Daniel Seed Bloq Post 2/2",
             "Daniel Seed Bloq Post 2/2 Description",
             "Daniel Seed Bloq Post 2/2 Content",
-            "Seed",
-            postGuid2,
-            true
+            systemGuid,
+            true,
+            postGuid2
             );
 
         var post1Comment1 = Comment.Create(
             postGuid1,
             userGuid,
             "Daniel Seed Bloq Post 1 Comment 1/3",
-            "Seed",
+            systemGuid,
             post1CommentGuid1,
             true
             );
@@ -195,7 +196,7 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             postGuid1,
             userGuid,
             "Daniel Seed Bloq Post 1 Comment 2/3",
-            "Seed",
+            systemGuid,
             post1CommentGuid2,
             true
             );
@@ -204,7 +205,7 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             postGuid1,
             userGuid,
             "Daniel Seed Bloq Post 1 Comment 3/3",
-            "Seed",
+            systemGuid,
             post1CommentGuid3,
             true
             );
@@ -229,7 +230,7 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             "James",
             "23232323",
             "james",
-            "Seed",
+            systemGuid,
             userGuid,
             "Henrich",
             "Butler"

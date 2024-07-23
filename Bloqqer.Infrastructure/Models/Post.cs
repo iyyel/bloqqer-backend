@@ -34,9 +34,9 @@ public class Post : BaseEntity<Guid>
         string title,
         string description,
         string content,
-        string createdBy,
-        Guid? id = null,
+        Guid createdBy,
         bool isPublished = false,
+        Guid? id = null,
         DateTime? published = null)
     {
         return new Post()

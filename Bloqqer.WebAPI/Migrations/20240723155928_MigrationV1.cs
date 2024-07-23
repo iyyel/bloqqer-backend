@@ -35,11 +35,11 @@ namespace Bloqqer.WebAPI.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     MiddleName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -178,11 +178,11 @@ namespace Bloqqer.WebAPI.Migrations
                     IsPrivate = table.Column<bool>(type: "bit", nullable: false),
                     IsPublished = table.Column<bool>(type: "bit", nullable: false),
                     Published = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -208,11 +208,11 @@ namespace Bloqqer.WebAPI.Migrations
                     Content = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     IsPublished = table.Column<bool>(type: "bit", nullable: false),
                     Published = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -241,11 +241,11 @@ namespace Bloqqer.WebAPI.Migrations
                     Content = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     IsPublished = table.Column<bool>(type: "bit", nullable: false),
                     Published = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -269,9 +269,9 @@ namespace Bloqqer.WebAPI.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "MiddleName", "ModifiedBy", "ModifiedOn", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("5734941b-03c9-4416-9451-b32d2a0e4cc0"), 0, "1a22664c-9b48-4809-a26d-70207e810859", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(6191), null, null, "james@butler.xyz", true, "James", "Butler", false, null, "Henrich", null, null, "JAMES@BUTLER.XYZ", "JAMES@BUTLER.XYZ", "AQAAAAIAAYagAAAAELq00J4H1GRnintxuRra5OpxgBesdyAEylzw71WIiKvrdGx49eytr2FPUud7WvtK2Q==", "23232323", true, "james", false, "james@butler.xyz" },
-                    { new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), 0, "4d9df6fb-0b49-4652-8704-356a47702254", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 739, DateTimeKind.Utc).AddTicks(8702), null, null, "admin@iyyel.io", true, "Admin", "", false, null, "", null, null, "ADMIN@IYYEL.IO", "ADMIN@IYYEL.IO", "AQAAAAIAAYagAAAAELbHjnthNFW27L58qRYsUbWh0VhkXpbNQYRC8qy42izEMlHLS1stFdUMHegCbUnGhw==", "21212121", true, "admin", false, "admin@iyyel.io" },
-                    { new Guid("de05b775-a344-497f-a091-643d267ff25d"), 0, "26b7b902-1e4a-4234-aa38-9d1343dd48a7", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8678), null, null, "mail@iyyel.io", true, "Daniel", "", false, null, "", null, null, "MAIL@IYYEL.IO", "MAIL@IYYEL.IO", "AQAAAAIAAYagAAAAEA4+FnwJp5tNvqJ3tfg2OB7wtKrAQ3BoZBumXp4NcZi4yZKMFPMHIZREUkx2SFTPag==", "20202020", true, "user", false, "mail@iyyel.io" }
+                    { new Guid("5734941b-03c9-4416-9451-b32d2a0e4cc0"), 0, "d8d993e3-c16e-46f7-b15d-d5f544086e39", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5678), new Guid("00000000-0000-0000-0000-000000000000"), null, "james@butler.xyz", true, "James", "Butler", false, null, "Henrich", new Guid("00000000-0000-0000-0000-000000000000"), null, "JAMES@BUTLER.XYZ", "JAMES@BUTLER.XYZ", "AQAAAAIAAYagAAAAECPmOB9f7MRPkXwjhDcjPKkSB/dLdYOe0Y7ddg7Ed/KVVoS5rij0o7vnXu8bBt/Irg==", "23232323", true, "james", false, "james@butler.xyz" },
+                    { new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), 0, "490d6d37-9490-470f-b84e-4500d2886afb", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 34, DateTimeKind.Utc).AddTicks(5984), new Guid("00000000-0000-0000-0000-000000000000"), null, "admin@iyyel.io", true, "Admin", "", false, null, "", new Guid("00000000-0000-0000-0000-000000000000"), null, "ADMIN@IYYEL.IO", "ADMIN@IYYEL.IO", "AQAAAAIAAYagAAAAEEkUT0JJgB/DLZQmbtFxaac1gS0Cm7esaKR6cWIWyotrnLJDggzjBisyTYHrq3ukrg==", "21212121", true, "admin", false, "admin@iyyel.io" },
+                    { new Guid("de05b775-a344-497f-a091-643d267ff25d"), 0, "1baa9420-b8da-4c06-89bb-03e9e5ee255c", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(5125), new Guid("00000000-0000-0000-0000-000000000000"), null, "mail@iyyel.io", true, "Daniel", "", false, null, "", new Guid("00000000-0000-0000-0000-000000000000"), null, "MAIL@IYYEL.IO", "MAIL@IYYEL.IO", "AQAAAAIAAYagAAAAEDuCcacagBuy8AWeVB6390MeOKohty6IPZEV9H45tRKjusPURgqRNRXeAPlp+PFQ9Q==", "20202020", true, "user", false, "mail@iyyel.io" }
                 });
 
             migrationBuilder.InsertData(
@@ -279,9 +279,9 @@ namespace Bloqqer.WebAPI.Migrations
                 columns: new[] { "Id", "AuthorId", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Description", "IsPrivate", "IsPublished", "ModifiedBy", "ModifiedOn", "Published", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("295efc76-56d6-4839-ada4-25924f912aa0"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8415), null, null, "Admin Seed Bloq Description 1/2", false, true, null, null, new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8413), "Admin Seed Bloq Title 1/2" },
-                    { new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(5874), null, null, "Daniel Seed Bloq Description", false, true, null, null, new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(5873), "Daniel Seed Bloq Title" },
-                    { new Guid("f8d31b28-1c9a-43c0-aebd-19236af4422f"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8420), null, null, "Admin Seed Bloq Description 2/2", true, false, null, null, null, "Admin Seed Bloq Title 2/2" }
+                    { new Guid("295efc76-56d6-4839-ada4-25924f912aa0"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4791), new Guid("00000000-0000-0000-0000-000000000000"), null, "Admin Seed Bloq Description 1/2", false, true, new Guid("00000000-0000-0000-0000-000000000000"), null, new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4785), "Admin Seed Bloq Title 1/2" },
+                    { new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5277), new Guid("00000000-0000-0000-0000-000000000000"), null, "Daniel Seed Bloq Description", false, true, new Guid("00000000-0000-0000-0000-000000000000"), null, new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5275), "Daniel Seed Bloq Title" },
+                    { new Guid("f8d31b28-1c9a-43c0-aebd-19236af4422f"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4797), new Guid("00000000-0000-0000-0000-000000000000"), null, "Admin Seed Bloq Description 2/2", true, false, new Guid("00000000-0000-0000-0000-000000000000"), null, null, "Admin Seed Bloq Title 2/2" }
                 });
 
             migrationBuilder.InsertData(
@@ -289,10 +289,10 @@ namespace Bloqqer.WebAPI.Migrations
                 columns: new[] { "Id", "AuthorId", "BloqId", "Content", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Description", "IsPublished", "ModifiedBy", "ModifiedOn", "Published", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"), "Daniel Seed Bloq Post 1/2 Content", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(5888), null, null, "Daniel Seed Bloq Post 1/2 Description", true, null, null, new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(5887), "Daniel Seed Bloq Post 1/2" },
-                    { new Guid("0cb3379f-6bea-424d-ba0f-a44f4fa6a11a"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), new Guid("295efc76-56d6-4839-ada4-25924f912aa0"), "Admin Seed Bloq Post 1/2 Content", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8428), null, null, "Admin Seed Bloq Post 1/2 Description", true, null, null, new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8428), "Admin Seed Bloq Post 1/2" },
-                    { new Guid("efab75ca-f1ac-4211-8076-e344b9c98025"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), new Guid("295efc76-56d6-4839-ada4-25924f912aa0"), "Admin Seed Bloq Post 2/2 Content", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8431), null, null, "Admin Seed Bloq Post 2/2 Description", false, null, null, null, "Admin Seed Bloq Post 2/2" },
-                    { new Guid("f298d1f6-9ae6-477c-af37-173f959cdd1c"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"), "Daniel Seed Bloq Post 2/2 Content", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(5891), null, null, "Daniel Seed Bloq Post 2/2 Description", true, null, null, new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(5890), "Daniel Seed Bloq Post 2/2" }
+                    { new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"), "Daniel Seed Bloq Post 1/2 Content", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5367), new Guid("00000000-0000-0000-0000-000000000000"), null, "Daniel Seed Bloq Post 1/2 Description", true, new Guid("00000000-0000-0000-0000-000000000000"), null, new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5366), "Daniel Seed Bloq Post 1/2" },
+                    { new Guid("0cb3379f-6bea-424d-ba0f-a44f4fa6a11a"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), new Guid("295efc76-56d6-4839-ada4-25924f912aa0"), "Admin Seed Bloq Post 1/2 Content", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4805), new Guid("00000000-0000-0000-0000-000000000000"), null, "Admin Seed Bloq Post 1/2 Description", true, new Guid("00000000-0000-0000-0000-000000000000"), null, new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4805), "Admin Seed Bloq Post 1/2" },
+                    { new Guid("efab75ca-f1ac-4211-8076-e344b9c98025"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), new Guid("295efc76-56d6-4839-ada4-25924f912aa0"), "Admin Seed Bloq Post 2/2 Content", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4809), new Guid("00000000-0000-0000-0000-000000000000"), null, "Admin Seed Bloq Post 2/2 Description", false, new Guid("00000000-0000-0000-0000-000000000000"), null, null, "Admin Seed Bloq Post 2/2" },
+                    { new Guid("f298d1f6-9ae6-477c-af37-173f959cdd1c"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"), "Daniel Seed Bloq Post 2/2 Content", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5370), new Guid("00000000-0000-0000-0000-000000000000"), null, "Daniel Seed Bloq Post 2/2 Description", true, new Guid("00000000-0000-0000-0000-000000000000"), null, new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5370), "Daniel Seed Bloq Post 2/2" }
                 });
 
             migrationBuilder.InsertData(
@@ -300,13 +300,13 @@ namespace Bloqqer.WebAPI.Migrations
                 columns: new[] { "Id", "AuthorId", "Content", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "IsPublished", "ModifiedBy", "ModifiedOn", "PostId", "Published" },
                 values: new object[,]
                 {
-                    { new Guid("180daba0-d465-40d0-bb01-68e0ac40b86c"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Admin Seed Bloq Post 1 Comment 2/2", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8438), null, null, false, null, null, new Guid("0cb3379f-6bea-424d-ba0f-a44f4fa6a11a"), null },
-                    { new Guid("1af0038f-73a2-4fbb-867f-75a90cf33536"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Admin Seed Bloq Post 1 Comment 1/2", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8436), null, null, true, null, null, new Guid("0cb3379f-6bea-424d-ba0f-a44f4fa6a11a"), new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8436) },
-                    { new Guid("3e8f006d-04c7-4d2b-97a2-108de9b39b3a"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Admin Seed Bloq Post 2 Comment 1/2", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8439), null, null, true, null, null, new Guid("efab75ca-f1ac-4211-8076-e344b9c98025"), new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8439) },
-                    { new Guid("49304138-ec9e-495e-8774-d4b2b64781ce"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), "Daniel Seed Bloq Post 1 Comment 2/3", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(5898), null, null, true, null, null, new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"), new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(5897) },
-                    { new Guid("679dee46-f2f2-4859-bedc-7d542eae5089"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), "Daniel Seed Bloq Post 1 Comment 3/3", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(5899), null, null, true, null, null, new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"), new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(5898) },
-                    { new Guid("d1cd67d2-67e5-4c6f-aabb-cb4056dd5064"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), "Daniel Seed Bloq Post 1 Comment 1/3", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(5896), null, null, true, null, null, new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"), new DateTime(2024, 7, 23, 13, 32, 28, 818, DateTimeKind.Utc).AddTicks(5895) },
-                    { new Guid("fcc41c42-f406-4b28-9b4f-c7e02ccb6380"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Admin Seed Bloq Post 2 Comment 2/2", "Seed", new DateTime(2024, 7, 23, 13, 32, 28, 779, DateTimeKind.Utc).AddTicks(8440), null, null, false, null, null, new Guid("efab75ca-f1ac-4211-8076-e344b9c98025"), null }
+                    { new Guid("180daba0-d465-40d0-bb01-68e0ac40b86c"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Admin Seed Bloq Post 1 Comment 2/2", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4816), new Guid("00000000-0000-0000-0000-000000000000"), null, false, new Guid("00000000-0000-0000-0000-000000000000"), null, new Guid("0cb3379f-6bea-424d-ba0f-a44f4fa6a11a"), null },
+                    { new Guid("1af0038f-73a2-4fbb-867f-75a90cf33536"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Admin Seed Bloq Post 1 Comment 1/2", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4814), new Guid("00000000-0000-0000-0000-000000000000"), null, true, new Guid("00000000-0000-0000-0000-000000000000"), null, new Guid("0cb3379f-6bea-424d-ba0f-a44f4fa6a11a"), new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4814) },
+                    { new Guid("3e8f006d-04c7-4d2b-97a2-108de9b39b3a"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Admin Seed Bloq Post 2 Comment 1/2", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4817), new Guid("00000000-0000-0000-0000-000000000000"), null, true, new Guid("00000000-0000-0000-0000-000000000000"), null, new Guid("efab75ca-f1ac-4211-8076-e344b9c98025"), new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4816) },
+                    { new Guid("49304138-ec9e-495e-8774-d4b2b64781ce"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), "Daniel Seed Bloq Post 1 Comment 2/3", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5376), new Guid("00000000-0000-0000-0000-000000000000"), null, true, new Guid("00000000-0000-0000-0000-000000000000"), null, new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"), new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5375) },
+                    { new Guid("679dee46-f2f2-4859-bedc-7d542eae5089"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), "Daniel Seed Bloq Post 1 Comment 3/3", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5377), new Guid("00000000-0000-0000-0000-000000000000"), null, true, new Guid("00000000-0000-0000-0000-000000000000"), null, new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"), new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5376) },
+                    { new Guid("d1cd67d2-67e5-4c6f-aabb-cb4056dd5064"), new Guid("de05b775-a344-497f-a091-643d267ff25d"), "Daniel Seed Bloq Post 1 Comment 1/3", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5374), new Guid("00000000-0000-0000-0000-000000000000"), null, true, new Guid("00000000-0000-0000-0000-000000000000"), null, new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"), new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5373) },
+                    { new Guid("fcc41c42-f406-4b28-9b4f-c7e02ccb6380"), new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"), "Admin Seed Bloq Post 2 Comment 2/2", new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"), new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4818), new Guid("00000000-0000-0000-0000-000000000000"), null, false, new Guid("00000000-0000-0000-0000-000000000000"), null, new Guid("efab75ca-f1ac-4211-8076-e344b9c98025"), null }
                 });
 
             migrationBuilder.CreateIndex(

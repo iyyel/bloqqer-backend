@@ -26,7 +26,7 @@ public class Bloq : BaseEntity<Guid>
         Guid authorId,
         string title,
         string description,
-        string createdBy,
+        Guid createdBy,
         bool isPrivate = false,
         Guid? id = null,
         bool isPublished = false,
