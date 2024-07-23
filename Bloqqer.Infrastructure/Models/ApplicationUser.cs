@@ -23,6 +23,12 @@ public class ApplicationUser : IdentityUser<Guid>, IBaseEntity<Guid>
 
     public virtual ICollection<Comment>? Comments { get; set; }
 
+    public virtual ICollection<Reaction>? Reactions { get; set; }
+
+    public virtual ICollection<Follow>? Followers { get; set; }
+
+    public virtual ICollection<Follow>? Following { get; set; }
+
     public Guid CreatedBy { get; set; }
 
     public DateTime? CreatedOn { get; set; }
@@ -70,6 +76,9 @@ public class ApplicationUser : IdentityUser<Guid>, IBaseEntity<Guid>
             Bloqs = [],
             Posts = [],
             Comments = [],
+            Reactions = [],
+            Followers = [],
+            Following = [],
         };
     }
 }

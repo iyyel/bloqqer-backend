@@ -8,6 +8,7 @@ public sealed class PostConfiguration : IEntityTypeConfiguration<Post>
 {
     public void Configure(EntityTypeBuilder<Post> builder)
     {
+        // TODO: Constants?
         builder.ToTable("Bloqqer.Posts");
 
         builder.Property(p => p.Title)
@@ -22,6 +23,11 @@ public sealed class PostConfiguration : IEntityTypeConfiguration<Post>
         builder.HasMany(p => p.Comments)
             .WithOne(c => c.Post)
             .HasForeignKey(c => c.PostId)
+            .HasPrincipalKey(p => p.Id);
+
+        builder.HasMany(p => p.Reactions)
+            .WithOne(r => r.Post)
+            .HasForeignKey(r => r.PostId)
             .HasPrincipalKey(p => p.Id);
 
         builder.HasOne(p => p.Author)

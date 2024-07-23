@@ -37,7 +37,7 @@ builder.Services.AddAuthorizationBuilder();
 // Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration
-    .GetConnectionString("DefaultConnection"), b =>
+    .GetConnectionString("LocalConnection"), b =>
     {
         b.MigrationsAssembly("Bloqqer.WebAPI");
         b.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);

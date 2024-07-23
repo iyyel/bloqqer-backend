@@ -22,6 +22,8 @@ public class Bloq : BaseEntity<Guid>
 
     public required virtual ICollection<Post> Posts { get; set; }
 
+    public required virtual ICollection<Reaction> Reactions { get; set; }
+
     public static Bloq Create(
         Guid authorId,
         string title,
@@ -44,6 +46,7 @@ public class Bloq : BaseEntity<Guid>
             Published = published ?? (isPublished ? DateTime.UtcNow : null),
             CreatedOn = DateTime.UtcNow,
             Posts = [],
+            Reactions = [],
         };
     }
 }

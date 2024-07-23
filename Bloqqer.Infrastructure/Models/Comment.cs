@@ -18,6 +18,8 @@ public class Comment : BaseEntity<Guid>
 
     public DateTime? Published { get; set; }
 
+    public required virtual ICollection<Reaction> Reactions { get; set; }
+
     public static Comment Create(
        Guid postId,
        Guid authorId,
@@ -37,6 +39,7 @@ public class Comment : BaseEntity<Guid>
             IsPublished = isPublished,
             Published = published ?? (isPublished ? DateTime.UtcNow : null),
             CreatedOn = DateTime.UtcNow,
+            Reactions = [],
         };
     }
 }

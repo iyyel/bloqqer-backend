@@ -8,6 +8,7 @@ public sealed class ApplicationUserConfiguration : IEntityTypeConfiguration<Appl
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
+        // TODO: Constants?
         builder.ToTable("Bloqqer.ApplicationUsers");
 
         builder.Property(a => a.FirstName)
@@ -32,6 +33,21 @@ public sealed class ApplicationUserConfiguration : IEntityTypeConfiguration<Appl
         builder.HasMany(a => a.Comments)
             .WithOne(c => c.Author)
             .HasForeignKey(c => c.AuthorId)
+            .HasPrincipalKey(a => a.Id);
+
+        builder.HasMany(a => a.Reactions)
+            .WithOne(r => r.Reactor)
+            .HasForeignKey(c => c.ReactorId)
+            .HasPrincipalKey(a => a.Id);
+
+        builder.HasMany(a => a.Followers)
+            .WithOne(f => f.Follower)
+            .HasForeignKey(f => f.FollowerId)
+            .HasPrincipalKey(a => a.Id);
+
+        builder.HasMany(a => a.Following)
+            .WithOne(f => f.Followed)
+            .HasForeignKey(f => f.FollowedId)
             .HasPrincipalKey(a => a.Id);
     }
 }

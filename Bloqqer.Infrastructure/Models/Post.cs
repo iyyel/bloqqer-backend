@@ -28,6 +28,8 @@ public class Post : BaseEntity<Guid>
 
     public required virtual ICollection<Comment> Comments { get; set; }
 
+    public required virtual ICollection<Reaction> Reactions { get; set; }
+
     public static Post Create(
         Guid bloqId,
         Guid authorId,
@@ -52,6 +54,7 @@ public class Post : BaseEntity<Guid>
             Published = published ?? (isPublished ? DateTime.UtcNow : null),
             CreatedOn = DateTime.UtcNow,
             Comments = [],
+            Reactions = [],
         };
     }
 }

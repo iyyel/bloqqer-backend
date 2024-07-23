@@ -8,6 +8,7 @@ public sealed class BloqConfiguration : IEntityTypeConfiguration<Bloq>
 {
     public void Configure(EntityTypeBuilder<Bloq> builder)
     {
+        // TODO: Constants?
         builder.ToTable("Bloqqer.Bloqs");
 
         builder.Property(b => b.Title)
@@ -20,6 +21,11 @@ public sealed class BloqConfiguration : IEntityTypeConfiguration<Bloq>
             .WithOne(p => p.Bloq)
             .HasForeignKey(p => p.BloqId)
             .HasPrincipalKey(b => b.Id);
+
+        builder.HasMany(b => b.Reactions)
+            .WithOne(r => r.Bloq)
+            .HasForeignKey(r => r.BloqId)
+            .HasPrincipalKey(a => a.Id);
 
         builder.HasOne(b => b.Author)
             .WithMany(a => a.Bloqs)

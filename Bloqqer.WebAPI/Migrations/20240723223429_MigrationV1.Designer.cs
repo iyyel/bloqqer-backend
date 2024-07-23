@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bloqqer.WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240723155928_MigrationV1")]
+    [Migration("20240723223429_MigrationV1")]
     partial class MigrationV1
     {
         /// <inheritdoc />
@@ -153,9 +153,9 @@ namespace Bloqqer.WebAPI.Migrations
                         {
                             Id = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "490d6d37-9490-470f-b84e-4500d2886afb",
+                            ConcurrencyStamp = "ff892bdc-1b25-4341-bad3-121dcc14c26f",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 34, DateTimeKind.Utc).AddTicks(5984),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 671, DateTimeKind.Utc).AddTicks(4951),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "admin@iyyel.io",
                             EmailConfirmed = true,
@@ -166,7 +166,7 @@ namespace Bloqqer.WebAPI.Migrations
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             NormalizedEmail = "ADMIN@IYYEL.IO",
                             NormalizedUserName = "ADMIN@IYYEL.IO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEkUT0JJgB/DLZQmbtFxaac1gS0Cm7esaKR6cWIWyotrnLJDggzjBisyTYHrq3ukrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDvbbwu1qXomSE/vAeBkwKlzkPI3xmDXkn4pc/YtmdnlGIOChfVr2gkz3jXYcBXMew==",
                             PhoneNumber = "21212121",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "admin",
@@ -177,9 +177,9 @@ namespace Bloqqer.WebAPI.Migrations
                         {
                             Id = new Guid("de05b775-a344-497f-a091-643d267ff25d"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1baa9420-b8da-4c06-89bb-03e9e5ee255c",
+                            ConcurrencyStamp = "51c58c06-1cc6-40c2-99ef-20012d6585b4",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(5125),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8876),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "mail@iyyel.io",
                             EmailConfirmed = true,
@@ -190,7 +190,7 @@ namespace Bloqqer.WebAPI.Migrations
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             NormalizedEmail = "MAIL@IYYEL.IO",
                             NormalizedUserName = "MAIL@IYYEL.IO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDuCcacagBuy8AWeVB6390MeOKohty6IPZEV9H45tRKjusPURgqRNRXeAPlp+PFQ9Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPFyrnZI2DCZ+HjHR1Oxr7Lpz67EqVX4cg3D7p/DZX2KGx/xBEcv6Xl7qSe8wuLwLg==",
                             PhoneNumber = "20202020",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "user",
@@ -201,9 +201,9 @@ namespace Bloqqer.WebAPI.Migrations
                         {
                             Id = new Guid("5734941b-03c9-4416-9451-b32d2a0e4cc0"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d8d993e3-c16e-46f7-b15d-d5f544086e39",
+                            ConcurrencyStamp = "f6b3cee5-867c-43ad-8cb0-0d1cb9463f0b",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5678),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(232),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "james@butler.xyz",
                             EmailConfirmed = true,
@@ -214,7 +214,7 @@ namespace Bloqqer.WebAPI.Migrations
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             NormalizedEmail = "JAMES@BUTLER.XYZ",
                             NormalizedUserName = "JAMES@BUTLER.XYZ",
-                            PasswordHash = "AQAAAAIAAYagAAAAECPmOB9f7MRPkXwjhDcjPKkSB/dLdYOe0Y7ddg7Ed/KVVoS5rij0o7vnXu8bBt/Irg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJW1y2zulDOSuBXF/77Av4QFhQm5YHFdG4y7N3pKzWjVFCg+9VejejXFw8OdB7F/aA==",
                             PhoneNumber = "23232323",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "james",
@@ -281,13 +281,13 @@ namespace Bloqqer.WebAPI.Migrations
                             Id = new Guid("295efc76-56d6-4839-ada4-25924f912aa0"),
                             AuthorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4791),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8584),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Admin Seed Bloq Description 1/2",
                             IsPrivate = false,
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Published = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4785),
+                            Published = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8582),
                             Title = "Admin Seed Bloq Title 1/2"
                         },
                         new
@@ -295,7 +295,7 @@ namespace Bloqqer.WebAPI.Migrations
                             Id = new Guid("f8d31b28-1c9a-43c0-aebd-19236af4422f"),
                             AuthorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4797),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8591),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Admin Seed Bloq Description 2/2",
                             IsPrivate = true,
@@ -308,13 +308,13 @@ namespace Bloqqer.WebAPI.Migrations
                             Id = new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"),
                             AuthorId = new Guid("de05b775-a344-497f-a091-643d267ff25d"),
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5277),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(33),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Daniel Seed Bloq Description",
                             IsPrivate = false,
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Published = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5275),
+                            Published = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(31),
                             Title = "Daniel Seed Bloq Title"
                         });
                 });
@@ -375,12 +375,12 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             Content = "Admin Seed Bloq Post 1 Comment 1/2",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4814),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8607),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("0cb3379f-6bea-424d-ba0f-a44f4fa6a11a"),
-                            Published = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4814)
+                            Published = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8606)
                         },
                         new
                         {
@@ -388,7 +388,7 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             Content = "Admin Seed Bloq Post 1 Comment 2/2",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4816),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8609),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsPublished = false,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -400,12 +400,12 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             Content = "Admin Seed Bloq Post 2 Comment 1/2",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4817),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8610),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("efab75ca-f1ac-4211-8076-e344b9c98025"),
-                            Published = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4816)
+                            Published = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8610)
                         },
                         new
                         {
@@ -413,7 +413,7 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             Content = "Admin Seed Bloq Post 2 Comment 2/2",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4818),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8611),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsPublished = false,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -425,12 +425,12 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("de05b775-a344-497f-a091-643d267ff25d"),
                             Content = "Daniel Seed Bloq Post 1 Comment 1/3",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5374),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(47),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"),
-                            Published = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5373)
+                            Published = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(47)
                         },
                         new
                         {
@@ -438,12 +438,12 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("de05b775-a344-497f-a091-643d267ff25d"),
                             Content = "Daniel Seed Bloq Post 1 Comment 2/3",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5376),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(49),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"),
-                            Published = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5375)
+                            Published = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(49)
                         },
                         new
                         {
@@ -451,13 +451,52 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("de05b775-a344-497f-a091-643d267ff25d"),
                             Content = "Daniel Seed Bloq Post 1 Comment 3/3",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5377),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(51),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"),
-                            Published = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5376)
+                            Published = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(50)
                         });
+                });
+
+            modelBuilder.Entity("Bloqqer.Infrastructure.Models.Follow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("FollowedId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FollowerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FollowedId");
+
+                    b.HasIndex("FollowerId");
+
+                    b.ToTable("Bloqqer.Follows", (string)null);
                 });
 
             modelBuilder.Entity("Bloqqer.Infrastructure.Models.Post", b =>
@@ -527,12 +566,12 @@ namespace Bloqqer.WebAPI.Migrations
                             BloqId = new Guid("295efc76-56d6-4839-ada4-25924f912aa0"),
                             Content = "Admin Seed Bloq Post 1/2 Content",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4805),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8599),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Admin Seed Bloq Post 1/2 Description",
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Published = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4805),
+                            Published = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8598),
                             Title = "Admin Seed Bloq Post 1/2"
                         },
                         new
@@ -542,7 +581,7 @@ namespace Bloqqer.WebAPI.Migrations
                             BloqId = new Guid("295efc76-56d6-4839-ada4-25924f912aa0"),
                             Content = "Admin Seed Bloq Post 2/2 Content",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 72, DateTimeKind.Utc).AddTicks(4809),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 709, DateTimeKind.Utc).AddTicks(8602),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Admin Seed Bloq Post 2/2 Description",
                             IsPublished = false,
@@ -556,12 +595,12 @@ namespace Bloqqer.WebAPI.Migrations
                             BloqId = new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"),
                             Content = "Daniel Seed Bloq Post 1/2 Content",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5367),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(40),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Daniel Seed Bloq Post 1/2 Description",
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Published = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5366),
+                            Published = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(40),
                             Title = "Daniel Seed Bloq Post 1/2"
                         },
                         new
@@ -571,14 +610,63 @@ namespace Bloqqer.WebAPI.Migrations
                             BloqId = new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"),
                             Content = "Daniel Seed Bloq Post 2/2 Content",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5370),
+                            CreatedOn = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(43),
                             DeletedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Daniel Seed Bloq Post 2/2 Description",
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Published = new DateTime(2024, 7, 23, 15, 59, 28, 112, DateTimeKind.Utc).AddTicks(5370),
+                            Published = new DateTime(2024, 7, 23, 22, 34, 28, 747, DateTimeKind.Utc).AddTicks(43),
                             Title = "Daniel Seed Bloq Post 2/2"
                         });
+                });
+
+            modelBuilder.Entity("Bloqqer.Infrastructure.Models.Reaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BloqId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CommentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("PostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ReactorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BloqId");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("ReactorId");
+
+                    b.ToTable("Bloqqer.Reactions", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -712,6 +800,23 @@ namespace Bloqqer.WebAPI.Migrations
                     b.Navigation("Post");
                 });
 
+            modelBuilder.Entity("Bloqqer.Infrastructure.Models.Follow", b =>
+                {
+                    b.HasOne("Bloqqer.Infrastructure.Models.ApplicationUser", "Followed")
+                        .WithMany("Following")
+                        .HasForeignKey("FollowedId");
+
+                    b.HasOne("Bloqqer.Infrastructure.Models.ApplicationUser", "Follower")
+                        .WithMany("Followers")
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Followed");
+
+                    b.Navigation("Follower");
+                });
+
             modelBuilder.Entity("Bloqqer.Infrastructure.Models.Post", b =>
                 {
                     b.HasOne("Bloqqer.Infrastructure.Models.ApplicationUser", "Author")
@@ -727,6 +832,33 @@ namespace Bloqqer.WebAPI.Migrations
                     b.Navigation("Author");
 
                     b.Navigation("Bloq");
+                });
+
+            modelBuilder.Entity("Bloqqer.Infrastructure.Models.Reaction", b =>
+                {
+                    b.HasOne("Bloqqer.Infrastructure.Models.Bloq", "Bloq")
+                        .WithMany("Reactions")
+                        .HasForeignKey("BloqId");
+
+                    b.HasOne("Bloqqer.Infrastructure.Models.Comment", "Comment")
+                        .WithMany("Reactions")
+                        .HasForeignKey("CommentId");
+
+                    b.HasOne("Bloqqer.Infrastructure.Models.Post", "Post")
+                        .WithMany("Reactions")
+                        .HasForeignKey("PostId");
+
+                    b.HasOne("Bloqqer.Infrastructure.Models.ApplicationUser", "Reactor")
+                        .WithMany("Reactions")
+                        .HasForeignKey("ReactorId");
+
+                    b.Navigation("Bloq");
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("Post");
+
+                    b.Navigation("Reactor");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -786,17 +918,32 @@ namespace Bloqqer.WebAPI.Migrations
 
                     b.Navigation("Comments");
 
+                    b.Navigation("Followers");
+
+                    b.Navigation("Following");
+
                     b.Navigation("Posts");
+
+                    b.Navigation("Reactions");
                 });
 
             modelBuilder.Entity("Bloqqer.Infrastructure.Models.Bloq", b =>
                 {
                     b.Navigation("Posts");
+
+                    b.Navigation("Reactions");
+                });
+
+            modelBuilder.Entity("Bloqqer.Infrastructure.Models.Comment", b =>
+                {
+                    b.Navigation("Reactions");
                 });
 
             modelBuilder.Entity("Bloqqer.Infrastructure.Models.Post", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Reactions");
                 });
 #pragma warning restore 612, 618
         }

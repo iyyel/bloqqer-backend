@@ -8,10 +8,16 @@ public sealed class CommentConfiguration : IEntityTypeConfiguration<Comment>
 {
     public void Configure(EntityTypeBuilder<Comment> builder)
     {
+        // TODO: Constants?
         builder.ToTable("Bloqqer.Comments");
 
         builder.Property(p => p.Content)
             .HasMaxLength(Post.MaxContentLength);
+
+        builder.HasMany(c => c.Reactions)
+            .WithOne(r => r.Comment)
+            .HasForeignKey(r => r.CommentId)
+            .HasPrincipalKey(c => c.Id);
 
         builder.HasOne(c => c.Post)
             .WithMany(p => p.Comments)
