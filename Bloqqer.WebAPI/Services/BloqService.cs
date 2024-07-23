@@ -15,7 +15,7 @@ public sealed class BloqService(
     private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
     private readonly IUserService _userService = userService;
 
-    public async Task<Guid> Create(CreateBloqDTO createBloq)
+    public async Task<Guid> CreateBloq(CreateBloqDTO createBloq)
     {
         var userGuid = _userService.GetLoggedInUserId() ?? throw new ArgumentException("Not logged in?");
         var user = await _unitOfWork.ApplicationUsers.GetByIdAsync(userGuid) ?? throw new ArgumentException("User not found?");
@@ -34,7 +34,7 @@ public sealed class BloqService(
         return newBloq.Id;
     }
 
-    public async Task<ICollection<ViewBloqDTO>> GetByUserId(Guid id)
+    public async Task<ICollection<ViewBloqDTO>> GetBloqsByUserId(Guid id)
     {
         // TODO: How do I make it so the Posts are included in the in the output as well?
         return (await _unitOfWork.Bloqs.FindAsync(b => b.AuthorId == id))
@@ -53,7 +53,7 @@ public sealed class BloqService(
         ).ToList();
     }
 
-    public async Task<ICollection<ViewBloqDTO>> GetAll()
+    public async Task<ICollection<ViewBloqDTO>> GetAllBloqs()
     {
         return (await _unitOfWork.Bloqs.GetAllAsync())
             .Select(b =>
@@ -72,7 +72,7 @@ public sealed class BloqService(
     }
 
     // TODO: Debug this method.
-    public async Task<Guid> Update(UpdateBloqDTO updateBloq)
+    public async Task<Guid> UpdateBloq(UpdateBloqDTO updateBloq)
     {
         // TODO: Make exception handling better.
         var userGuid = _userService.GetLoggedInUserId() ?? throw new ArgumentException("Not logged in?");

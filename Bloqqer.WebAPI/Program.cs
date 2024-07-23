@@ -37,8 +37,11 @@ builder.Services.AddAuthorizationBuilder();
 // Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration
-    .GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Bloqqer.WebAPI"))
-    );
+    .GetConnectionString("DefaultConnection"), b =>
+    {
+        b.MigrationsAssembly("Bloqqer.WebAPI");
+        b.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+    }));
 
 builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 builder.Services.AddScoped<IBloqRepository, BloqRepository>();

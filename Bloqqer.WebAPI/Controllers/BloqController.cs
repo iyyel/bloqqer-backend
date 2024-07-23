@@ -21,7 +21,7 @@ public class BloqController(IBloqService bloqService, ILogger<BloqController> lo
     [ProducesResponseType(typeof(APIError), 404)]
     public async Task<ActionResult<(APIError? Error, Guid? BloqId)>> Create(CreateBloqDTO createBloq)
     {
-        return Ok(await _bloqService.Create(createBloq));
+        return Ok(await _bloqService.CreateBloq(createBloq));
     }
 
     [Authorize]
@@ -31,7 +31,7 @@ public class BloqController(IBloqService bloqService, ILogger<BloqController> lo
     [ProducesResponseType(typeof(APIError), 404)]
     public async Task<ActionResult<(APIError? Error, ICollection<ViewBloqDTO>? ViewBloqDTOs)>> GetByUserId(Guid id)
     {
-        return Ok(await _bloqService.GetByUserId(id));
+        return Ok(await _bloqService.GetBloqsByUserId(id));
     }
 
     [Authorize]
@@ -40,7 +40,7 @@ public class BloqController(IBloqService bloqService, ILogger<BloqController> lo
     [ProducesResponseType(typeof(APIError), 404)]
     public async Task<ActionResult<(APIError? Error, ICollection<ViewBloqDTO>? ViewBloqDTOs)>> GetAll()
     {
-        return Ok(await _bloqService.GetAll());
+        return Ok(await _bloqService.GetAllBloqs());
     }
 
     [Authorize]
@@ -49,6 +49,6 @@ public class BloqController(IBloqService bloqService, ILogger<BloqController> lo
     [ProducesResponseType(typeof(APIError), 404)]
     public async Task<ActionResult<(APIError? Error, Guid? BloqId)>> Update(UpdateBloqDTO updateBloq)
     {
-        return Ok(await _bloqService.Update(updateBloq));
+        return Ok(await _bloqService.UpdateBloq(updateBloq));
     }
 }

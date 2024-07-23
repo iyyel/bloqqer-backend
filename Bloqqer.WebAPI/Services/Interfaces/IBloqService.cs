@@ -4,11 +4,11 @@ namespace Bloqqer.WebAPI.Services.Interfaces;
 
 public interface IBloqService
 {
-    Task<Guid> Create(CreateBloqDTO createBloq);
+    Task<Guid> CreateBloq(CreateBloqDTO createBloq);
 
-    Task<ICollection<ViewBloqDTO>> GetByUserId(Guid id);
+    Task<ICollection<ViewBloqDTO>> GetBloqsByUserId(Guid id);
 
-    Task<ICollection<ViewBloqDTO>> GetAll();
+    Task<ICollection<ViewBloqDTO>> GetAllBloqs();
 
-    Task<Guid> Update(UpdateBloqDTO updateBloq);
+    Task<Guid> UpdateBloq(UpdateBloqDTO updateBloq);
 }
