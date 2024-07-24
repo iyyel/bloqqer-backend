@@ -37,7 +37,7 @@ builder.Services.AddHttpContextAccessor();
 // Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration
-    .GetConnectionString("LocalConnection"), b =>
+    .GetConnectionString("DefaultConnection"), b =>
     {
         b.MigrationsAssembly("Bloqqer.WebAPI");
         b.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
@@ -68,11 +68,13 @@ builder.Services
 
 var app = builder.Build();
 
+// moved outside ...IsDevelopment() as Azure requires the open API definition
+app.UseSwagger();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger()
-       .UseSwaggerUI(options =>
+    app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Bloqqer API");
         options.DocumentTitle = "Bloqqer API Docs";
