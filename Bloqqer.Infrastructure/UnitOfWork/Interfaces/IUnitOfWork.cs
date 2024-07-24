@@ -12,6 +12,10 @@ public interface IUnitOfWork : IDisposable
 
     ICommentRepository Comments { get; }
 
+    IReactionRepository Reactions { get; }
+
+    IFollowRepository Follows { get; }
+
     bool SaveChanges();
 
     Task<bool> SaveChangesAsync();

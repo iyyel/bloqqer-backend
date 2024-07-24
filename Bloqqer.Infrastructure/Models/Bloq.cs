@@ -1,4 +1,6 @@
-﻿namespace Bloqqer.Infrastructure.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace Bloqqer.Infrastructure.Models;
 
 public class Bloq : BaseEntity<Guid>
 {
@@ -8,6 +10,8 @@ public class Bloq : BaseEntity<Guid>
 
     public required Guid AuthorId { get; set; }
 
+    // TODO: Find a better solution for this JSON ignore. Use dedicated DTOs?
+    [JsonIgnore]
     public virtual ApplicationUser? Author { get; set; }
 
     public required string Title { get; set; }
@@ -24,6 +28,8 @@ public class Bloq : BaseEntity<Guid>
 
     public required virtual ICollection<Reaction> Reactions { get; set; }
 
+    // TODO: Is there a better way to have a 'Create' method? This is not very readable when invoked.
+    // Object initializion syntax is more readable.
     public static Bloq Create(
         Guid authorId,
         string title,

@@ -1,7 +1,6 @@
 using Bloqqer.Infrastructure.ViewModels;
 using Bloqqer.WebAPI.Errors;
 using Bloqqer.WebAPI.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bloqqer.Controllers;
@@ -15,7 +14,7 @@ public class UserController(IUserService userService, ILogger<UserController> lo
 
     private readonly ILogger<UserController> _logger = logger;
 
-    [Authorize]
+    // [Authorize]
     [HttpGet]
     [ProducesResponseType(typeof(string), 200)]
     [ProducesResponseType(typeof(APIError), 404)]
@@ -24,8 +23,8 @@ public class UserController(IUserService userService, ILogger<UserController> lo
         return Ok(_userService.GetLoggedInUserId());
     }
 
+    // [Authorize]
     [Route("all")]
-    [Authorize]
     [HttpGet]
     [ProducesResponseType(typeof(ICollection<UserDTO>), 200)]
     [ProducesResponseType(typeof(APIError), 404)]

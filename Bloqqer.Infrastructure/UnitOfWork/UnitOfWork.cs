@@ -9,7 +9,9 @@ public sealed class UnitOfWork(
     IApplicationUserRepository applicationUsers,
     IBloqRepository bloqs,
     IPostRepository posts,
-    ICommentRepository comments
+    ICommentRepository comments,
+    IReactionRepository reactions,
+    IFollowRepository follows
 ) : IUnitOfWork
 {
     private readonly ApplicationDbContext _dbContext = dbContext;
@@ -21,6 +23,10 @@ public sealed class UnitOfWork(
     public IPostRepository Posts { get; } = posts;
 
     public ICommentRepository Comments { get; } = comments;
+
+    public IReactionRepository Reactions { get; } = reactions;
+
+    public IFollowRepository Follows { get; } = follows;
 
     public bool SaveChanges()
     {
@@ -40,6 +46,7 @@ public sealed class UnitOfWork(
         }
         catch (Exception)
         {
+            // TODO: Actually ues a logger.
             // _logger.LogError("Dispose UnitOfWork", e, "faild to dispose unit of work");
             throw;
         }

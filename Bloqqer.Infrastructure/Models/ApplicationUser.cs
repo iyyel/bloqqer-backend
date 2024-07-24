@@ -41,6 +41,8 @@ public class ApplicationUser : IdentityUser<Guid>, IBaseEntity<Guid>
 
     public DateTime? DeletedOn { get; set; }
 
+    // TODO: Is there a better way to have a 'Create' method? This is not very readable when invoked.
+    // Object initializion syntax is more readable.
     public static ApplicationUser Create(
         string email,
         string firstName,

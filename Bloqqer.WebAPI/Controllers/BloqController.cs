@@ -1,7 +1,6 @@
 using Bloqqer.Infrastructure.ViewModels;
 using Bloqqer.WebAPI.Errors;
 using Bloqqer.WebAPI.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bloqqer.Controllers;
@@ -18,7 +17,7 @@ public class BloqController(
 
     private readonly ILogger<BloqController> _logger = logger;
 
-    [Authorize]
+    // [Authorize]
     [HttpPost]
     [ProducesResponseType(typeof(Guid), 200)]
     [ProducesResponseType(typeof(APIError), 404)]
@@ -27,7 +26,7 @@ public class BloqController(
         return Ok(await _bloqService.CreateBloq(createBloq));
     }
 
-    [Authorize]
+    // [Authorize]
     [HttpGet]
     [Route("user/{id}")]
     [ProducesResponseType(typeof(ICollection<ViewBloqDTO>), 200)]
@@ -37,7 +36,7 @@ public class BloqController(
         return Ok(await _bloqService.GetBloqsByUserId(id));
     }
 
-    [Authorize]
+    // [Authorize]
     [HttpGet]
     [ProducesResponseType(typeof(ICollection<ViewBloqDTO>), 200)]
     [ProducesResponseType(typeof(APIError), 404)]
@@ -46,7 +45,7 @@ public class BloqController(
         return Ok(await _bloqService.GetAllBloqs());
     }
 
-    [Authorize]
+    // [Authorize]
     [HttpPut]
     [ProducesResponseType(typeof(Guid), 200)]
     [ProducesResponseType(typeof(APIError), 404)]

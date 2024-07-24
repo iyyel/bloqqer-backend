@@ -27,12 +27,12 @@ builder.Services.AddSwaggerGen(options => options.SwaggerDoc("v1", new Microsoft
 
 // Auth
 builder.Services
-    .AddAuthentication(IdentityConstants.ApplicationScheme)
-    .AddIdentityCookies();
+    .AddAuthentication(IdentityConstants.ApplicationScheme);
+// .AddIdentityCookies();
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddAuthorizationBuilder();
+// builder.Services.AddAuthorizationBuilder();
 
 // Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -43,15 +43,21 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         b.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
     }));
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 builder.Services.AddScoped<IBloqRepository, BloqRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IReactionRepository, ReactionRepository>();
+builder.Services.AddScoped<IFollowRepository, FollowRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IBloqService, BloqService>();
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IReactionService, ReactionService>();
+builder.Services.AddScoped<IFollowService, FollowService>();
 
 // Identity stuff
 builder.Services
@@ -61,9 +67,6 @@ builder.Services
     .AddApiEndpoints();
 
 var app = builder.Build();
-
-app.MapGroup("/api")
-   .MapIdentityApi<ApplicationUser>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -79,7 +82,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+// app.UseAuthorization();
 
 app.MapControllers();
 
