@@ -1,6 +1,6 @@
-﻿using Bloqqer.Infrastructure.Models.Interfaces;
+﻿using Bloqqer.Domain.Models.Interfaces;
 
-namespace Bloqqer.Infrastructure.Models;
+namespace Bloqqer.Domain.Models;
 
 public abstract class BaseEntity<TKey>
     : IBaseEntity<TKey> where TKey : IEquatable<TKey>

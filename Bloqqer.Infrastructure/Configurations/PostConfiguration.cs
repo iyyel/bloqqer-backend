@@ -1,4 +1,5 @@
-﻿using Bloqqer.Infrastructure.Models;
+﻿using Bloqqer.Domain.Constants;
+using Bloqqer.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,13 +13,13 @@ public sealed class PostConfiguration : IEntityTypeConfiguration<Post>
         builder.ToTable("Bloqqer.Posts");
 
         builder.Property(p => p.Title)
-            .HasMaxLength(Post.MaxTitleLength);
+            .HasMaxLength(MaxLengths.Post.Title);
 
         builder.Property(p => p.Description)
-            .HasMaxLength(Post.MaxDescriptionLength);
+            .HasMaxLength(MaxLengths.Post.Description);
 
         builder.Property(p => p.Content)
-            .HasMaxLength(Post.MaxContentLength);
+            .HasMaxLength(MaxLengths.Post.Content);
 
         builder.HasMany(p => p.Comments)
             .WithOne(c => c.Post)

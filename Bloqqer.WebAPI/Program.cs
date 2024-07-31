@@ -1,5 +1,5 @@
+using Bloqqer.Domain.Models;
 using Bloqqer.Infrastructure.Database;
-using Bloqqer.Infrastructure.Models;
 using Bloqqer.Infrastructure.Repositories;
 using Bloqqer.Infrastructure.Repositories.Interfaces;
 using Bloqqer.Infrastructure.UnitOfWork;
@@ -23,7 +23,7 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c => { c.EnableAnnotations(); });
 builder.Services.AddSwaggerGen(options => options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
 {
     Title = "Bloqqer API Docs",
@@ -44,7 +44,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration
     .GetConnectionString("LocalConnection"), b =>
     {
-        b.MigrationsAssembly("Bloqqer.WebAPI");
+        b.MigrationsAssembly("Bloqqer.Infrastructure");
         b.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
     }));
 

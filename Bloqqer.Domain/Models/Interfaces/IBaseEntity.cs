@@ -1,4 +1,4 @@
-﻿namespace Bloqqer.Infrastructure.Models.Interfaces;
+﻿namespace Bloqqer.Domain.Models.Interfaces;
 
 public interface IBaseEntity<TKey> where TKey : IEquatable<TKey>
 {

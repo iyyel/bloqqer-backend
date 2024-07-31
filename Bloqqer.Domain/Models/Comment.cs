@@ -1,11 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Bloqqer.Infrastructure.Models;
+namespace Bloqqer.Domain.Models;
 
 public class Comment : BaseEntity<Guid>
 {
-    public const int MaxContentLength = 256;
-
     public Guid? PostId { get; set; }
 
     // TODO: Find a better solution for this JSON ignore. Use dedicated DTOs?

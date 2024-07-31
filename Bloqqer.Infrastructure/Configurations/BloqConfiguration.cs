@@ -1,4 +1,5 @@
-﻿using Bloqqer.Infrastructure.Models;
+﻿using Bloqqer.Domain.Constants;
+using Bloqqer.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,10 +13,10 @@ public sealed class BloqConfiguration : IEntityTypeConfiguration<Bloq>
         builder.ToTable("Bloqqer.Bloqs");
 
         builder.Property(b => b.Title)
-            .HasMaxLength(Bloq.MaxTitleLength);
+            .HasMaxLength(MaxLengths.Bloq.Title);
 
         builder.Property(b => b.Description)
-            .HasMaxLength(Bloq.MaxDescriptionLength);
+            .HasMaxLength(MaxLengths.Bloq.Description);
 
         builder.HasMany(b => b.Posts)
             .WithOne(p => p.Bloq)

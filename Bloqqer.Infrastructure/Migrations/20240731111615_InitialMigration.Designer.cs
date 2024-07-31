@@ -4,16 +4,19 @@ using Bloqqer.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Bloqqer.WebAPI.Migrations
+namespace Bloqqer.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240731111615_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,9 +153,9 @@ namespace Bloqqer.WebAPI.Migrations
                         {
                             Id = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "85158da7-ad05-4843-b62b-e59635992409",
+                            ConcurrencyStamp = "be50b958-be10-46ed-8d20-c620f1f2e755",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 174, DateTimeKind.Utc).AddTicks(6675),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 297, DateTimeKind.Utc).AddTicks(6099),
                             Email = "admin@iyyel.io",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -162,7 +165,7 @@ namespace Bloqqer.WebAPI.Migrations
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             NormalizedEmail = "ADMIN@IYYEL.IO",
                             NormalizedUserName = "ADMIN@IYYEL.IO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJGDJlVSTxWpviQrL8ssPK/ws87ukCjoA8D+bE/4OIAodTPHUp160bqFhl/v55FtCA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEALlHDA5VjykLvTkh6UNcKsRtouHxfNrUZdZUXMnMEZtOyMwzbn0SbJRwGKU+i981Q==",
                             PhoneNumber = "21212121",
                             PhoneNumberConfirmed = true,
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -174,9 +177,9 @@ namespace Bloqqer.WebAPI.Migrations
                         {
                             Id = new Guid("de05b775-a344-497f-a091-643d267ff25d"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fcfb4a35-647f-497c-98cb-abe7c0e4b3a6",
+                            ConcurrencyStamp = "b1226a26-8d18-4cc4-9847-02ecb0d0c5aa",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8627),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(4607),
                             Email = "james@butler.xyz",
                             EmailConfirmed = true,
                             FirstName = "James",
@@ -186,7 +189,7 @@ namespace Bloqqer.WebAPI.Migrations
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             NormalizedEmail = "JAMES@BUTLER.XYZ",
                             NormalizedUserName = "JAMES@BUTLER.XYZ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN4bZgbMQCSE/9XDeXueiGGVyap5DTNLlZIKOH0D3auvAWr8dBLtUb7FavLGjjZgeQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN2biABYwSRVg75UPu+udNV3vBNyMtvxIcgq2MaaJBz8bbQwECQv3JHmxyS2axLJ0g==",
                             PhoneNumber = "23232323",
                             PhoneNumberConfirmed = true,
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -254,12 +257,12 @@ namespace Bloqqer.WebAPI.Migrations
                             Id = new Guid("295efc76-56d6-4839-ada4-25924f912aa0"),
                             AuthorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8303),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(2514),
                             Description = "Admin Seed Bloq Description 1/2",
                             IsPrivate = false,
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Published = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8300),
+                            Published = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(2513),
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Title = "Admin Seed Bloq Title 1/2"
                         },
@@ -268,7 +271,7 @@ namespace Bloqqer.WebAPI.Migrations
                             Id = new Guid("f8d31b28-1c9a-43c0-aebd-19236af4422f"),
                             AuthorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8309),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(4332),
                             Description = "Admin Seed Bloq Description 2/2",
                             IsPrivate = true,
                             IsPublished = false,
@@ -281,12 +284,12 @@ namespace Bloqqer.WebAPI.Migrations
                             Id = new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"),
                             AuthorId = new Guid("de05b775-a344-497f-a091-643d267ff25d"),
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3023),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9329),
                             Description = "James Seed Bloq Description",
                             IsPrivate = false,
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Published = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3020),
+                            Published = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9329),
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Title = "James Seed Bloq Title"
                         });
@@ -348,11 +351,11 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             Content = "Admin Seed Bloq Post 1 Comment 1/2",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8327),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(4352),
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("0cb3379f-6bea-424d-ba0f-a44f4fa6a11a"),
-                            Published = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8326),
+                            Published = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(4351),
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
@@ -361,7 +364,7 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             Content = "Admin Seed Bloq Post 1 Comment 2/2",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8329),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(4354),
                             IsPublished = false,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("0cb3379f-6bea-424d-ba0f-a44f4fa6a11a"),
@@ -373,11 +376,11 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             Content = "Admin Seed Bloq Post 2 Comment 1/2",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8372),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(4356),
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("efab75ca-f1ac-4211-8076-e344b9c98025"),
-                            Published = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8372),
+                            Published = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(4355),
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
@@ -386,7 +389,7 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             Content = "Admin Seed Bloq Post 2 Comment 2/2",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8374),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(4357),
                             IsPublished = false,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("efab75ca-f1ac-4211-8076-e344b9c98025"),
@@ -398,11 +401,11 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("de05b775-a344-497f-a091-643d267ff25d"),
                             Content = "James Seed Bloq Post 1 Comment 1/3",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3052),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9348),
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"),
-                            Published = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3052),
+                            Published = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9348),
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
@@ -411,11 +414,11 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("de05b775-a344-497f-a091-643d267ff25d"),
                             Content = "James Seed Bloq Post 1 Comment 2/3",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3056),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9351),
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"),
-                            Published = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3055),
+                            Published = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9351),
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
@@ -424,11 +427,11 @@ namespace Bloqqer.WebAPI.Migrations
                             AuthorId = new Guid("de05b775-a344-497f-a091-643d267ff25d"),
                             Content = "James Seed Bloq Post 1 Comment 3/3",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3057),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9353),
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"),
-                            Published = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3057),
+                            Published = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9352),
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
@@ -476,7 +479,7 @@ namespace Bloqqer.WebAPI.Migrations
                         {
                             Id = new Guid("aac1463f-f051-4407-8ee6-f23431e9ccaa"),
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3061),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9357),
                             FollowedId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             FollowerId = new Guid("de05b775-a344-497f-a091-643d267ff25d"),
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -551,11 +554,11 @@ namespace Bloqqer.WebAPI.Migrations
                             BloqId = new Guid("295efc76-56d6-4839-ada4-25924f912aa0"),
                             Content = "Admin Seed Bloq Post 1/2 Content",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8318),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(4341),
                             Description = "Admin Seed Bloq Post 1/2 Description",
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Published = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8317),
+                            Published = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(4340),
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Title = "Admin Seed Bloq Post 1/2"
                         },
@@ -566,7 +569,7 @@ namespace Bloqqer.WebAPI.Migrations
                             BloqId = new Guid("295efc76-56d6-4839-ada4-25924f912aa0"),
                             Content = "Admin Seed Bloq Post 2/2 Content",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 214, DateTimeKind.Utc).AddTicks(8321),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 335, DateTimeKind.Utc).AddTicks(4346),
                             Description = "Admin Seed Bloq Post 2/2 Description",
                             IsPublished = false,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -580,11 +583,11 @@ namespace Bloqqer.WebAPI.Migrations
                             BloqId = new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"),
                             Content = "James Seed Bloq Post 1/2 Content",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3034),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9335),
                             Description = "James Seed Bloq Post 1/2 Description",
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Published = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3034),
+                            Published = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9334),
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Title = "James Seed Bloq Post 1/2"
                         },
@@ -595,11 +598,11 @@ namespace Bloqqer.WebAPI.Migrations
                             BloqId = new Guid("dc5b12fd-f5a3-4a04-a6e0-c4cd552cd6b5"),
                             Content = "James Seed Bloq Post 2/2 Content",
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3047),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9345),
                             Description = "James Seed Bloq Post 2/2 Description",
                             IsPublished = true,
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Published = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3047),
+                            Published = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9344),
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Title = "James Seed Bloq Post 2/2"
                         });
@@ -658,7 +661,7 @@ namespace Bloqqer.WebAPI.Migrations
                         {
                             Id = new Guid("7a8504bd-5204-4ff7-8473-9b8a625d5d52"),
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3042),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9341),
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"),
                             ReactorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
@@ -668,7 +671,7 @@ namespace Bloqqer.WebAPI.Migrations
                         {
                             Id = new Guid("0fe8f779-88d5-46dc-a705-48eabe7691de"),
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3044),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9343),
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             PostId = new Guid("0afda5fc-0a56-45b6-a983-3018048c204a"),
                             ReactorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
@@ -679,7 +682,7 @@ namespace Bloqqer.WebAPI.Migrations
                             Id = new Guid("981f0e58-66df-4329-add8-3eaba8ae51d3"),
                             CommentId = new Guid("d1cd67d2-67e5-4c6f-aabb-cb4056dd5064"),
                             CreatedBy = new Guid("2afb7b32-9305-4c43-90d3-78412603e4ff"),
-                            CreatedOn = new DateTime(2024, 7, 31, 9, 24, 13, 254, DateTimeKind.Utc).AddTicks(3054),
+                            CreatedOn = new DateTime(2024, 7, 31, 11, 16, 15, 372, DateTimeKind.Utc).AddTicks(9350),
                             ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             ReactorId = new Guid("c108f0d4-7f9f-49eb-8a18-9f9bd81e1765"),
                             RemovedBy = new Guid("00000000-0000-0000-0000-000000000000")

@@ -1,4 +1,4 @@
-﻿using Bloqqer.Infrastructure.Models;
+﻿using Bloqqer.Domain.Models;
 
 namespace Bloqqer.Infrastructure.Repositories.Interfaces;
 

@@ -1,5 +1,5 @@
-﻿using Bloqqer.Infrastructure.Database;
-using Bloqqer.Infrastructure.Models;
+﻿using Bloqqer.Domain.Models;
+using Bloqqer.Infrastructure.Database;
 using Bloqqer.Infrastructure.Repositories.Interfaces;
 
 namespace Bloqqer.Infrastructure.Repositories;

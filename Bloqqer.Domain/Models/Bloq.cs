@@ -1,13 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Bloqqer.Infrastructure.Models;
+namespace Bloqqer.Domain.Models;
 
 public class Bloq : BaseEntity<Guid>
 {
-    public const int MaxTitleLength = 256;
-
-    public const int MaxDescriptionLength = 256;
-
     public required Guid AuthorId { get; set; }
 
     // TODO: Find a better solution for this JSON ignore. Use dedicated DTOs?

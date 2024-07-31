@@ -1,4 +1,5 @@
-﻿using Bloqqer.Infrastructure.Models;
+﻿using Bloqqer.Domain.Constants;
+using Bloqqer.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,13 +13,13 @@ public sealed class ApplicationUserConfiguration : IEntityTypeConfiguration<Appl
         builder.ToTable("Bloqqer.ApplicationUsers");
 
         builder.Property(a => a.FirstName)
-            .HasMaxLength(ApplicationUser.MaxFirstNameLength);
+            .HasMaxLength(MaxLengths.ApplicationUser.FirstName);
 
         builder.Property(a => a.MiddleName)
-            .HasMaxLength(ApplicationUser.MaxMiddleNameLength);
+            .HasMaxLength(MaxLengths.ApplicationUser.MiddleName);
 
         builder.Property(a => a.LastName)
-            .HasMaxLength(ApplicationUser.MaxLastNameLength);
+            .HasMaxLength(MaxLengths.ApplicationUser.LastName);
 
         builder.HasMany(a => a.Bloqs)
             .WithOne(b => b.Author)

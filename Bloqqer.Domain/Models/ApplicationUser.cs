@@ -1,16 +1,10 @@
-﻿using Bloqqer.Infrastructure.Models.Interfaces;
+﻿using Bloqqer.Domain.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
-namespace Bloqqer.Infrastructure.Models;
+namespace Bloqqer.Domain.Models;
 
 public class ApplicationUser : IdentityUser<Guid>, IBaseEntity<Guid>
 {
-    public const int MaxFirstNameLength = 256;
-
-    public const int MaxMiddleNameLength = 256;
-
-    public const int MaxLastNameLength = 256;
-
     public string? FirstName { get; set; }
 
     public string? MiddleName { get; set; }

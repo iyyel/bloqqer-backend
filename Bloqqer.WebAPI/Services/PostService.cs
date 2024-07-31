@@ -1,8 +1,7 @@
-﻿using Bloqqer.Infrastructure.Models;
+﻿using Bloqqer.Domain.Models;
 using Bloqqer.Infrastructure.UnitOfWork.Interfaces;
 using Bloqqer.Infrastructure.ViewModels;
 using Bloqqer.WebAPI.Services.Interfaces;
-using Microsoft.Extensions.Hosting;
 
 namespace Bloqqer.WebAPI.Services;
 

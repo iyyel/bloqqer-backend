@@ -1,35 +1,38 @@
 using Bloqqer.Infrastructure.ViewModels;
-using Bloqqer.WebAPI.Errors;
+using Bloqqer.WebAPI.Models;
 using Bloqqer.WebAPI.Services.Interfaces;
+using CleanArchitecture.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Bloqqer.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+// [Authorize]
+[Route("api/v1/[controller]")]
 [Produces("application/json")]
-public class UserController(IUserService userService, ILogger<UserController> logger) : ControllerBase
+public sealed class UserController(
+    IUserService userService,
+    ILogger<UserController> logger
+) : APIController
 {
     private readonly IUserService _userService = userService;
-
     private readonly ILogger<UserController> _logger = logger;
 
-    // [Authorize]
     [HttpGet]
-    [ProducesResponseType(typeof(string), 200)]
-    [ProducesResponseType(typeof(APIError), 404)]
-    public ActionResult<(APIError? Error, ICollection<UserDTO>? Users)> GetLoggedInUser()
+    [SwaggerOperation("Get logged in user id")]
+    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
+    public IActionResult GetLoggedInUser()
     {
-        return Ok(_userService.GetLoggedInUserId());
+        return Response(_userService.GetLoggedInUserId());
     }
 
-    // [Authorize]
-    [Route("all")]
     [HttpGet]
-    [ProducesResponseType(typeof(ICollection<UserDTO>), 200)]
-    [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, ICollection<UserDTO>? Users)>> GetUsers()
+    [Route("all")]
+    [SwaggerOperation("Get all users")]
+    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ICollection<UserDTO>>))]
+    public async Task<IActionResult> GetUsers()
     {
-        return Ok(await _userService.GetAllUsers());
+        return Response(await _userService.GetAllUsers());
     }
 }

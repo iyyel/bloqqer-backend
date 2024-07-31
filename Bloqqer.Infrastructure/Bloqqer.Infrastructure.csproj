@@ -25,4 +25,8 @@
     <Folder Include="Database\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Bloqqer.Domain\Bloqqer.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

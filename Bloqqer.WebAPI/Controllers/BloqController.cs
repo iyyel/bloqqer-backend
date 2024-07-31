@@ -1,85 +1,81 @@
 using Bloqqer.Infrastructure.ViewModels;
-using Bloqqer.WebAPI.Errors;
+using Bloqqer.WebAPI.Models;
 using Bloqqer.WebAPI.Services.Interfaces;
+using CleanArchitecture.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Bloqqer.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+// [Authorize]
+[Route("api/v1/[controller]")]
 [Produces("application/json")]
-public class BloqController(
+public sealed class BloqController(
     IBloqService bloqService,
     ILogger<BloqController> logger
-) : ControllerBase
+) : APIController
 {
     private readonly IBloqService _bloqService = bloqService;
-
     private readonly ILogger<BloqController> _logger = logger;
 
-    // [Authorize]
     [HttpPost]
-    [ProducesResponseType(typeof(Guid), 200)]
-    [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, Guid? BloqId)>> CreateBloq(CreateBloqDTO createBloq)
+    [SwaggerOperation("Create a new Bloq")]
+    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
+    public async Task<IActionResult> CreateBloq([FromBody] CreateBloqDTO createBloq)
     {
-        return Ok(await _bloqService.CreateBloq(createBloq));
+        return Response(await _bloqService.CreateBloq(createBloq));
     }
 
-    // [Authorize]
     [HttpGet]
     [Route("{bloqId}")]
-    [ProducesResponseType(typeof(ViewBloqDTO), 200)]
-    [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, ViewBloqDTO? ViewBloqDTO)>> GetBloqByBloqIdId(Guid bloqId)
+    [SwaggerOperation("Get a Bloq by Bloq id")]
+    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ViewBloqDTO>))]
+    public async Task<IActionResult> GetBloqByBloqIdId([FromRoute] Guid bloqId)
     {
-        return Ok(await _bloqService.GetBloqByBloqId(bloqId));
+        return Response(await _bloqService.GetBloqByBloqId(bloqId));
     }
 
-    // [Authorize]
     [HttpGet]
     [Route("user/{userId}")]
-    [ProducesResponseType(typeof(ICollection<ViewBloqDTO>), 200)]
-    [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, ICollection<ViewBloqDTO>? ViewBloqDTOs)>> GetBloqsByUserId(Guid userId)
+    [SwaggerOperation("Get Bloqs by User id")]
+    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ICollection<ViewBloqDTO>>))]
+    public async Task<IActionResult> GetBloqsByUserId([FromRoute] Guid userId)
     {
-        return Ok(await _bloqService.GetBloqsByUserId(userId));
+        return Response(await _bloqService.GetBloqsByUserId(userId));
     }
 
-    // [Authorize]
     [HttpGet]
-    [ProducesResponseType(typeof(ICollection<ViewBloqDTO>), 200)]
-    [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, ICollection<ViewBloqDTO>? ViewBloqDTOs)>> GetAllBloqs()
+    [SwaggerOperation("Get all Bloqs")]
+    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ICollection<ViewBloqDTO>>))]
+    public async Task<IActionResult> GetAllBloqs()
     {
-        return Ok(await _bloqService.GetAllBloqs());
+        return Response(await _bloqService.GetAllBloqs());
     }
 
-    // [Authorize]
     [HttpGet]
     [Route("followed")]
-    [ProducesResponseType(typeof(ICollection<ViewBloqDTO>), 200)]
-    [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, ICollection<ViewBloqDTO>? ViewBloqDTOs)>> GetFollowedUsersBloqs()
+    [SwaggerOperation("Get all Bloqs that the user follows")]
+    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ICollection<ViewBloqDTO>>))]
+    public async Task<IActionResult> GetFollowedUsersBloqs()
     {
-        return Ok(await _bloqService.GetFollowedUsersBloqs());
+        return Response(await _bloqService.GetFollowedUsersBloqs());
     }
 
-    // [Authorize]
     [HttpPut]
-    [ProducesResponseType(typeof(Guid), 200)]
-    [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, Guid? BloqId)>> UpdateBloq(UpdateBloqDTO updateBloq)
+    [SwaggerOperation("Updates the Bloq")]
+    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
+    public async Task<IActionResult> UpdateBloq([FromBody] UpdateBloqDTO updateBloq)
     {
-        return Ok(await _bloqService.UpdateBloq(updateBloq));
+        return Response(await _bloqService.UpdateBloq(updateBloq));
     }
 
-    // [Authorize]
     [HttpDelete]
-    [ProducesResponseType(typeof(Guid), 200)]
-    [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, Guid? BloqId)>> RemoveBloq(Guid bloqId)
+    [Route("{bloqId}")]
+    [SwaggerOperation("Removes the Bloq")]
+    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
+    public async Task<IActionResult> RemoveBloq([FromRoute] Guid bloqId)
     {
-        return Ok(await _bloqService.RemoveBloq(bloqId));
+        return Response(await _bloqService.RemoveBloq(bloqId));
     }
 }

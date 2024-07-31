@@ -1,4 +1,4 @@
-﻿using Bloqqer.Infrastructure.Models;
+﻿using Bloqqer.Domain.Models;
 using Bloqqer.Infrastructure.ViewModels;
 
 namespace Bloqqer.WebAPI.Services.Interfaces;

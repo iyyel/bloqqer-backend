@@ -1,4 +1,4 @@
-﻿using Bloqqer.Infrastructure.Models;
+﻿using Bloqqer.Domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

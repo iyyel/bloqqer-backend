@@ -1,4 +1,5 @@
-﻿using Bloqqer.Infrastructure.Models;
+﻿using Bloqqer.Domain.Constants;
+using Bloqqer.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,7 +13,7 @@ public sealed class CommentConfiguration : IEntityTypeConfiguration<Comment>
         builder.ToTable("Bloqqer.Comments");
 
         builder.Property(p => p.Content)
-            .HasMaxLength(Post.MaxContentLength);
+            .HasMaxLength(MaxLengths.Comment.Content);
 
         builder.HasMany(c => c.Reactions)
             .WithOne(r => r.Comment)

@@ -1,6 +1,4 @@
-﻿using Bloqqer.Infrastructure.Models;
-
-namespace Bloqqer.Infrastructure.ViewModels;
+﻿namespace Bloqqer.Infrastructure.ViewModels;
 
 // TODO: Turn all view models into records?
 public class CreatePostDTO

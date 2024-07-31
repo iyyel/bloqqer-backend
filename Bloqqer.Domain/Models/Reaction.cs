@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Bloqqer.Infrastructure.Models;
+namespace Bloqqer.Domain.Models;
 
 public class Reaction : BaseEntity<Guid>
 {
