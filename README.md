@@ -9,12 +9,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/iyyel/bloqqer-backend">
+    📓
     <!-- <img src="images/game-of-life-logo.png" width="auto" height="300" alt="Game of Life Logo"> -->
   </a>
 
   <p align="center">
     <br />
-    Insert catchy title here
+    📓 A social media backend experiment using clean architecture with .NET
     <br />
   </p>
 </div>
@@ -54,7 +55,7 @@ Usage here.
 
 
 ## License
-Distributed under the ?? License. See [LICENSE.md](LICENSE.md) for more information.
+Distributed under the MIT License. See [LICENSE.md](LICENSE.md) for more information.
 
 
 
