@@ -8,12 +8,17 @@ using Bloqqer.WebAPI.Services;
 using Bloqqer.WebAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+});
+
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -37,7 +42,7 @@ builder.Services.AddHttpContextAccessor();
 // Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration
-    .GetConnectionString("DefaultConnection"), b =>
+    .GetConnectionString("LocalConnection"), b =>
     {
         b.MigrationsAssembly("Bloqqer.WebAPI");
         b.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);

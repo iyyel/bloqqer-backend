@@ -49,12 +49,12 @@ public class Repository<TEntity>(DbContext dbContext)
         _dbSet.UpdateRange(entities);
     }
 
-    public virtual void Delete(TEntity entity)
+    public virtual void Remove(TEntity entity)
     {
         _dbSet.Remove(entity);
     }
 
-    public virtual void DeleteRange(ICollection<TEntity> entities)
+    public virtual void RemoveRange(ICollection<TEntity> entities)
     {
         _dbSet.RemoveRange(entities);
     }

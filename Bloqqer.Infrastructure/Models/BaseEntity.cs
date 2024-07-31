@@ -15,7 +15,7 @@ public abstract class BaseEntity<TKey>
 
     public DateTime? ModifiedOn { get; set; }
 
-    public TKey? DeletedBy { get; set; }
+    public TKey? RemovedBy { get; set; }
 
-    public DateTime? DeletedOn { get; set; }
+    public DateTime? RemovedOn { get; set; }
 }

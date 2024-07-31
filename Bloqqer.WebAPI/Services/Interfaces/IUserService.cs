@@ -1,10 +1,15 @@
-﻿using Bloqqer.Infrastructure.ViewModels;
+﻿using Bloqqer.Infrastructure.Models;
+using Bloqqer.Infrastructure.ViewModels;
 
 namespace Bloqqer.WebAPI.Services.Interfaces;
 
 public interface IUserService
 {
-    Task<ICollection<UserDTO>> GetAllUsers();
-
     Guid? GetLoggedInUserId();
+
+    Task<ApplicationUser?> GetLoggedInUser();
+
+    Task<ApplicationUser?> GetUserByUserId(Guid userId);
+
+    Task<ICollection<UserDTO>> GetAllUsers();
 }

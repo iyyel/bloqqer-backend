@@ -37,9 +37,9 @@ public class ApplicationUser : IdentityUser<Guid>, IBaseEntity<Guid>
 
     public DateTime? ModifiedOn { get; set; }
 
-    public Guid DeletedBy { get; set; }
+    public Guid RemovedBy { get; set; }
 
-    public DateTime? DeletedOn { get; set; }
+    public DateTime? RemovedOn { get; set; }
 
     // TODO: Is there a better way to have a 'Create' method? This is not very readable when invoked.
     // Object initializion syntax is more readable.

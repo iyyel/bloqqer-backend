@@ -28,12 +28,22 @@ public class BloqController(
 
     // [Authorize]
     [HttpGet]
-    [Route("user/{id}")]
+    [Route("{bloqId}")]
+    [ProducesResponseType(typeof(ViewBloqDTO), 200)]
+    [ProducesResponseType(typeof(APIError), 404)]
+    public async Task<ActionResult<(APIError? Error, ViewBloqDTO? ViewBloqDTO)>> GetBloqByBloqIdId(Guid bloqId)
+    {
+        return Ok(await _bloqService.GetBloqByBloqId(bloqId));
+    }
+
+    // [Authorize]
+    [HttpGet]
+    [Route("user/{userId}")]
     [ProducesResponseType(typeof(ICollection<ViewBloqDTO>), 200)]
     [ProducesResponseType(typeof(APIError), 404)]
-    public async Task<ActionResult<(APIError? Error, ICollection<ViewBloqDTO>? ViewBloqDTOs)>> GetBloqsByUserId(Guid id)
+    public async Task<ActionResult<(APIError? Error, ICollection<ViewBloqDTO>? ViewBloqDTOs)>> GetBloqsByUserId(Guid userId)
     {
-        return Ok(await _bloqService.GetBloqsByUserId(id));
+        return Ok(await _bloqService.GetBloqsByUserId(userId));
     }
 
     // [Authorize]
@@ -46,11 +56,30 @@ public class BloqController(
     }
 
     // [Authorize]
+    [HttpGet]
+    [Route("followed")]
+    [ProducesResponseType(typeof(ICollection<ViewBloqDTO>), 200)]
+    [ProducesResponseType(typeof(APIError), 404)]
+    public async Task<ActionResult<(APIError? Error, ICollection<ViewBloqDTO>? ViewBloqDTOs)>> GetFollowedUsersBloqs()
+    {
+        return Ok(await _bloqService.GetFollowedUsersBloqs());
+    }
+
+    // [Authorize]
     [HttpPut]
     [ProducesResponseType(typeof(Guid), 200)]
     [ProducesResponseType(typeof(APIError), 404)]
     public async Task<ActionResult<(APIError? Error, Guid? BloqId)>> UpdateBloq(UpdateBloqDTO updateBloq)
     {
         return Ok(await _bloqService.UpdateBloq(updateBloq));
+    }
+
+    // [Authorize]
+    [HttpDelete]
+    [ProducesResponseType(typeof(Guid), 200)]
+    [ProducesResponseType(typeof(APIError), 404)]
+    public async Task<ActionResult<(APIError? Error, Guid? BloqId)>> RemoveBloq(Guid bloqId)
+    {
+        return Ok(await _bloqService.RemoveBloq(bloqId));
     }
 }

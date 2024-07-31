@@ -20,7 +20,7 @@ public interface IRepository<TKey, TEntity> where TEntity : class
 
     void UpdateRange(ICollection<TEntity> entities);
 
-    void Delete(TEntity entity);
+    void Remove(TEntity entity);
 
-    void DeleteRange(ICollection<TEntity> entities);
+    void RemoveRange(ICollection<TEntity> entities);
 }

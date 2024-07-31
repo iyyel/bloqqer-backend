@@ -10,7 +10,7 @@ public interface IBaseEntity<TKey> where TKey : IEquatable<TKey>
 
     DateTime? ModifiedOn { get; set; }
 
-    TKey? DeletedBy { get; set; }
+    TKey? RemovedBy { get; set; }
 
-    DateTime? DeletedOn { get; set; }
+    DateTime? RemovedOn { get; set; }
 }

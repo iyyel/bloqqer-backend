@@ -1,4 +1,5 @@
-﻿using Bloqqer.Infrastructure.UnitOfWork.Interfaces;
+﻿using Bloqqer.Infrastructure.Models;
+using Bloqqer.Infrastructure.UnitOfWork.Interfaces;
 using Bloqqer.Infrastructure.ViewModels;
 using Bloqqer.WebAPI.Services.Interfaces;
 using System.Security.Claims;
@@ -29,5 +30,22 @@ public sealed class UserService(
         var userId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         bool isValidGuid = Guid.TryParse(userId, out Guid userGuid);
         return isValidGuid ? userGuid : null;
+    }
+
+    public async Task<ApplicationUser?> GetLoggedInUser()
+    {
+        var userId = GetLoggedInUserId();
+
+        if (userId is null)
+        {
+            return null;
+        }
+
+        return await _unitOfWork.ApplicationUsers.SingleOrDefaultAsync(a => a.Id == userId);
+    }
+
+    public async Task<ApplicationUser?> GetUserByUserId(Guid userId)
+    {
+        return await _unitOfWork.ApplicationUsers.GetByIdAsync(userId);
     }
 }
