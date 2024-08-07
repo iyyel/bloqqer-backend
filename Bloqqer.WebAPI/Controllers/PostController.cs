@@ -14,17 +14,16 @@ namespace Bloqqer.Controllers;
 public sealed class PostController(
     IPostService postService,
     ILogger<PostController> logger
-) : APIController
+) : APIController(logger)
 {
     private readonly IPostService _postService = postService;
-    private readonly ILogger<PostController> _logger = logger;
 
     [HttpPost]
     [SwaggerOperation("Create a new Post")]
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
     public async Task<IActionResult> CreatePost([FromBody] CreatePostDTO createPost)
     {
-        return Response(await _postService.CreatePost(createPost));
+        return await GetResponseAsync(() => _postService.CreatePost(createPost));
     }
 
     [HttpGet]
@@ -33,7 +32,7 @@ public sealed class PostController(
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ViewPostDTO>))]
     public async Task<IActionResult> GetPostbyPostId([FromRoute] Guid postId)
     {
-        return Response(await _postService.GetPostByPostId(postId));
+        return await GetResponseAsync(() => _postService.GetPostByPostId(postId));
     }
 
     [HttpGet]
@@ -42,7 +41,7 @@ public sealed class PostController(
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ICollection<ViewPostDTO>>))]
     public async Task<IActionResult> GetPostsByBloqId([FromRoute] Guid bloqId)
     {
-        return Response(await _postService.GetPostsByBloqId(bloqId));
+        return await GetResponseAsync(() => _postService.GetPostsByBloqId(bloqId));
     }
 
     [HttpPut]
@@ -50,7 +49,7 @@ public sealed class PostController(
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
     public async Task<IActionResult> UpdatePost([FromBody] UpdatePostDTO updatePost)
     {
-        return Response(await _postService.UpdatePost(updatePost));
+        return await GetResponseAsync(() => _postService.UpdatePost(updatePost));
     }
 
     [HttpDelete]
@@ -59,6 +58,6 @@ public sealed class PostController(
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
     public async Task<IActionResult> RemovePost([FromRoute] Guid postId)
     {
-        return Response(await _postService.RemovePost(postId));
+        return await GetResponseAsync(() => _postService.RemovePost(postId));
     }
 }

@@ -1,4 +1,5 @@
-﻿using Bloqqer.Domain.Models;
+﻿using Bloqqer.Application.Exceptions;
+using Bloqqer.Domain.Models;
 using Bloqqer.Infrastructure.UnitOfWork.Interfaces;
 using Bloqqer.Infrastructure.ViewModels;
 using Bloqqer.WebAPI.Services.Interfaces;
@@ -15,8 +16,7 @@ public sealed class BloqService(
 
     public async Task<Guid> CreateBloq(CreateBloqDTO createBloq)
     {
-        // TODO: Find a better exception handling pattern.
-        var userId = _userService.GetLoggedInUserId() ?? throw new ArgumentException("Not logged in?");
+        var userId = _userService.GetLoggedInUserId();
 
         var newBloq = Bloq.Create(
             userId,
@@ -34,8 +34,8 @@ public sealed class BloqService(
 
     public async Task<ViewBloqDTO> GetBloqByBloqId(Guid bloqId)
     {
-        // TODO: Find a better exception handling pattern.
-        var bloq = await _unitOfWork.Bloqs.GetByIdAsync(bloqId) ?? throw new ArgumentException("Bloq not found?");
+        var bloq = await _unitOfWork.Bloqs.GetByIdAsync(bloqId)
+            ?? throw new NotFoundException($"Bloq with Id ({bloqId}) was not found");
 
         return new ViewBloqDTO()
         {
@@ -53,6 +53,8 @@ public sealed class BloqService(
 
     public async Task<ICollection<ViewBloqDTO>> GetBloqsByUserId(Guid userId)
     {
+        _ = await _userService.GetUserByUserId(userId);
+
         return (await _unitOfWork.Bloqs.FindAsync(b => b.AuthorId == userId))
             .Select(b =>
             new ViewBloqDTO()
@@ -94,13 +96,14 @@ public sealed class BloqService(
 
     public async Task<Guid> UpdateBloq(UpdateBloqDTO updateBloq)
     {
-        // TODO: Find a better exception handling pattern.
-        var userId = _userService.GetLoggedInUserId() ?? throw new ArgumentException("Not logged in?");
-        var currentBloq = await _unitOfWork.Bloqs.GetByIdAsync(updateBloq.BloqId) ?? throw new ArgumentException("Bloq not found?");
+        var loggedInUserId = _userService.GetLoggedInUserId();
 
-        if (userId != currentBloq.AuthorId)
+        var currentBloq = await _unitOfWork.Bloqs.GetByIdAsync(updateBloq.BloqId)
+            ?? throw new NotFoundException($"Bloq with Id ({updateBloq.BloqId}) was not found");
+
+        if (loggedInUserId != currentBloq.AuthorId)
         {
-            throw new Exception("You can't update somebody else's bloq!");
+            throw new UnauthorizedException($"Logged in user with Id ({loggedInUserId}) does not own Bloq with author Id ({currentBloq.AuthorId})");
         }
 
         currentBloq.Title = updateBloq.Title;
@@ -108,7 +111,7 @@ public sealed class BloqService(
         currentBloq.IsPrivate = updateBloq.IsPrivate;
         currentBloq.IsPublished = updateBloq.IsPublished;
         currentBloq.Published = !currentBloq.IsPublished && updateBloq.IsPublished ? DateTime.UtcNow : currentBloq.Published;
-        currentBloq.ModifiedBy = userId;
+        currentBloq.ModifiedBy = loggedInUserId;
         currentBloq.ModifiedOn = DateTime.UtcNow;
 
         _unitOfWork.Bloqs.Update(currentBloq);
@@ -119,8 +122,8 @@ public sealed class BloqService(
 
     public async Task<Guid> RemoveBloq(Guid bloqId)
     {
-        // TODO: Find a better exception handling pattern.
-        var bloq = await _unitOfWork.Bloqs.GetByIdAsync(bloqId) ?? throw new ArgumentException("Bloq not found?");
+        var bloq = await _unitOfWork.Bloqs.GetByIdAsync(bloqId)
+            ?? throw new NotFoundException($"Bloq with Id ({bloqId}) was not found");
 
         _unitOfWork.Bloqs.Remove(bloq);
         await _unitOfWork.SaveChangesAsync();

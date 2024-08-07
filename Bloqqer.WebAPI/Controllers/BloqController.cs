@@ -14,17 +14,16 @@ namespace Bloqqer.Controllers;
 public sealed class BloqController(
     IBloqService bloqService,
     ILogger<BloqController> logger
-) : APIController
+) : APIController(logger)
 {
     private readonly IBloqService _bloqService = bloqService;
-    private readonly ILogger<BloqController> _logger = logger;
 
     [HttpPost]
     [SwaggerOperation("Create a new Bloq")]
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
     public async Task<IActionResult> CreateBloq([FromBody] CreateBloqDTO createBloq)
     {
-        return Response(await _bloqService.CreateBloq(createBloq));
+        return await GetResponseAsync(() => _bloqService.CreateBloq(createBloq));
     }
 
     [HttpGet]
@@ -33,7 +32,7 @@ public sealed class BloqController(
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ViewBloqDTO>))]
     public async Task<IActionResult> GetBloqByBloqIdId([FromRoute] Guid bloqId)
     {
-        return Response(await _bloqService.GetBloqByBloqId(bloqId));
+        return await GetResponseAsync(() => _bloqService.GetBloqByBloqId(bloqId));
     }
 
     [HttpGet]
@@ -42,7 +41,7 @@ public sealed class BloqController(
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ICollection<ViewBloqDTO>>))]
     public async Task<IActionResult> GetBloqsByUserId([FromRoute] Guid userId)
     {
-        return Response(await _bloqService.GetBloqsByUserId(userId));
+        return await GetResponseAsync(() => _bloqService.GetBloqsByUserId(userId));
     }
 
     [HttpGet]
@@ -50,7 +49,7 @@ public sealed class BloqController(
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ICollection<ViewBloqDTO>>))]
     public async Task<IActionResult> GetAllBloqs()
     {
-        return Response(await _bloqService.GetAllBloqs());
+        return await GetResponseAsync(() => _bloqService.GetAllBloqs());
     }
 
     [HttpGet]
@@ -59,7 +58,7 @@ public sealed class BloqController(
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ICollection<ViewBloqDTO>>))]
     public async Task<IActionResult> GetFollowedUsersBloqs()
     {
-        return Response(await _bloqService.GetFollowedUsersBloqs());
+        return await GetResponseAsync(() => _bloqService.GetFollowedUsersBloqs());
     }
 
     [HttpPut]
@@ -67,7 +66,7 @@ public sealed class BloqController(
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
     public async Task<IActionResult> UpdateBloq([FromBody] UpdateBloqDTO updateBloq)
     {
-        return Response(await _bloqService.UpdateBloq(updateBloq));
+        return await GetResponseAsync(() => _bloqService.UpdateBloq(updateBloq));
     }
 
     [HttpDelete]
@@ -76,6 +75,6 @@ public sealed class BloqController(
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
     public async Task<IActionResult> RemoveBloq([FromRoute] Guid bloqId)
     {
-        return Response(await _bloqService.RemoveBloq(bloqId));
+        return await GetResponseAsync(() => _bloqService.RemoveBloq(bloqId));
     }
 }

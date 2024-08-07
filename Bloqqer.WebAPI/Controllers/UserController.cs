@@ -14,17 +14,16 @@ namespace Bloqqer.Controllers;
 public sealed class UserController(
     IUserService userService,
     ILogger<UserController> logger
-) : APIController
+) : APIController(logger)
 {
     private readonly IUserService _userService = userService;
-    private readonly ILogger<UserController> _logger = logger;
 
     [HttpGet]
     [SwaggerOperation("Get logged in user id")]
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
     public IActionResult GetLoggedInUser()
     {
-        return Response(_userService.GetLoggedInUserId());
+        return GetResponse(() => _userService.GetLoggedInUserId());
     }
 
     [HttpGet]
@@ -33,6 +32,6 @@ public sealed class UserController(
     [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ICollection<UserDTO>>))]
     public async Task<IActionResult> GetUsers()
     {
-        return Response(await _userService.GetAllUsers());
+        return await GetResponseAsync(() => _userService.GetAllUsers());
     }
 }

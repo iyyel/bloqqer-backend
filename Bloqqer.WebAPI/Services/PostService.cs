@@ -15,15 +15,15 @@ public sealed class PostService(
 
     public async Task<Guid> CreatePost(CreatePostDTO createPost)
     {
-        var userGuid = _userService.GetLoggedInUserId() ?? throw new ArgumentException("Not logged in?");
+        var userId = _userService.GetLoggedInUserId();
 
         var newPost = Post.Create(
             createPost.BloqId,
-            userGuid,
+            userId,
             createPost.Title,
             createPost.Description,
             createPost.Content,
-            userGuid,
+            userId,
             createPost.IsPublished
         );
 
@@ -72,7 +72,8 @@ public sealed class PostService(
     public async Task<Guid> UpdatePost(UpdatePostDTO updatePost)
     {
         // TODO: Find a better exception handling pattern.
-        var userId = _userService.GetLoggedInUserId() ?? throw new ArgumentException("Not logged in?");
+        var userId = _userService.GetLoggedInUserId();
+
         var currentPost = await _unitOfWork.Posts.GetByIdAsync(updatePost.PostId) ?? throw new ArgumentException("Bloq not found?");
 
         if (userId != currentPost.AuthorId)

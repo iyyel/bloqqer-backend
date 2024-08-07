@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bloqqer.Application\Bloqqer.Application.csproj" />
     <ProjectReference Include="..\Bloqqer.Infrastructure\Bloqqer.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -5,11 +5,11 @@ namespace Bloqqer.WebAPI.Services.Interfaces;
 
 public interface IUserService
 {
-    Guid? GetLoggedInUserId();
+    Guid GetLoggedInUserId();
 
-    Task<ApplicationUser?> GetLoggedInUser();
+    Task<ApplicationUser> GetLoggedInUser();
 
-    Task<ApplicationUser?> GetUserByUserId(Guid userId);
+    Task<ApplicationUser> GetUserByUserId(Guid userId);
 
     Task<ICollection<UserDTO>> GetAllUsers();
 }

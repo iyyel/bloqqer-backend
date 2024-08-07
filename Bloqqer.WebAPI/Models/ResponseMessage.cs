@@ -2,9 +2,9 @@
 
 public sealed class ResponseMessage<T>
 {
-    public bool Success { get; init; }
-
-    public IEnumerable<string>? Errors { get; init; }
+    public required bool Success { get; init; }
 
     public T? Data { get; init; }
+
+    public string? Error { get; init; }
 }

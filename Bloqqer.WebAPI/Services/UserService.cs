@@ -1,4 +1,5 @@
-﻿using Bloqqer.Domain.Models;
+﻿using Bloqqer.Application.Exceptions;
+using Bloqqer.Domain.Models;
 using Bloqqer.Infrastructure.UnitOfWork.Interfaces;
 using Bloqqer.Infrastructure.ViewModels;
 using Bloqqer.WebAPI.Services.Interfaces;
@@ -14,6 +15,31 @@ public sealed class UserService(
     private readonly IUnitOfWork _unitOfWork = _unitOfWork;
     private readonly IHttpContextAccessor _httpContextAccessor = _httpContextAccessor;
 
+    public Guid GetLoggedInUserId()
+    {
+        var userId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        bool isValidGuid = Guid.TryParse(userId, out Guid userGuid);
+        return isValidGuid
+            ? userGuid
+            : throw new UnauthorizedException("User is not logged in");
+    }
+
+    public async Task<ApplicationUser> GetLoggedInUser()
+    {
+        var userId = GetLoggedInUserId();
+
+        var user = await _unitOfWork.ApplicationUsers.SingleOrDefaultAsync(a => a.Id == userId)
+            ?? throw new NotFoundException($"User with Id ({userId}) was not found");
+
+        return user;
+    }
+
+    public async Task<ApplicationUser> GetUserByUserId(Guid userId)
+    {
+        return await _unitOfWork.ApplicationUsers.GetByIdAsync(userId)
+            ?? throw new NotFoundException($"User with Id ({userId}) was not found");
+    }
+
     public async Task<ICollection<UserDTO>> GetAllUsers()
     {
         return (await _unitOfWork.ApplicationUsers.GetAllAsync()).Select(a =>
@@ -23,29 +49,5 @@ public sealed class UserService(
                 MiddleName = a.MiddleName,
                 LastName = a.LastName,
             }).ToList();
-    }
-
-    public Guid? GetLoggedInUserId()
-    {
-        var userId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        bool isValidGuid = Guid.TryParse(userId, out Guid userGuid);
-        return isValidGuid ? userGuid : null;
-    }
-
-    public async Task<ApplicationUser?> GetLoggedInUser()
-    {
-        var userId = GetLoggedInUserId();
-
-        if (userId is null)
-        {
-            return null;
-        }
-
-        return await _unitOfWork.ApplicationUsers.SingleOrDefaultAsync(a => a.Id == userId);
-    }
-
-    public async Task<ApplicationUser?> GetUserByUserId(Guid userId)
-    {
-        return await _unitOfWork.ApplicationUsers.GetByIdAsync(userId);
     }
 }
