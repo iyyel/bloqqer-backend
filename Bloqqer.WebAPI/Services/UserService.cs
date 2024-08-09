@@ -40,10 +40,10 @@ public sealed class UserService(
             ?? throw new NotFoundException($"User with Id ({userId}) was not found");
     }
 
-    public async Task<ICollection<UserDTO>> GetAllUsers()
+    public async Task<ICollection<ViewUserDTO>> GetAllUsers()
     {
         return (await _unitOfWork.ApplicationUsers.GetAllAsync()).Select(a =>
-            new UserDTO
+            new ViewUserDTO
             {
                 FirstName = a.FirstName,
                 MiddleName = a.MiddleName,

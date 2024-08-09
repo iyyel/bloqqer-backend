@@ -1,6 +1,6 @@
 ﻿namespace Bloqqer.Infrastructure.ViewModels;
 
-public sealed class UserDTO
+public sealed class ViewUserDTO
 {
     public string? FirstName { get; set; }
 

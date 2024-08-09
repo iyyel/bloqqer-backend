@@ -29,7 +29,7 @@ public sealed class UserController(
     [HttpGet]
     [Route("all")]
     [SwaggerOperation("Get all users")]
-    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ICollection<UserDTO>>))]
+    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ICollection<ViewUserDTO>>))]
     public async Task<IActionResult> GetUsers()
     {
         return await GetResponseAsync(() => _userService.GetAllUsers());

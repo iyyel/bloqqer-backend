@@ -11,5 +11,5 @@ public interface IUserService
 
     Task<ApplicationUser> GetUserByUserId(Guid userId);
 
-    Task<ICollection<UserDTO>> GetAllUsers();
+    Task<ICollection<ViewUserDTO>> GetAllUsers();
 }

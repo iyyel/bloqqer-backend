@@ -56,18 +56,18 @@ public sealed class BloqService(
         _ = await _userService.GetUserByUserId(userId);
 
         return (await _unitOfWork.Bloqs.FindAsync(b => b.AuthorId == userId))
-            .Select(b =>
+            .Select(bloq =>
             new ViewBloqDTO()
             {
-                BloqId = b.Id,
-                AuthorId = b.AuthorId,
-                Title = b.Title,
-                Description = b.Description,
-                IsPrivate = b.IsPrivate,
-                IsPublished = b.IsPublished,
-                Published = b.Published,
-                Posts = b.Posts,
-                Reactions = b.Reactions,
+                BloqId = bloq.Id,
+                AuthorId = bloq.AuthorId,
+                Title = bloq.Title,
+                Description = bloq.Description,
+                IsPrivate = bloq.IsPrivate,
+                IsPublished = bloq.IsPublished,
+                Published = bloq.Published,
+                Posts = bloq.Posts,
+                Reactions = bloq.Reactions,
             }
         ).ToList();
     }
@@ -75,23 +75,39 @@ public sealed class BloqService(
     public async Task<ICollection<ViewBloqDTO>> GetAllBloqs()
     {
         return (await _unitOfWork.Bloqs.GetAllAsync())
-            .Select(b =>
+            .Select(bloq =>
             new ViewBloqDTO()
             {
-                BloqId = b.Id,
-                AuthorId = b.AuthorId,
-                Title = b.Title,
-                Description = b.Description,
-                IsPrivate = b.IsPrivate,
-                IsPublished = b.IsPublished,
-                Published = b.Published,
+                BloqId = bloq.Id,
+                AuthorId = bloq.AuthorId,
+                Title = bloq.Title,
+                Description = bloq.Description,
+                IsPrivate = bloq.IsPrivate,
+                IsPublished = bloq.IsPublished,
+                Published = bloq.Published,
             }
         ).ToList();
     }
 
-    public Task<ICollection<ViewBloqDTO>> GetFollowedUsersBloqs()
+    public async Task<ICollection<ViewBloqDTO>> GetFollowedUsersBloqs()
     {
-        throw new NotImplementedException();
+        var userId = _userService.GetLoggedInUserId();
+
+        var followedIds = (await _unitOfWork.Follows.FindAsync(f => f.FollowerId == userId)).Select(f => f.FollowedId);
+
+        return (await _unitOfWork.Bloqs.FindAsync(b => followedIds.Contains(b.AuthorId)))
+            .Select(bloq =>
+            new ViewBloqDTO()
+            {
+                BloqId = bloq.Id,
+                AuthorId = bloq.AuthorId,
+                Title = bloq.Title,
+                Description = bloq.Description,
+                IsPrivate = bloq.IsPrivate,
+                IsPublished = bloq.IsPublished,
+                Published = bloq.Published,
+            }
+        ).ToList();
     }
 
     public async Task<Guid> UpdateBloq(UpdateBloqDTO updateBloq)

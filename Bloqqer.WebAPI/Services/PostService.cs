@@ -1,4 +1,5 @@
-﻿using Bloqqer.Domain.Models;
+﻿using Bloqqer.Application.Exceptions;
+using Bloqqer.Domain.Models;
 using Bloqqer.Infrastructure.UnitOfWork.Interfaces;
 using Bloqqer.Infrastructure.ViewModels;
 using Bloqqer.WebAPI.Services.Interfaces;
@@ -35,8 +36,8 @@ public sealed class PostService(
 
     public async Task<ViewPostDTO> GetPostByPostId(Guid postId)
     {
-        // TODO: Find a better exception handling pattern.
-        var post = await _unitOfWork.Posts.GetByIdAsync(postId) ?? throw new ArgumentException("Post not found?");
+        var post = await _unitOfWork.Posts.GetByIdAsync(postId)
+            ?? throw new NotFoundException($"Post with Id ({postId}) was not found");
 
         return new ViewPostDTO()
         {
@@ -53,9 +54,10 @@ public sealed class PostService(
 
     public async Task<ICollection<ViewPostDTO>> GetPostsByBloqId(Guid bloqId)
     {
-        return (await _unitOfWork.Bloqs.FindAsync(b => b.Id == bloqId))
-            .SelectMany(b => b.Posts)
-            .Select(post =>
+        var bloq = await _unitOfWork.Bloqs.GetByIdAsync(bloqId)
+            ?? throw new NotFoundException($"Bloq with Id ({bloqId}) was not found");
+
+        return bloq.Posts.Select(post =>
             new ViewPostDTO()
             {
                 BloqId = post.Id,
@@ -71,14 +73,14 @@ public sealed class PostService(
 
     public async Task<Guid> UpdatePost(UpdatePostDTO updatePost)
     {
-        // TODO: Find a better exception handling pattern.
         var userId = _userService.GetLoggedInUserId();
 
-        var currentPost = await _unitOfWork.Posts.GetByIdAsync(updatePost.PostId) ?? throw new ArgumentException("Bloq not found?");
+        var currentPost = await _unitOfWork.Posts.GetByIdAsync(updatePost.PostId)
+            ?? throw new NotFoundException($"Post with Id ({updatePost.PostId}) was not found");
 
         if (userId != currentPost.AuthorId)
         {
-            throw new Exception("You can't update somebody else's post!");
+            throw new BadRequestException("You are not the author of this post");
         }
 
         currentPost.Title = updatePost.Title;
@@ -97,8 +99,8 @@ public sealed class PostService(
 
     public async Task<Guid> RemovePost(Guid postId)
     {
-        // TODO: Find a better exception handling pattern.
-        var post = await _unitOfWork.Posts.GetByIdAsync(postId) ?? throw new ArgumentException("Post not found?");
+        var post = await _unitOfWork.Posts.GetByIdAsync(postId)
+            ?? throw new NotFoundException($"Post with Id ({postId}) was not found");
 
         _unitOfWork.Posts.Remove(post);
         await _unitOfWork.SaveChangesAsync();

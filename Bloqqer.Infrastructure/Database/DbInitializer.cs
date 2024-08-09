@@ -239,8 +239,8 @@ public sealed class DbInitializer(ModelBuilder modelBuilder)
             );
 
         var followAdmin = Follow.Create(
-            adminUserGuid,
             jamesUserGuid,
+            adminUserGuid,
             systemGuid,
             followAdminGuid
             );
