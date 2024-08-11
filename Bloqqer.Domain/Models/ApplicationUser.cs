@@ -47,8 +47,8 @@ public class ApplicationUser : IdentityUser<Guid>, IBaseEntity<Guid>
         string? middleName = "",
         string? lastName = "",
         bool? lockoutEnabled = false,
-        bool? emailConfirmed = true,
-        bool? phoneNumberConfirmed = true,
+        bool? emailConfirmed = false,
+        bool? phoneNumberConfirmed = false,
         bool? twoFactorEnabled = false)
     {
         return new ApplicationUser()
@@ -65,8 +65,8 @@ public class ApplicationUser : IdentityUser<Guid>, IBaseEntity<Guid>
             SecurityStamp = securityStamp,
             CreatedBy = createdBy,
             LockoutEnabled = lockoutEnabled ?? false,
-            EmailConfirmed = emailConfirmed ?? true,
-            PhoneNumberConfirmed = phoneNumberConfirmed ?? true,
+            EmailConfirmed = emailConfirmed ?? false,
+            PhoneNumberConfirmed = phoneNumberConfirmed ?? false,
             TwoFactorEnabled = twoFactorEnabled ?? false,
             CreatedOn = DateTime.UtcNow,
             Bloqs = [],

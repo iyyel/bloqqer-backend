@@ -14,37 +14,37 @@ public sealed class FollowService(
     private readonly IUnitOfWork _unitOfWork = _unitOfWork;
     private readonly IUserService _userService = userService;
 
-    public async Task<Guid> FollowUser(Guid followedId)
+    public async Task<Guid> FollowUser(Guid userId)
     {
         var followerId = _userService.GetLoggedInUserId();
 
-        if (followerId == followedId)
+        if (followerId == userId)
         {
             throw new BadRequestException("You cannot follow yourself");
         }
 
-        _ = await _unitOfWork.ApplicationUsers.GetByIdAsync(followedId)
-           ?? throw new NotFoundException($"User with Id ({followedId}) was not found");
+        _ = await _unitOfWork.ApplicationUsers.GetByIdAsync(userId)
+           ?? throw new NotFoundException($"User with Id ({userId}) was not found");
 
         await _unitOfWork.Follows.AddAsync(
             Follow.Create(
                 followerId,
-                followedId,
+                userId,
                 followerId
         ));
         await _unitOfWork.SaveChangesAsync();
 
-        return followedId;
+        return userId;
     }
 
-    public async Task<Guid> UnfollowUser(Guid followedId)
+    public async Task<Guid> UnfollowUser(Guid userId)
     {
         var followerId = _userService.GetLoggedInUserId();
 
-        _ = await _unitOfWork.Follows.FindAsync(f => f.FollowedId == followedId && f.FollowerId == followerId)
-            ?? throw new NotFoundException($"User with Id ({followerId}) does not follow User with Id ({followedId})");
+        _ = await _unitOfWork.Follows.FindAsync(f => f.FollowedId == userId && f.FollowerId == followerId)
+            ?? throw new NotFoundException($"User with Id ({followerId}) does not follow User with Id ({userId})");
 
-        return followedId;
+        return userId;
     }
 
     public async Task<ViewFollowsDTO> GetFollowers(Guid userId)

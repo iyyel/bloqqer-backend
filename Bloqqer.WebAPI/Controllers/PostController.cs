@@ -7,10 +7,8 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Bloqqer.Controllers;
 
-[ApiController]
-// [Authorize]
 [Route("api/v1/[controller]")]
-[Produces("application/json")]
+[SwaggerTag("Post related endpoints")]
 public sealed class PostController(
     IPostService postService,
     ILogger<PostController> logger
@@ -19,44 +17,72 @@ public sealed class PostController(
     private readonly IPostService _postService = postService;
 
     [HttpPost]
-    [SwaggerOperation("Create a new Post")]
-    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
-    public async Task<IActionResult> CreatePost([FromBody] CreatePostDTO createPost)
+    [SwaggerOperation(
+        Summary = "Create a Post",
+        Description = "Creates a new Post for the logged in User"
+    )]
+    [SwaggerResponse(200, "OK", typeof(ResponseMessage<Guid>))]
+    [SwaggerResponse(401, "Unauthorized", typeof(ResponseMessage<Guid>))]
+    public async Task<IActionResult> CreatePost(
+        [FromBody, SwaggerRequestBody("Post creation information", Required = true)] CreatePostDTO createPost
+    )
     {
         return await GetResponseAsync(() => _postService.CreatePost(createPost));
     }
 
     [HttpGet]
-    [Route("{postId}")]
-    [SwaggerOperation("Get Post by Post id")]
-    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ViewPostDTO>))]
-    public async Task<IActionResult> GetPostbyPostId([FromRoute] Guid postId)
+    [SwaggerOperation(
+        Summary = "Get a Post",
+        Description = "Gets a Post by Post Id"
+    )]
+    [SwaggerResponse(200, "OK", typeof(ResponseMessage<ViewPostDTO>))]
+    [SwaggerResponse(401, "Unauthorized", typeof(ResponseMessage<ViewPostDTO>))]
+    public async Task<IActionResult> GetPostbyPostId(
+        [FromQuery, SwaggerParameter("Post GUID")] Guid postId
+    )
     {
         return await GetResponseAsync(() => _postService.GetPostByPostId(postId));
     }
 
     [HttpGet]
-    [Route("bloq/{bloqId}")]
-    [SwaggerOperation("Get Posts by Bloq id")]
-    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ICollection<ViewPostDTO>>))]
-    public async Task<IActionResult> GetPostsByBloqId([FromRoute] Guid bloqId)
+    [Route("bloq")]
+    [SwaggerOperation(
+        Summary = "Get Posts from Bloq",
+        Description = "Gets Posts associated with the Bloq Id"
+    )]
+    [SwaggerResponse(200, "OK", typeof(ResponseMessage<ICollection<ViewPostDTO>>))]
+    [SwaggerResponse(401, "Unauthorized", typeof(ResponseMessage<ICollection<ViewPostDTO>>))]
+    public async Task<IActionResult> GetPostsByBloqId(
+        [FromQuery, SwaggerParameter("Bloq GUID")] Guid bloqId
+    )
     {
         return await GetResponseAsync(() => _postService.GetPostsByBloqId(bloqId));
     }
 
     [HttpPut]
-    [SwaggerOperation("Updates the Post")]
-    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
-    public async Task<IActionResult> UpdatePost([FromBody] UpdatePostDTO updatePost)
+    [SwaggerOperation(
+        Summary = "Update a Post",
+        Description = "Updates the Post"
+    )]
+    [SwaggerResponse(200, "OK", typeof(ResponseMessage<ICollection<ViewPostDTO>>))]
+    [SwaggerResponse(401, "Unauthorized", typeof(ResponseMessage<ICollection<ViewPostDTO>>))]
+    public async Task<IActionResult> UpdatePost(
+        [FromBody, SwaggerParameter("Post update information")] UpdatePostDTO updatePost
+    )
     {
         return await GetResponseAsync(() => _postService.UpdatePost(updatePost));
     }
 
     [HttpDelete]
-    [Route("{postId}")]
-    [SwaggerOperation("Removes the Post")]
-    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
-    public async Task<IActionResult> RemovePost([FromRoute] Guid postId)
+    [SwaggerOperation(
+        Summary = "Remove a Post",
+        Description = "Removes the Post"
+    )]
+    [SwaggerResponse(200, "OK", typeof(ResponseMessage<Guid>))]
+    [SwaggerResponse(401, "Unauthorized", typeof(ResponseMessage<Guid>))]
+    public async Task<IActionResult> RemovePost(
+        [FromQuery, SwaggerParameter("Post GUID")] Guid postId
+    )
     {
         return await GetResponseAsync(() => _postService.RemovePost(postId));
     }

@@ -12,7 +12,7 @@ public interface IBloqService
 
     Task<ICollection<ViewBloqDTO>> GetAllBloqs();
 
-    Task<ICollection<ViewBloqDTO>> GetFollowedUsersBloqs();
+    Task<ICollection<ViewBloqDTO>> GetFollowingUsersBloqs();
 
     Task<Guid> UpdateBloq(UpdateBloqDTO updateBloq);
 

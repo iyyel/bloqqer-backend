@@ -7,10 +7,8 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Bloqqer.WebAPI.Controllers;
 
-[ApiController]
-// [Authorize]
 [Route("api/v1/[controller]")]
-[Produces("application/json")]
+[SwaggerTag("Follow related endpoints")]
 public sealed class FollowController(
     IFollowService followService,
     ILogger<FollowController> logger
@@ -19,37 +17,59 @@ public sealed class FollowController(
     private readonly IFollowService _followService = followService;
 
     [HttpPost]
-    [Route("{followedId}")]
-    [SwaggerOperation("Follow a user")]
-    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
-    public async Task<IActionResult> FollowUser([FromRoute] Guid followedId)
+    [SwaggerOperation(
+        Summary = "Follow a User",
+        Description = "Follows a new User"
+    )]
+    [SwaggerResponse(200, "OK", typeof(ResponseMessage<Guid>))]
+    [SwaggerResponse(401, "Unauthorized", typeof(ResponseMessage<Guid>))]
+    public async Task<IActionResult> FollowUser(
+        [FromQuery, SwaggerParameter("User GUID")] Guid userId
+    )
     {
-        return await GetResponseAsync(() => _followService.FollowUser(followedId));
+        return await GetResponseAsync(() => _followService.FollowUser(userId));
     }
 
     [HttpDelete]
-    [Route("{followedId}")]
-    [SwaggerOperation("Unfollow a user")]
-    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
-    public async Task<IActionResult> UnfollowUser([FromRoute] Guid followedId)
+    [SwaggerOperation(
+        Summary = "Unfollow a User",
+        Description = "Unfollows a User"
+    )]
+    [SwaggerResponse(200, "OK", typeof(ResponseMessage<Guid>))]
+    [SwaggerResponse(401, "Unauthorized", typeof(ResponseMessage<Guid>))]
+    public async Task<IActionResult> UnfollowUser(
+        [FromQuery, SwaggerParameter("User GUID")] Guid userId
+    )
     {
-        return await GetResponseAsync(() => _followService.UnfollowUser(followedId));
+        return await GetResponseAsync(() => _followService.UnfollowUser(userId));
     }
 
     [HttpGet]
-    [Route("followers/{userId}")]
-    [SwaggerOperation("Get followers")]
-    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ViewFollowsDTO>))]
-    public async Task<IActionResult> GetFollowers([FromRoute] Guid userId)
+    [Route("followers")]
+    [SwaggerOperation(
+        Summary = "Get followers",
+        Description = "Get followers of the User"
+    )]
+    [SwaggerResponse(200, "OK", typeof(ResponseMessage<ViewFollowsDTO>))]
+    [SwaggerResponse(401, "Unauthorized", typeof(ResponseMessage<ViewFollowsDTO>))]
+    public async Task<IActionResult> GetFollowers(
+        [FromQuery, SwaggerParameter("User GUID")] Guid userId
+    )
     {
         return await GetResponseAsync(() => _followService.GetFollowers(userId));
     }
 
     [HttpGet]
-    [Route("following/{userId}")]
-    [SwaggerOperation("Get following")]
-    [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<ViewFollowsDTO>))]
-    public async Task<IActionResult> GetFollowing([FromRoute] Guid userId)
+    [Route("following")]
+    [SwaggerOperation(
+        Summary = "Get following",
+        Description = "Get following of the User"
+    )]
+    [SwaggerResponse(200, "OK", typeof(ResponseMessage<ViewFollowsDTO>))]
+    [SwaggerResponse(401, "Unauthorized", typeof(ResponseMessage<ViewFollowsDTO>))]
+    public async Task<IActionResult> GetFollowing(
+        [FromQuery, SwaggerParameter("User GUID")] Guid userId
+    )
     {
         return await GetResponseAsync(() => _followService.GetFollowing(userId));
     }

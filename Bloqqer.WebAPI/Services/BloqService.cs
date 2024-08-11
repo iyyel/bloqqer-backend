@@ -89,7 +89,7 @@ public sealed class BloqService(
         ).ToList();
     }
 
-    public async Task<ICollection<ViewBloqDTO>> GetFollowedUsersBloqs()
+    public async Task<ICollection<ViewBloqDTO>> GetFollowingUsersBloqs()
     {
         var userId = _userService.GetLoggedInUserId();
 

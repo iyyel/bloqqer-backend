@@ -1,8 +1,13 @@
-﻿using Bloqqer.WebAPI.Models;
+﻿using Bloqqer.Application.Exceptions;
+using Bloqqer.WebAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Api.Controllers;
 
+[ApiController]
+[Authorize]
+[Produces("application/json")]
 public abstract class APIController(
   ILogger<APIController> _logger
 ) : ControllerBase
@@ -70,13 +75,21 @@ public abstract class APIController(
             Error = ex.Message,
         };
 
-        if (ex is ArgumentNullException)
+        if (ex is BadRequestException)
+        {
+            return BadRequest(response);
+        }
+        else if (ex is NotFoundException)
         {
             return NotFound(response);
         }
+        else if (ex is UnauthorizedException)
+        {
+            return Unauthorized(response);
+        }
         else
         {
-            return BadRequest(response);
+            return StatusCode(500, response);
         }
     }
 }
