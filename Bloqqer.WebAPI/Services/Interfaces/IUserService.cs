@@ -13,13 +13,15 @@ public interface IUserService
     // TODO: Make a view model here.
     Task<ApplicationUser> GetUserByUserId(Guid userId);
 
-    Task<string> RegisterUser(RegisterUserDTO registerUserDTO);
+    Task<Guid> RegisterUser(RegisterUserDTO registerUserDTO);
 
     Task<Guid> LoginUser(LoginUserDTO loginUserDTO);
 
+    Task<Guid> LogoutUser();
+
     Task<bool> ConfirmUserEmail(string email, string confirmEmailToken);
 
-    Task<string> RequestUserPasswordReset(string email);
+    Task<Guid> RequestUserPasswordReset(string email);
 
-    Task<bool> ConfirmUserPasswordReset(string email, string resetPasswordToken, string newPassword, string newPasswordConfirm);
+    Task<bool> ConfirmUserPasswordReset(string email, string newPassword, string newPasswordConfirmation, string resetPasswordToken);
 }

@@ -4,11 +4,9 @@ using Bloqqer.WebAPI.Services.Interfaces;
 namespace Bloqqer.WebAPI.Services;
 
 public sealed class ReactionService(
-    IUnitOfWork unitOfWork,
-    IHttpContextAccessor httpContextAccessor
+    IUnitOfWork _unitOfWork
 ) : IReactionService
 {
-    private readonly IUnitOfWork _unitOfWork = unitOfWork;
-    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+    private readonly IUnitOfWork _unitOfWork = _unitOfWork;
 
 }

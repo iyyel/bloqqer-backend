@@ -8,11 +8,11 @@ namespace Bloqqer.WebAPI.Services;
 
 public sealed class PostService(
     IUnitOfWork _unitOfWork,
-    IUserService userService
+    IUserService _userService
 ) : IPostService
 {
     private readonly IUnitOfWork _unitOfWork = _unitOfWork;
-    private readonly IUserService _userService = userService;
+    private readonly IUserService _userService = _userService;
 
     public async Task<Guid> CreatePost(CreatePostDTO createPost)
     {

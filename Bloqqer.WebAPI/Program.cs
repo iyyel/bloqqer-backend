@@ -36,7 +36,7 @@ builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme);
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection"), b =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b =>
     {
         b.MigrationsAssembly("Bloqqer.Infrastructure");
         b.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
@@ -88,6 +88,8 @@ builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IReactionService, ReactionService>();
 builder.Services.AddScoped<IFollowService, FollowService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<ISecretService, SecretService>();
 
 var app = builder.Build();
 
