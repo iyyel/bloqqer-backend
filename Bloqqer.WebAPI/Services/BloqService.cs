@@ -14,6 +14,29 @@ public sealed class BloqService(
     private readonly IUnitOfWork _unitOfWork = _unitOfWork;
     private readonly IUserService _userService = _userService;
 
+    public async Task<ICollection<BloqMetadataDTO>> GetAllBloqsMetadata()
+    {
+        return [.. (await _unitOfWork.Bloqs.GetAllAsync())
+            .OrderByDescending(b => b.CreatedOn)
+            .Select(bloq =>
+            new BloqMetadataDTO()
+            {
+                Id = bloq.Id,
+                AuthorId = bloq.AuthorId,
+                AuthorFirstName = bloq.Author?.FirstName ?? string.Empty,
+                AuthorMiddleName = bloq.Author?.MiddleName ?? string.Empty,
+                AuthorLastName = bloq.Author?.LastName ?? string.Empty,
+                Title = bloq.Title,
+                Description = bloq.Description,
+                IsPrivate = bloq.IsPrivate,
+                IsPublished = bloq.IsPublished,
+                Published = bloq.Published,
+                PostCount = bloq.Posts.Count,
+                ReactionCount = bloq.Reactions.Count,
+            }
+        )];
+    }
+
     public async Task<Guid> CreateBloq(CreateBloqDTO createBloq)
     {
         var userId = _userService.GetLoggedInUserId();
@@ -39,7 +62,7 @@ public sealed class BloqService(
 
         return new ViewBloqDTO()
         {
-            BloqId = bloq.Id,
+            Id = bloq.Id,
             AuthorId = bloq.AuthorId,
             Title = bloq.Title,
             Description = bloq.Description,
@@ -53,13 +76,12 @@ public sealed class BloqService(
 
     public async Task<ICollection<ViewBloqDTO>> GetBloqsByUserId(Guid userId)
     {
-        _ = await _userService.GetUserByUserId(userId);
-
         return (await _unitOfWork.Bloqs.FindAsync(b => b.AuthorId == userId))
+            .OrderByDescending(b => b.CreatedOn)
             .Select(bloq =>
             new ViewBloqDTO()
             {
-                BloqId = bloq.Id,
+                Id = bloq.Id,
                 AuthorId = bloq.AuthorId,
                 Title = bloq.Title,
                 Description = bloq.Description,
@@ -72,23 +94,6 @@ public sealed class BloqService(
         ).ToList();
     }
 
-    public async Task<ICollection<ViewBloqDTO>> GetAllBloqs()
-    {
-        return (await _unitOfWork.Bloqs.GetAllAsync())
-            .Select(bloq =>
-            new ViewBloqDTO()
-            {
-                BloqId = bloq.Id,
-                AuthorId = bloq.AuthorId,
-                Title = bloq.Title,
-                Description = bloq.Description,
-                IsPrivate = bloq.IsPrivate,
-                IsPublished = bloq.IsPublished,
-                Published = bloq.Published,
-            }
-        ).ToList();
-    }
-
     public async Task<ICollection<ViewBloqDTO>> GetFollowingUsersBloqs()
     {
         var userId = _userService.GetLoggedInUserId();
@@ -96,10 +101,11 @@ public sealed class BloqService(
         var followedIds = (await _unitOfWork.Follows.FindAsync(f => f.FollowerId == userId)).Select(f => f.FollowedId);
 
         return (await _unitOfWork.Bloqs.FindAsync(b => followedIds.Contains(b.AuthorId)))
+            .OrderByDescending(b => b.CreatedOn)
             .Select(bloq =>
             new ViewBloqDTO()
             {
-                BloqId = bloq.Id,
+                Id = bloq.Id,
                 AuthorId = bloq.AuthorId,
                 Title = bloq.Title,
                 Description = bloq.Description,

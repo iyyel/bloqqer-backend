@@ -4,6 +4,8 @@ namespace Bloqqer.Infrastructure.ViewModels;
 
 public class ViewPostDTO
 {
+    public required Guid Id { get; set; }
+
     public required Guid BloqId { get; set; }
 
     public required Guid AuthorId { get; set; }

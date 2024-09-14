@@ -41,10 +41,12 @@ public sealed class PostService(
 
         return new ViewPostDTO()
         {
-            BloqId = post.Id,
+            Id = post.Id,
+            BloqId = post.BloqId ?? Guid.Empty,
             AuthorId = post.AuthorId,
             Title = post.Title,
             Description = post.Description,
+            Content = post.Content,
             IsPublished = post.IsPublished,
             Published = post.Published,
             Comments = post.Comments,
@@ -54,21 +56,25 @@ public sealed class PostService(
 
     public async Task<ICollection<ViewPostDTO>> GetPostsByBloqId(Guid bloqId)
     {
-        var bloq = await _unitOfWork.Bloqs.GetByIdAsync(bloqId)
-            ?? throw new NotFoundException($"Bloq with Id ({bloqId}) was not found");
+        var posts = await _unitOfWork.Posts.FindAsync(p => p.BloqId == bloqId)
+            ?? throw new NotFoundException($"Posts with Bloq Id ({bloqId}) was not found");
 
-        return bloq.Posts.Select(post =>
+        return [.. posts
+            .OrderByDescending(p => p.CreatedOn)
+            .Select(post =>
             new ViewPostDTO()
             {
-                BloqId = post.Id,
+                Id = post.Id,
+                BloqId = post.BloqId ?? Guid.Empty,
                 AuthorId = post.AuthorId,
                 Title = post.Title,
                 Description = post.Description,
+                Content = post.Content,
                 IsPublished = post.IsPublished,
                 Published = post.Published,
-                Comments = post.Comments,
-                Reactions = post.Reactions,
-            }).ToList();
+                Comments = [.. post.Comments.OrderByDescending(c => c.CreatedOn)],
+                Reactions = [.. post.Reactions.OrderByDescending(r => r.CreatedOn)],
+            })];
     }
 
     public async Task<Guid> UpdatePost(UpdatePostDTO updatePost)

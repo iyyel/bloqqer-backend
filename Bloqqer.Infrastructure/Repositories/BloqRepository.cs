@@ -20,6 +20,7 @@ public sealed class BloqRepository(ApplicationDbContext dbContext)
     public override async Task<ICollection<Bloq>> GetAllAsync()
     {
         return await _dbSet
+            .Include(b => b.Author)
             .Include(b => b.Posts)
             .Include(b => b.Reactions)
             .ToListAsync();

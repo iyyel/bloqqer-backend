@@ -36,7 +36,7 @@ builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme);
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection"), b =>
     {
         b.MigrationsAssembly("Bloqqer.Infrastructure");
         b.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);

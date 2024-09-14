@@ -5,7 +5,7 @@ using CleanArchitecture.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Bloqqer.Controllers;
+namespace Bloqqer.WebAPI.Controllers;
 
 [Route("api/v1/[controller]")]
 [SwaggerTag("Bloq related endpoints")]
@@ -15,6 +15,19 @@ public sealed class BloqController(
 ) : APIController(logger)
 {
     private readonly IBloqService _bloqService = bloqService;
+
+    [HttpGet]
+    [Route("metadata")]
+    [SwaggerOperation(
+        Summary = "Get all Bloqs Metadata",
+        Description = "Gets all existing Bloqs Metadata"
+    )]
+    [SwaggerResponse(200, "OK", typeof(ResponseMessage<ICollection<BloqMetadataDTO>>))]
+    [SwaggerResponse(401, "Unauthorized", typeof(ResponseMessage<ICollection<BloqMetadataDTO>>))]
+    public async Task<IActionResult> GetAllBloqsMetadata()
+    {
+        return await GetResponseAsync(_bloqService.GetAllBloqsMetadata);
+    }
 
     [HttpPost]
     [SwaggerOperation(
@@ -57,19 +70,6 @@ public sealed class BloqController(
     )
     {
         return await GetResponseAsync(() => _bloqService.GetBloqsByUserId(userId));
-    }
-
-    [HttpGet]
-    [Route("all")]
-    [SwaggerOperation(
-        Summary = "Get all Bloqs",
-        Description = "Gets all existing Bloqs"
-    )]
-    [SwaggerResponse(200, "OK", typeof(ResponseMessage<ICollection<ViewBloqDTO>>))]
-    [SwaggerResponse(401, "Unauthorized", typeof(ResponseMessage<ICollection<ViewBloqDTO>>))]
-    public async Task<IActionResult> GetAllBloqs()
-    {
-        return await GetResponseAsync(_bloqService.GetAllBloqs);
     }
 
     [HttpGet]
