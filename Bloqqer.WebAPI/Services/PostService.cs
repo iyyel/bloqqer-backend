@@ -18,15 +18,19 @@ public sealed class PostService(
     {
         var userId = _userService.GetLoggedInUserId();
 
-        var newPost = Post.Create(
-            createPost.BloqId,
-            userId,
-            createPost.Title,
-            createPost.Description,
-            createPost.Content,
-            userId,
-            createPost.IsPublished
-        );
+        var newPost = new Post
+        {
+            Id = Guid.NewGuid(),
+            BloqId = createPost.BloqId,
+            AuthorId = userId,
+            Title = createPost.Title,
+            Description = createPost.Description,
+            Content = createPost.Content,
+            IsPublished = createPost.IsPublished,
+            Published = createPost.IsPublished ? DateTime.UtcNow : null,
+            CreatedBy = userId,
+            CreatedOn = DateTime.UtcNow,
+        };
 
         await _unitOfWork.Posts.AddAsync(newPost);
         await _unitOfWork.SaveChangesAsync();
@@ -42,7 +46,7 @@ public sealed class PostService(
         return new ViewPostDTO()
         {
             Id = post.Id,
-            BloqId = post.BloqId ?? Guid.Empty,
+            BloqId = post.BloqId,
             AuthorId = post.AuthorId,
             Title = post.Title,
             Description = post.Description,
@@ -65,15 +69,15 @@ public sealed class PostService(
             new ViewPostDTO()
             {
                 Id = post.Id,
-                BloqId = post.BloqId ?? Guid.Empty,
+                BloqId = post.BloqId,
                 AuthorId = post.AuthorId,
                 Title = post.Title,
                 Description = post.Description,
                 Content = post.Content,
                 IsPublished = post.IsPublished,
                 Published = post.Published,
-                Comments = [.. post.Comments.OrderByDescending(c => c.CreatedOn)],
-                Reactions = [.. post.Reactions.OrderByDescending(r => r.CreatedOn)],
+                Comments = [.. post?.Comments?.OrderByDescending(c => c.CreatedOn)],
+                Reactions = [.. post?.Reactions?.OrderByDescending(r => r.CreatedOn)],
             })];
     }
 

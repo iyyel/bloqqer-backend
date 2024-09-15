@@ -10,9 +10,5 @@ public class ViewCommentDTO
 
     public required string Content { get; set; }
 
-    public required bool IsPublished { get; set; }
-
-    public DateTime? Published { get; set; }
-
     public ICollection<Reaction>? Reactions { get; set; }
 }

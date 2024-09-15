@@ -18,14 +18,15 @@ public sealed class CommentService(
     {
         var userId = _userService.GetLoggedInUserId();
 
-        var newComment = Comment.Create(
-            commentDTO.PostId,
-            userId,
-            commentDTO.Content,
-            userId,
-            Guid.NewGuid(),
-            commentDTO.IsPublished
-        );
+        var newComment = new Comment
+        {
+            Id = Guid.NewGuid(),
+            PostId = commentDTO.PostId,
+            AuthorId = userId,
+            Content = commentDTO.Content,
+            CreatedBy = userId,
+            CreatedOn = DateTime.UtcNow
+        };
 
         await _unitOfWork.Comments.AddAsync(newComment);
         await _unitOfWork.SaveChangesAsync();
@@ -40,12 +41,9 @@ public sealed class CommentService(
 
         return new ViewCommentDTO()
         {
-            // TODO: Why is this exception necessary again?
-            PostId = comment.PostId ?? throw new NotFoundException($"Comment with Id ({commentId}) has no associated Post"),
+            PostId = comment.PostId,
             AuthorId = comment.AuthorId,
             Content = comment.Content,
-            IsPublished = comment.IsPublished,
-            Published = comment.Published,
             Reactions = comment.Reactions,
         };
     }

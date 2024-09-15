@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloqqer.Infrastructure", "B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloqqer.Domain", "Bloqqer.Domain\Bloqqer.Domain.csproj", "{A9E9176F-B8D3-4435-9063-A65948E8D8B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bloqqer.Application", "Bloqqer.Application\Bloqqer.Application.csproj", "{B9159A5F-0B51-4C2F-8CF8-429D0BE6B90C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloqqer.Application", "Bloqqer.Application\Bloqqer.Application.csproj", "{B9159A5F-0B51-4C2F-8CF8-429D0BE6B90C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

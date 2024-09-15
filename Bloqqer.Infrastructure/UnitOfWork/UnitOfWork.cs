@@ -46,7 +46,7 @@ public sealed class UnitOfWork(
         }
         catch (Exception)
         {
-            // TODO: Actually ues a logger.
+            // TODO: Actually use a logger.
             // _logger.LogError("Dispose UnitOfWork", e, "faild to dispose unit of work");
             throw;
         }

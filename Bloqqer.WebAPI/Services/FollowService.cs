@@ -27,11 +27,15 @@ public sealed class FollowService(
            ?? throw new NotFoundException($"User with Id ({userId}) was not found");
 
         await _unitOfWork.Follows.AddAsync(
-            Follow.Create(
-                followerId,
-                userId,
-                followerId
-        ));
+              new Follow
+              {
+                  Id = Guid.NewGuid(),
+                  FollowerId = followerId,
+                  FollowedId = userId,
+                  CreatedBy = followerId,
+                  CreatedOn = DateTime.UtcNow
+              }
+        );
         await _unitOfWork.SaveChangesAsync();
 
         return userId;

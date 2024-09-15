@@ -26,9 +26,9 @@ public sealed class ReactionConfiguration : IEntityTypeConfiguration<Reaction>
             .HasForeignKey(r => r.CommentId)
             .HasPrincipalKey(c => c.Id);
 
-        builder.HasOne(r => r.Reactor)
-            .WithMany(a => a.Reactions)
-            .HasForeignKey(r => r.ReactorId)
+        builder.HasOne(r => r.Author)
+            .WithMany(a => a.AuthoredReactions)
+            .HasForeignKey(r => r.AuthorId)
             .HasPrincipalKey(a => a.Id);
     }
 }

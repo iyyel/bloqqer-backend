@@ -21,24 +21,24 @@ public sealed class ApplicationUserConfiguration : IEntityTypeConfiguration<Appl
         builder.Property(a => a.LastName)
             .HasMaxLength(MaxLengths.ApplicationUser.LastName);
 
-        builder.HasMany(a => a.Bloqs)
+        builder.HasMany(a => a.AuthoredBloqs)
             .WithOne(b => b.Author)
             .HasForeignKey(b => b.AuthorId)
             .HasPrincipalKey(a => a.Id);
 
-        builder.HasMany(a => a.Posts)
+        builder.HasMany(a => a.AuthoredPosts)
             .WithOne(p => p.Author)
             .HasForeignKey(p => p.AuthorId)
             .HasPrincipalKey(a => a.Id);
 
-        builder.HasMany(a => a.Comments)
+        builder.HasMany(a => a.AuthoredComments)
             .WithOne(c => c.Author)
             .HasForeignKey(c => c.AuthorId)
             .HasPrincipalKey(a => a.Id);
 
-        builder.HasMany(a => a.Reactions)
-            .WithOne(r => r.Reactor)
-            .HasForeignKey(c => c.ReactorId)
+        builder.HasMany(a => a.AuthoredReactions)
+            .WithOne(r => r.Author)
+            .HasForeignKey(c => c.AuthorId)
             .HasPrincipalKey(a => a.Id);
 
         builder.HasMany(a => a.Followers)

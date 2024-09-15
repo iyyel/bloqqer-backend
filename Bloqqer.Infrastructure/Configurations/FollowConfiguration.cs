@@ -19,6 +19,7 @@ public sealed class FollowConfiguration : IEntityTypeConfiguration<Follow>
         builder.HasOne(f => f.Followed)
             .WithMany(a => a.Following)
             .HasForeignKey(f => f.FollowedId)
-            .HasPrincipalKey(a => a.Id);
+            .HasPrincipalKey(a => a.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

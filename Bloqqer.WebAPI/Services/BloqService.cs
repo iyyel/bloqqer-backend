@@ -19,35 +19,35 @@ public sealed class BloqService(
         return [.. (await _unitOfWork.Bloqs.GetAllAsync())
             .OrderByDescending(b => b.CreatedOn)
             .Select(bloq =>
-            new BloqMetadataDTO()
-            {
-                Id = bloq.Id,
-                AuthorId = bloq.AuthorId,
-                AuthorFirstName = bloq.Author?.FirstName ?? string.Empty,
-                AuthorMiddleName = bloq.Author?.MiddleName ?? string.Empty,
-                AuthorLastName = bloq.Author?.LastName ?? string.Empty,
-                Title = bloq.Title,
-                Description = bloq.Description,
-                IsPrivate = bloq.IsPrivate,
-                IsPublished = bloq.IsPublished,
-                Published = bloq.Published,
-                PostCount = bloq.Posts.Count,
-                ReactionCount = bloq.Reactions.Count,
-            }
-        )];
+            new BloqMetadataDTO(
+                Id: bloq.Id,
+                AuthorId: bloq.AuthorId,
+                AuthorName: $"{bloq.Author!.FirstName} {bloq.Author!.LastName}",
+                Title: bloq.Title,
+                Description: bloq.Description,
+                IsPublished: bloq.IsPublished,
+                Published: bloq.Published,
+                PostCount: bloq.Posts?.Count ?? 0,
+                ReactionCount: bloq.Reactions?.Count ?? 0,
+                DaysSinceCreation: (DateTime.UtcNow - bloq.CreatedOn).Days
+            ))];
     }
 
     public async Task<Guid> CreateBloq(CreateBloqDTO createBloq)
     {
         var userId = _userService.GetLoggedInUserId();
 
-        var newBloq = Bloq.Create(
-            userId,
-            createBloq.Title,
-            createBloq.Description,
-            userId,
-            createBloq.IsPrivate
-        );
+        var newBloq = new Bloq
+        {
+            Id = Guid.NewGuid(),
+            AuthorId = userId,
+            Title = createBloq.Title,
+            Description = createBloq.Description,
+            IsPrivate = createBloq.IsPrivate,
+            IsPublished = false,
+            CreatedBy = userId,
+            CreatedOn = DateTime.UtcNow,
+        };
 
         await _unitOfWork.Bloqs.AddAsync(newBloq);
         await _unitOfWork.SaveChangesAsync();

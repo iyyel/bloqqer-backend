@@ -50,33 +50,44 @@ public sealed class UserService(
     public async Task<Guid> RegisterUser(RegisterUserDTO registerUserDTO)
     {
         // TODO: Check if the user with the same email/userName already exists? How to prevent registrering the same user? Is it supported OOTB? Test it.
-        var userId = Guid.NewGuid();
+        var newUser = new ApplicationUser
+        {
+            Id = Guid.NewGuid(),
+            FirstName = registerUserDTO.FirstName,
+            MiddleName = registerUserDTO.MiddleName,
+            LastName = registerUserDTO.LastName,
+            UserName = registerUserDTO.UserName.ToLower(),
+            NormalizedUserName = registerUserDTO.UserName.ToUpper(),
+            Email = registerUserDTO.Email.ToLower(),
+            NormalizedEmail = registerUserDTO.Email.ToUpper(),
+            PhoneNumber = registerUserDTO.PhoneNumber,
+            EmailConfirmed = false,
+            PhoneNumberConfirmed = false,
+            LockoutEnabled = false,
+            TwoFactorEnabled = false,
+            // TODO: This is incorrect. Fix :)
+            CreatedBy = Guid.Empty,
+            CreatedOn = DateTime.UtcNow,
+            ModifiedBy = null,
+            ModifiedOn = null,
+            RemovedBy = null,
+            RemovedOn = null
+        };
 
-        var user = ApplicationUser.Create(
-            registerUserDTO.Email,
-            registerUserDTO.FirstName,
-            registerUserDTO.PhoneNumber,
-            "secStamp", // TODO: What to do with this? This is probably not secure. Seems to get overwritten?
-            userId,
-            userId,
-            registerUserDTO.MiddleName,
-            registerUserDTO.LastName
-            );
-
-        var result = await _userManager.CreateAsync(user, registerUserDTO.Password);
+        var result = await _userManager.CreateAsync(newUser, registerUserDTO.Password);
 
         // TODO: Invert if. Clean up.
         if (result.Succeeded)
         {
-            var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
 
             var success = await _emailService.SendEmailConfirmationRequest(
                 new EmailConfirmationRequest()
                 {
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    MiddleName = user.MiddleName,
-                    LastName = user.LastName,
+                    Email = newUser.Email,
+                    FirstName = newUser.FirstName,
+                    MiddleName = newUser.MiddleName,
+                    LastName = newUser.LastName,
                     ConfirmationToken = confirmationToken
                 });
 
@@ -86,7 +97,7 @@ public sealed class UserService(
                 throw new BadRequestException("Failed to send email confirmation. User created successfully though.");
             }
 
-            return user.Id;
+            return newUser.Id;
         }
         else
         {
@@ -146,7 +157,7 @@ public sealed class UserService(
                 var success = await _emailService.SendEmailConfirmationAcceptance(
                     new EmailConfirmationAcceptance()
                     {
-                        Email = user.Email,
+                        Email = user.Email!,
                         FirstName = user.FirstName,
                         MiddleName = user.MiddleName,
                         LastName = user.LastName
@@ -179,7 +190,7 @@ public sealed class UserService(
         var success = await _emailService.SendResetPasswordRequest(
             new ResetPasswordRequest()
             {
-                Email = user.Email,
+                Email = user.Email!,
                 FirstName = user.FirstName,
                 MiddleName = user.MiddleName,
                 LastName = user.LastName,
@@ -213,7 +224,7 @@ public sealed class UserService(
             var success = await _emailService.SendResetPasswordAcceptance(
                 new ResetPasswordAcceptance()
                 {
-                    Email = user.Email,
+                    Email = user.Email!,
                     FirstName = user.FirstName,
                     MiddleName = user.MiddleName,
                     LastName = user.LastName

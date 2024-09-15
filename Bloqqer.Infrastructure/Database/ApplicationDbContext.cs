@@ -13,6 +13,10 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
 
     public DbSet<Comment> Comments { get; set; }
 
+    public DbSet<Reaction> Reactions { get; set; }
+
+    public DbSet<Follow> Follows { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

@@ -7,8 +7,8 @@ namespace Bloqqer.Infrastructure.Repositories;
 public sealed class ApplicationUserRepository(ApplicationDbContext dbContext)
     : Repository<ApplicationUser>(dbContext), IApplicationUserRepository
 {
-    public ApplicationUser? FindUserByUserName(string username)
+    public ApplicationUser? FindUserByUserName(string userName)
     {
-        return _dbSet.SingleOrDefault(a => a.UserName == username);
+        return _dbSet.SingleOrDefault(a => a.UserName == userName);
     }
 }

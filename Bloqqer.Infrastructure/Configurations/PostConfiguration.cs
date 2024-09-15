@@ -32,8 +32,9 @@ public sealed class PostConfiguration : IEntityTypeConfiguration<Post>
             .HasPrincipalKey(p => p.Id);
 
         builder.HasOne(p => p.Author)
-            .WithMany(a => a.Posts)
+            .WithMany(a => a.AuthoredPosts)
             .HasForeignKey(p => p.AuthorId)
-            .HasPrincipalKey(a => a.Id);
+            .HasPrincipalKey(a => a.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

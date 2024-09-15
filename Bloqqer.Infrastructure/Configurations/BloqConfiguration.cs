@@ -29,7 +29,7 @@ public sealed class BloqConfiguration : IEntityTypeConfiguration<Bloq>
             .HasPrincipalKey(a => a.Id);
 
         builder.HasOne(b => b.Author)
-            .WithMany(a => a.Bloqs)
+            .WithMany(a => a.AuthoredBloqs)
             .HasForeignKey(b => b.AuthorId)
             .HasPrincipalKey(a => a.Id);
     }
