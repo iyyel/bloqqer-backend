@@ -3,10 +3,10 @@ using Bloqqer.WebAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitecture.Api.Controllers;
+namespace Bloqqer.WebAPI.Controllers;
 
 [ApiController]
-[Authorize]
+// [Authorize]
 [Produces("application/json")]
 public abstract class APIController(
   ILogger<APIController> _logger

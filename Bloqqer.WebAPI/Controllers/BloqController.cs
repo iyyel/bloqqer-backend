@@ -1,7 +1,6 @@
 using Bloqqer.Infrastructure.ViewModels;
 using Bloqqer.WebAPI.Models;
 using Bloqqer.WebAPI.Services.Interfaces;
-using CleanArchitecture.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
