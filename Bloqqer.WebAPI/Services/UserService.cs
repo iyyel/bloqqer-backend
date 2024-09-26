@@ -107,13 +107,13 @@ public sealed class UserService(
 
     public async Task<Guid> LoginUser(LoginUserDTO loginUserDTO)
     {
-        var result = await _signInManager.PasswordSignInAsync(loginUserDTO.Email, loginUserDTO.Password, loginUserDTO.RememberMe, false);
+        var result = await _signInManager.PasswordSignInAsync(loginUserDTO.UserName, loginUserDTO.Password, loginUserDTO.RememberMe, false);
 
         // TODO: Clean up this if-else logic. It is a bit messy. Invert ifs if possible.
         if (result.Succeeded)
         {
-            var user = await _userManager.FindByEmailAsync(loginUserDTO.Email)
-                ?? throw new NotFoundException($"User with email ({loginUserDTO.Email}) was not found");
+            var user = await _userManager.FindByNameAsync(loginUserDTO.UserName)
+                ?? throw new NotFoundException($"User with UserName ({loginUserDTO.UserName}) was not found");
             return user.Id;
         }
         else
