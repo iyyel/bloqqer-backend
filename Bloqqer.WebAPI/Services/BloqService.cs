@@ -60,18 +60,17 @@ public sealed class BloqService(
         var bloq = await _unitOfWork.Bloqs.GetByIdAsync(bloqId)
             ?? throw new NotFoundException($"Bloq with Id ({bloqId}) was not found");
 
-        return new ViewBloqDTO()
-        {
-            Id = bloq.Id,
-            AuthorId = bloq.AuthorId,
-            Title = bloq.Title,
-            Description = bloq.Description,
-            IsPrivate = bloq.IsPrivate,
-            IsPublished = bloq.IsPublished,
-            Published = bloq.Published,
-            Posts = bloq.Posts,
-            Reactions = bloq.Reactions,
-        };
+        return new ViewBloqDTO(
+            Id: bloq.Id,
+            AuthorId: bloq.AuthorId,
+            Title: bloq.Title,
+            Description: bloq.Description,
+            IsPrivate: bloq.IsPrivate,
+            IsPublished: bloq.IsPublished,
+            Published: bloq.Published,
+            Posts: bloq.Posts,
+            Reactions: bloq.Reactions
+        );
     }
 
     public async Task<ICollection<ViewBloqDTO>> GetBloqsByUserId(Guid userId)
@@ -79,18 +78,17 @@ public sealed class BloqService(
         return (await _unitOfWork.Bloqs.FindAsync(b => b.AuthorId == userId))
             .OrderByDescending(b => b.CreatedOn)
             .Select(bloq =>
-            new ViewBloqDTO()
-            {
-                Id = bloq.Id,
-                AuthorId = bloq.AuthorId,
-                Title = bloq.Title,
-                Description = bloq.Description,
-                IsPrivate = bloq.IsPrivate,
-                IsPublished = bloq.IsPublished,
-                Published = bloq.Published,
-                Posts = bloq.Posts,
-                Reactions = bloq.Reactions,
-            }
+            new ViewBloqDTO(
+                Id: bloq.Id,
+                AuthorId: bloq.AuthorId,
+                Title: bloq.Title,
+                Description: bloq.Description,
+                IsPrivate: bloq.IsPrivate,
+                IsPublished: bloq.IsPublished,
+                Published: bloq.Published,
+                Posts: bloq.Posts,
+                Reactions: bloq.Reactions
+            )
         ).ToList();
     }
 
@@ -103,16 +101,17 @@ public sealed class BloqService(
         return (await _unitOfWork.Bloqs.FindAsync(b => followedIds.Contains(b.AuthorId)))
             .OrderByDescending(b => b.CreatedOn)
             .Select(bloq =>
-            new ViewBloqDTO()
-            {
-                Id = bloq.Id,
-                AuthorId = bloq.AuthorId,
-                Title = bloq.Title,
-                Description = bloq.Description,
-                IsPrivate = bloq.IsPrivate,
-                IsPublished = bloq.IsPublished,
-                Published = bloq.Published,
-            }
+            new ViewBloqDTO(
+                Id: bloq.Id,
+                AuthorId: bloq.AuthorId,
+                Title: bloq.Title,
+                Description: bloq.Description,
+                IsPrivate: bloq.IsPrivate,
+                IsPublished: bloq.IsPublished,
+                Published: bloq.Published,
+                Posts: bloq.Posts,
+                Reactions: bloq.Reactions
+            )
         ).ToList();
     }
 

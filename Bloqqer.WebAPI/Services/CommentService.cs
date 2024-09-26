@@ -39,12 +39,11 @@ public sealed class CommentService(
         var comment = await _unitOfWork.Comments.GetByIdAsync(commentId)
             ?? throw new NotFoundException($"Comment with Id ({commentId}) was not found");
 
-        return new ViewCommentDTO()
-        {
-            PostId = comment.PostId,
-            AuthorId = comment.AuthorId,
-            Content = comment.Content,
-            Reactions = comment.Reactions,
-        };
+        return new ViewCommentDTO(
+            PostId: comment.PostId,
+            AuthorId: comment.AuthorId,
+            Content: comment.Content,
+            Reactions: comment.Reactions
+        );
     }
 }

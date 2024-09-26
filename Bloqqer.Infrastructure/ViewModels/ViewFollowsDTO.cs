@@ -1,8 +1,6 @@
 ﻿namespace Bloqqer.Infrastructure.ViewModels;
 
-public class ViewFollowsDTO
-{
-    public required Guid UserId { get; set; }
-
-    public required ICollection<ViewUserDTO> Follows { get; set; }
-}
+public sealed record ViewFollowsDTO(
+    Guid UserId,
+    ICollection<ViewUserDTO> Follows
+);

@@ -59,17 +59,15 @@ public sealed class FollowService(
 
         var followedUsers = await _unitOfWork.ApplicationUsers.FindAsync(u => followedIds.Contains(u.Id));
 
-        return new ViewFollowsDTO()
-        {
-            UserId = userId,
-            Follows = followedUsers.Select(u =>
-                new ViewUserDTO()
-                {
-                    FirstName = u.FirstName,
-                    MiddleName = u.MiddleName,
-                    LastName = u.LastName,
-                }).ToList()
-        };
+        return new ViewFollowsDTO(
+            UserId: userId,
+            Follows: followedUsers.Select(a =>
+                new ViewUserDTO(
+                    FirstName: a.FirstName,
+                    MiddleName: a.MiddleName,
+                    LastName: a.LastName
+                )).ToList()
+        );
     }
 
     public async Task<ViewFollowsDTO> GetFollowing(Guid userId)
@@ -80,16 +78,14 @@ public sealed class FollowService(
 
         var followers = await _unitOfWork.ApplicationUsers.FindAsync(u => followerIds.Contains(u.Id));
 
-        return new ViewFollowsDTO()
-        {
-            UserId = userId,
-            Follows = followers.Select(u =>
-                new ViewUserDTO()
-                {
-                    FirstName = u.FirstName,
-                    MiddleName = u.MiddleName,
-                    LastName = u.LastName,
-                }).ToList()
-        };
+        return new ViewFollowsDTO(
+             UserId: userId,
+             Follows: followers.Select(a =>
+                 new ViewUserDTO(
+                     FirstName: a.FirstName,
+                     MiddleName: a.MiddleName,
+                     LastName: a.LastName
+                 )).ToList()
+         );
     }
 }

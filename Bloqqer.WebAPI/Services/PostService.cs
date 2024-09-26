@@ -43,19 +43,18 @@ public sealed class PostService(
         var post = await _unitOfWork.Posts.GetByIdAsync(postId)
             ?? throw new NotFoundException($"Post with Id ({postId}) was not found");
 
-        return new ViewPostDTO()
-        {
-            Id = post.Id,
-            BloqId = post.BloqId,
-            AuthorId = post.AuthorId,
-            Title = post.Title,
-            Description = post.Description,
-            Content = post.Content,
-            IsPublished = post.IsPublished,
-            Published = post.Published,
-            Comments = post.Comments,
-            Reactions = post.Reactions,
-        };
+        return new ViewPostDTO(
+            Id: post.Id,
+            BloqId: post.BloqId,
+            AuthorId: post.AuthorId,
+            Title: post.Title,
+            Description: post.Description,
+            Content: post.Content,
+            IsPublished: post.IsPublished,
+            Published: post.Published,
+            Comments: post.Comments,
+            Reactions: post.Reactions
+        );
     }
 
     public async Task<ICollection<ViewPostDTO>> GetPostsByBloqId(Guid bloqId)
@@ -66,19 +65,18 @@ public sealed class PostService(
         return [.. posts
             .OrderByDescending(p => p.CreatedOn)
             .Select(post =>
-            new ViewPostDTO()
-            {
-                Id = post.Id,
-                BloqId = post.BloqId,
-                AuthorId = post.AuthorId,
-                Title = post.Title,
-                Description = post.Description,
-                Content = post.Content,
-                IsPublished = post.IsPublished,
-                Published = post.Published,
-                Comments = [.. post?.Comments?.OrderByDescending(c => c.CreatedOn)],
-                Reactions = [.. post?.Reactions?.OrderByDescending(r => r.CreatedOn)],
-            })];
+            new ViewPostDTO(
+                Id: post.Id,
+                BloqId: post.BloqId,
+                AuthorId: post.AuthorId,
+                Title: post.Title,
+                Description: post.Description,
+                Content: post.Content,
+                IsPublished: post.IsPublished,
+                Published: post.Published,
+                Comments: [.. post?.Comments?.OrderByDescending(c => c.CreatedOn)],
+                Reactions: [.. post?.Reactions?.OrderByDescending(r => r.CreatedOn)]
+            ))];
     }
 
     public async Task<Guid> UpdatePost(UpdatePostDTO updatePost)

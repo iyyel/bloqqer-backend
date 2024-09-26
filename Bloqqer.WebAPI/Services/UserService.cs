@@ -82,14 +82,13 @@ public sealed class UserService(
             var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
 
             var success = await _emailService.SendEmailConfirmationRequest(
-                new EmailConfirmationRequest()
-                {
-                    Email = newUser.Email,
-                    FirstName = newUser.FirstName,
-                    MiddleName = newUser.MiddleName,
-                    LastName = newUser.LastName,
-                    ConfirmationToken = confirmationToken
-                });
+                new EmailConfirmationRequest(
+                    Email: newUser.Email,
+                    FirstName: newUser.FirstName,
+                    MiddleName: newUser.MiddleName,
+                    LastName: newUser.LastName,
+                    ConfirmationToken: confirmationToken
+                ));
 
             if (!success)
             {
@@ -155,13 +154,12 @@ public sealed class UserService(
             if (!user.EmailConfirmed)
             {
                 var success = await _emailService.SendEmailConfirmationAcceptance(
-                    new EmailConfirmationAcceptance()
-                    {
-                        Email = user.Email!,
-                        FirstName = user.FirstName,
-                        MiddleName = user.MiddleName,
-                        LastName = user.LastName
-                    });
+                    new EmailConfirmationAcceptance(
+                        Email: user.Email!,
+                        FirstName: user.FirstName,
+                        MiddleName: user.MiddleName,
+                        LastName: user.LastName
+                    ));
                 return success;
             }
             return true;
@@ -188,14 +186,13 @@ public sealed class UserService(
         var passwordResetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
 
         var success = await _emailService.SendResetPasswordRequest(
-            new ResetPasswordRequest()
-            {
-                Email = user.Email!,
-                FirstName = user.FirstName,
-                MiddleName = user.MiddleName,
-                LastName = user.LastName,
-                ResetPasswordToken = passwordResetToken
-            });
+            new ResetPasswordRequest(
+                Email: user.Email!,  // TODO: Can we remove ! here?
+                FirstName: user.FirstName,
+                MiddleName: user.MiddleName,
+                LastName: user.LastName,
+                ResetPasswordToken: passwordResetToken
+            ));
 
         if (!success)
         {
@@ -222,13 +219,12 @@ public sealed class UserService(
         {
             // TODO: Currently, this functionality can be spammed. How do we prevent this?
             var success = await _emailService.SendResetPasswordAcceptance(
-                new ResetPasswordAcceptance()
-                {
-                    Email = user.Email!,
-                    FirstName = user.FirstName,
-                    MiddleName = user.MiddleName,
-                    LastName = user.LastName
-                });
+                new ResetPasswordAcceptance(
+                    Email: user.Email!, // TODO: Can we remove ! here?
+                    FirstName: user.FirstName,
+                    MiddleName: user.MiddleName,
+                    LastName: user.LastName
+                ));
             return success;
         }
 

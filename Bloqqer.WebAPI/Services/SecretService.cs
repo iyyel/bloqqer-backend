@@ -22,7 +22,7 @@ public sealed class SecretService : ISecretService
                 Mode = RetryMode.Exponential
             }
         };
-        _secretClient = new SecretClient(new Uri(config["KeyVaults:BloqqerUrl"]), new DefaultAzureCredential(), options);
+        _secretClient = new SecretClient(new Uri(config["KeyVaults:BloqqerUrl"]!), new DefaultAzureCredential(), options);
     }
 
     public string GetSecret(string secretName)
